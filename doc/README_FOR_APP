@@ -1,0 +1,4 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+MrLog.find(:all, :conditions=>"CURDATE() = DATE(SP_MRLOG.CREATETIME)" , :joins => "INNER JOIN SP_ROUTER ON SP_ROUTER.TELSEG = SUBSTR(SP_MRLOG.PHONENUMBER,1,7) ")

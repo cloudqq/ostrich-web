@@ -1,0 +1,182 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+	var a= $('#modata');
+	if (a == null) alert('null');
+        $('#spinfo').jtable({
+	    addRecordButton: $('#addnew'),
+            title: 'SP列表',
+            actions: {
+                listAction: '/sp_info/indexdata',
+		createAction: '/sp_info/create'
+            },
+            fields: {
+		SPID: {
+		    key: true,
+		    create: false,
+		    edit:false,
+		    list:false,
+		    title: 'SP编号',
+		    width: '20%'
+		},
+		SPNAME: {
+		    title: 'SP名称',
+		    width: '20%'
+		},
+                CATAGORY: {
+		    title: '业务类型',
+		    width: '10%',
+		    display: function(data){
+			if (data.record.CATAGORY == 0)
+			    return '短信';
+			else
+			    return 'IVR';
+
+		    }
+                },
+		ACCEPTTYPE:{
+		    title: '接口方式',
+		    width: '10%',
+		    display: function(data){
+			if (data.record.ACCEPTTYPE == 0)
+			    return 'MO/MR';
+			else
+			    return '整合';
+		    }
+		},
+		PAYPERIOD:{
+		    title: '结算周期',
+		    width: '10%'
+		},
+	    PAYPERIODTYPE:{
+		title: '结算类型',
+		width: '10%',
+		display: function(data)
+		{
+		    if (data.record.PAYPERIODTYPE == 1)
+			return '月结';
+		    else
+			return '周结';
+		}
+	    },
+		MOREQPRAMLIST:{
+		    title: 'MO参数',
+		    list:false,
+		    create:true,
+		    edit:true
+		},
+		MOREQSUFFIX:{
+		    title: 'MO前缀',
+		    list:false,
+		    create:false,
+		    edit:true
+		},
+		MRREQPRAMLIST:{
+		    title: 'MT参数',
+		    list:false,
+		    create:true,
+		    edit:true
+		},
+		MTREQSUFFIX:{
+		    title: 'MT前缀',
+		    list:false,
+		    create:false,
+		    edit:true
+		},
+		PAYPRCT:{
+		    title: '结算比例',
+		    create:true,
+		    list:true,
+		    edit:false
+		},
+		ACTION:{
+		    title: '操作',
+		    display: function(data)
+		    {
+			return '[开启][修改][添加指令]';
+		    }
+		}
+              }
+        });
+ 
+        $('#spinfo').jtable('load');
+    });
+</script>
+
+<h1>SpInfo#index</h1>
+<div class="btn btn-primary" onclick="$('#create_form_modal').modal('show')">创建新SP</div>
+<div id="spinfo"></div>
+<div class="modal" id="create_form_modal" style="display:none">
+	<div class="modal-header">
+		<a class="close" data-dismiss="modal">x</a>
+		<h3>新建SP信息<h3>
+	</div>
+	<div class="modal-body">
+	  <form class="form-horizontal">
+	    <div class="control-group">
+	      <label class="control-label" for="input_spname">SP 名称</label>
+	      <div class="controls">
+		<input type="text" class="input-xlarge" id="input_spname">
+		  <p class="help-block">输入SP名称不要有空格等特殊字符</p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_catagory">业务类型</label>
+	      <div class="controls">
+		<select id="input_catagory">
+		  <option value="0">短信</option>
+		  <option value="1">IVR</option>
+		</select>
+		<p class="help-block">输入业务类型 ( 短信 / IVR ) </p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_accepttype">接口方式</label>
+	      <div class="controls">
+		<select id="input_accepttype">
+		  <option value="0">MO/MR</option>
+		  <option value="1">整合</option>
+		</select>
+		<p class="help-block">接口类型MO/MR 表示SP方提供独立的MO和MR接口，整合表示MO和MR包含在单个接口中 </p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_mourlprefix">MO地址前缀</label>
+	      <div class="controls">
+		<input type="text" class="input-xlarge" id="input_mourlprefix">
+		<p class="help-block">用了匹配MO URL地址</p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_moparams">MO参数列表</label>
+	      <div class="controls">
+		<input type="text" class="input-xlarge" id="input_moparams">
+		<p class="help-block">MO匹配参数列表</p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_mrurlprefix">MR地址前缀</label>
+	      <div class="controls">
+		<input type="text" class="input-xlarge" id="input_mrurlprefix">
+		<p class="help-block">用了匹配MR URL地址</p>
+	      </div>
+	    </div>
+	    <div class="control-group">
+	      <label class="control-label" for="input_mrparams">MR参数列表</label>
+	      <div class="controls">
+		<input type="text" class="input-xlarge" id="input_mrparams">
+		<p class="help-block">MR匹配参数列表</p>
+	      </div>
+	    </div>
+
+	  </form>
+
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<a href="#" class="btn btn-primary">Save Change</a>
+	</div>
+</div>
+	
+
+
+<%= render "create_form" %>

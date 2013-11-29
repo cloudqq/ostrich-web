@@ -1,0 +1,34 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+
+	var a= $('#modata');
+	if (a == null) alert('null');
+        $('#modata').jtable({
+            title: 'Table of people',
+            actions: {
+                listAction: '/report/moindex'
+            },
+            fields: {
+		SPID: {
+		    title: 'SP编号',
+		    width: '20%'
+		},
+                BUSINESSID: {
+		    title: '业务编号',
+		    width: '10%'
+                },
+		CPID: {
+		    title: 'CP编号',
+		    width: '30%'
+		}
+              }
+        });
+ 
+        $('#modata').jtable('load');
+    });
+</script>
+
+<h1>上行日志</h1>
+
+
+<div id="modata"></div>

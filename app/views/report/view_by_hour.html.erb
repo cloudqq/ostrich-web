@@ -1,0 +1,71 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+
+	var a= $('#data');
+	if (a == null) alert('null');
+        $('#data').jtable({
+            title: '统计信息',
+            actions: {
+                listAction: '/report/stat_by_hour'
+            },
+            fields: {
+		hour:{
+		    title: '时间', width: '10%',
+		    display: function(data)
+		    {
+			if (data.record.hour == 0)
+			    return '00';
+			else {
+			    if (data.record.hour < 10)
+			    {
+				return "0" + data.record.hour.toString();
+			    }
+			    else
+				return data.record.hour.toString();
+			}
+		    }
+
+		},
+		spnumber: {
+		    title: 'SP编号',
+		    width: '20%'
+		},
+		count: {title: '数量',width: '10%'}
+              }
+        });
+
+        $('#data').jtable('load',{statdate: '<%= @now %>'});
+    });
+
+
+function query_data(statdate, spnumber)
+{
+    $('#data').jtable('load', { statdate: statdate, spnumber: spnumber});
+}
+
+function do_query()
+{
+    query_data(
+	$('#query_date').val(),
+	$('#spnumber').val()
+    );
+}
+</script>
+
+<h1>分时统计</h1>
+<div>
+  <table>
+    <tr>
+      <td>查询日期</td><td><input id="query_date" name="query_date" value="<%= @now %>" type="text"></input></td><td>如： 2012-05-01</td>
+    </tr>
+    <tr>
+      <td>SP编号</td><td> <input id="spnumber" name="spnumber" type="text"></input></td><td></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td><td><input type="submit" onclick="do_query();"></input></td>
+    </tr>
+    
+  </table>
+</div>
+
+<div id="data"></div>

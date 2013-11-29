@@ -1,0 +1,18 @@
+* stat_by_hour
+acmatoMacBook-Pro:~ mac$ curl -i -H "Accept: application/json" -X POST -d "9" http://127.0.0.1:3000/report/stat_by_hour
+HTTP/1.1 201 Created 
+Content-Type: application/json; charset=utf-8
+X-Ua-Compatible: IE=Edge
+Etag: "63ff14aa9c7233c5b6d8adab55fb7db2"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 362a249c0365416fe99563fc4653b27a
+X-Runtime: 0.733133
+Content-Length: 197
+Server: WEBrick/1.3.1 (Ruby/1.9.2/2011-07-09)
+Date: Mon, 23 Apr 2012 15:25:07 GMT
+Connection: Keep-Alive
+Set-Cookie: _rspp_session=BAh7BkkiD3Nlc3Npb25faWQGOgZFRkkiJWZiMmQyZWFiMDc0ZTM3ODM1MmE5NGFhNjNmNTFkYjMzBjsAVA%3D%3D--6d96b888ddcf3949e2f380ca5178f1cd27da5951; path=/; HttpOnly
+
+{"Result":"OK","Records":[{"spnumber":"1062339944","cmd":"40059"},{"spnumber":"1062835667","cmd":"BG21"},{"spnumber":"106288383","cmd":"6"},{"spnumber":"106288383","cmd":"6"}],"TotalRecordCount":4}MacmatoMacBook-Pro:~ mac$ 
+
+

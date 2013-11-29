@@ -1,0 +1,136 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+	var a= $('#statdata');
+	if (a == null) alert('null');
+        $('#statdata').jtable({
+            paging:true,
+            pageSize:30,
+            title: '计费统计数据',
+            actions: {
+                listAction: '/report/statdata'
+            },
+            fields: {
+		STATDATE:{
+		    title: '统计日期',
+		    width: '12%'
+		},
+		SPID: {
+		    title: 'SPID',
+		    width: '4%'
+		},
+		SPNAME: {
+		    title: 'SP名称',
+		    width: '10%'
+		},
+                CPID: {
+                    title: 'CPID',
+                    width: '4%'
+                },
+		CPNAME: {
+		    title: 'CP名词',
+		    width: '15%'
+		},
+		COUNT:{
+		    title: '接收数量',
+		    width: '10%'
+		},	
+		PRICE:{
+		    title: '单价',
+		    width: '5%'
+		},
+		VALIDCOUNT: {
+		    title: '同步数量',
+		    width: '10%'
+		},
+		v_price: {
+		    title: '同步金额',
+		    width: '10%',
+		    display: function(data)
+		    {
+			if (data.record.VALIDCOUNT == 0)
+			    return '0.0'
+			else {
+			    var value = data.record.VALIDCOUNT * data.record.PRICE
+			    return value.toFixed(1);
+			}
+		    }
+		},
+		DISCOUNT: {
+		    title: '扣量',
+		    width: '15%',
+		    display: function(data)
+		    {
+			if (data.record.COUNT - data.record.VALIDCOUNT == 0)
+			    return '0'
+			else
+			    return data.record.COUNT - data.record.VALIDCOUNT
+		    }
+		}
+
+            }
+        });
+ 
+        $('#statdata').jtable('load');
+    });
+
+function query_data(spname, cpname, date,sdate,edate)
+{
+    $('#statdata').jtable('load', { spname: spname, cpname: cpname, date:date, sdate:sdate, edate:edate});
+}
+
+function do_query()
+{
+    query_data(
+	$('#query_spname').val(), 
+	$('#query_cpname').val(),
+	$('#query_date').val(),
+	$('#query_date_start').val(),
+	$('#query_date_end').val()
+    );
+}
+
+function setCurrentdDate()
+{
+    var now = new Date();
+    var currdate = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    $('#query_date_start').val(currdate);
+    $('#query_date_end').val(currdate);
+
+}
+
+function setCurrentMonth()
+{
+    var now = new Date();
+    var end_date =   now.getFullYear() + '-' + (now.getMonth() +1) + '-' + now.getDate();
+    var start_date = now.getFullYear() + '-' + (now.getMonth() +1) + '-' + '01';
+    $('#query_date_start').val(start_date);
+    $('#query_date_end').val(end_date);
+}
+
+function setAll()
+{
+    $('#query_date_start').val('');
+    $('#query_date_end').val('');
+}
+
+</script>
+<h1>统计查询</h1>
+<div>
+  <table>
+    <tr>
+      <td>SP名称</td><td><input id="query_spname" name="query_spname" type="text"></input></td><td>&nbsp;</td>
+      <td>CP名称</td><td><input id="query_cpname" name="query_cpname" type="text"></input></td><td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>期间</td><td><input id="query_date_start" name="query_date_start" type="text"></input></td><td>&nbsp;</td>
+      <td>结束</td><td><input id="query_date_end" name="query_date_end" type="text"></input></td>
+      <td><a class="btn" href=# onclick="setCurrentdDate();">当天</a> <a class="btn" href=# onclick="setCurrentMonth();">本月</a> <a class="btn" href=# onclick="setAll();">全部</a></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td><td><input type="submit" onclick="do_query();"></input></td>
+    </tr>
+    
+  </table>
+</div>
+<div id="statdata"></div>
+
