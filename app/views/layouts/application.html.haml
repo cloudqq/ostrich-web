@@ -1,0 +1,21 @@
+!!!
+%html{ :lang => 'en', 'xml:lang' => 'en', :xmlns => 'http://www.w3.org/1999/xhtml' }
+  %head
+    %title
+      My New Site
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+    = csrf_meta_tag
+  %body{ :class => @body_class }
+    #wrap
+      #header
+      #body
+        .container
+          .row
+            .span2
+              = render :partial => 'common/menu'
+            .span10
+              = yield
+      #footer
+    :javascript
+      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')

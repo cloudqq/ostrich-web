@@ -18,6 +18,12 @@ Rspp::Application.routes.draw do
   devise_for :admins
 
   post "sp_info/indexdata"
+  get  "sp_info/list_for_table"
+  get  "sp_info/list"
+  get  "sp_info/create"
+  post "sp_info/submit_create_spinfo"
+
+  get  "sp_business/list"
   post "report/statdata"
   post "report/stat_by_hour"
   get  "report/view_by_hour"

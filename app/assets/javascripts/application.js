@@ -8,5 +8,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery-ui.min
-//= require jquery.jtable
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require_tree .
