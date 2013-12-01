@@ -29,7 +29,8 @@
     options = {
       column_names: ["SP编号", "SP名称", "付款周期", "创建时间", "操作"],
       url: "/sp_info/list_for_table.json",
-      paging: true
+      paging: true,
+      dom: "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
     };
     adv_options = {
       aLengthMenu: [10, 25, 50],
