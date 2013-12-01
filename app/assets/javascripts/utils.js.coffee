@@ -32,7 +32,7 @@ $.fn.easyTable = (options,adv_options) ->
         error: (xhr,error,thrown) ->
           alert('error')
     bPaginate: false
-    sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+    sDom: 'T<"clear">lfrtip'
     sPaginationType: "bootstrap"
     bServerSide: true
     bProcessing: true

@@ -1,4 +1,10 @@
 Rspp::Application.routes.draw do
+  get "sp_business/create"
+  get "sp_business/list"
+  get "sp_business/destroy"
+  get "sp_business/update"
+  get "sp_business/list_for_table"
+
   authenticated :user do
     root :to => 'cp#dashboard'
   end
@@ -15,15 +21,20 @@ Rspp::Application.routes.draw do
     :registration => 'register', 
     :sign_up => 'cmon_let_me_in' 
   }
+
   devise_for :admins
 
   post "sp_info/indexdata"
   get  "sp_info/list_for_table"
   get  "sp_info/list"
   get  "sp_info/create"
+#  get  "sp_info/configure"
   post "sp_info/submit_create_spinfo"
+  post "sp_info/submit_configure"
 
-  get  "sp_business/list"
+  match "/sp_info/configure/:id" => "sp_info#configure", :as => :sp_info
+  match "/sp_info/submit_configure/:id" => "sp_info#submit_configure", :as => :sp_info
+
   post "report/statdata"
   post "report/stat_by_hour"
   get  "report/view_by_hour"

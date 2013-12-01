@@ -2,10 +2,8 @@ module Datatable
   class Base
     delegate :params, :h, :link_to, :number_to_currency, to: :@view
     attr_accessor :model
-
-    def initialize(view, model)
+    def initialize(view)
       @view = view
-      @model = model
     end
 
     def as_json(options = {})

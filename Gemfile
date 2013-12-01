@@ -49,6 +49,7 @@ group :test,:development do
   gem 'capybara','1.1.3'
   gem 'rspec-rails','2.11.4'
   gem 'minitest', '4.0.0'
+  gem 'guard-rails', '0.4.7'
 end
 
 gem 'will_paginate'

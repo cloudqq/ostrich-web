@@ -4,3 +4,5 @@ require 'composite_primary_keys'
 # Initialize the rails application
 Rspp::Application.initialize!
 
+
+

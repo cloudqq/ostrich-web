@@ -18,7 +18,8 @@ module Rspp
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
-    config.autoload_paths += %W(#{config.root}/lib/datatables)
+    # config.autoload_paths += %W(#{config.root}/lib/datatables)
+#    config.autoload_paths << 'lib/datatables'
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -36,6 +37,7 @@ module Rspp
     config.generators do |g|
       g.template_engine :haml
     end
+
 
     # config.i18n.default_locale = :de
 
