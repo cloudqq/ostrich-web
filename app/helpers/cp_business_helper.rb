@@ -1,0 +1,2 @@
+module CpBusinessHelper
+end

@@ -1,0 +1,38 @@
+%form{:class => 'form-horizontal', :action=>"/sp_business/submit_configure/#{@sp_business.ID}", :method =>"post"}
+  %legend #{@sp_business.SPID}  #{@sp_business.BUSINESSID}
+  .control-group
+    %label{:class => 'control-label'} 
+      特服号
+    .controls
+      %input{:name => 'spnumber', :class => "input-large" ,:value => "#{@sp_business.SPNUMBER}" }
+  .control-group
+    %label{:class => 'control-label'} 
+      指令
+    .controls
+      %input{:name => 'cmd', :class=>"input-large", :value => "#{@sp_business.CMD}" }
+  .control-group
+    %label{:class => 'control-label'} 
+      金额
+    .controls
+      %input{:type =>"text", :class => "input-large", :name => "price", :value => "#{@sp_business.PRICE}"}
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'} 
+        - if @sp_business.CMDTYPE == 0
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled" } 启用
+        - else
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'}
+        - if @sp_business.STATUS == 1
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
+        - else
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
+
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        保存配置
+        
+  

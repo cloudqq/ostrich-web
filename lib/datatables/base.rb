@@ -16,8 +16,6 @@ module Datatable
     end
 
     def data
-
-
     end
 
     def fetch_data

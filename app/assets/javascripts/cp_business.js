@@ -7,17 +7,17 @@
     sButtonText: "Copy to element",
     sDiv: "",
     fnClick: function(nButton, oConfig) {
-      return $(window).attr("location", "/sp_business/create");
+      return $(window).attr("location", "/cp_business/create");
     }
   };
 
-  TableTools.BUTTONS.create_new_sp_div = $.extend(true, TableTools.buttonBase, params);
+  TableTools.BUTTONS.create_new_cp_business_div = $.extend(true, TableTools.buttonBase, params);
 
   tool_option = {
     aButtons: [
       {
-        sExtends: "create_new_sp_div",
-        sButtonText: "新建SP",
+        sExtends: "create_new_cp_business_div",
+        sButtonText: "新建",
         sDiv: "copy"
       }
     ]
@@ -27,15 +27,15 @@
     var adv_options, options;
 
     options = {
-      column_names: ["通道ID", "SPID", "特服号码", "指令", "创建时间", "操作"],
-      url: "/sp_business/list_for_table.json",
+      column_names: ["CP名称", "指令", "特服号码", "金额", "结算比例", "扣量比例", "操作"],
+      url: "/cp_business/list_for_table.json",
       paging: true
     };
     adv_options = {
       aLengthMenu: [10, 25, 50],
       oTableTools: tool_option
     };
-    return $("#business_table").easyTable(options, adv_options);
+    return $("#cp_business_table").easyTable(options, adv_options);
   });
 
 }).call(this);

@@ -5,6 +5,7 @@ class SpBusinessController < ApplicationController
   end
 
   def list
+
     
   end
 
@@ -20,5 +21,10 @@ class SpBusinessController < ApplicationController
   end
 
   def update
+  end
+
+  def configure
+    id = params[:id]
+    @sp_business = SpBusiness.find_by_ID id
   end
 end

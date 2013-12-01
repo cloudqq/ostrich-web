@@ -2,22 +2,23 @@
 require File.expand_path('../base' ,__FILE__)
 
 module Datatable
-  class SpInfoTable < Base
+  class CpInfoTable < Base
     def initialize(view)
       super
-      self.model = SpInfo
+      self.model = CpInfo
     end
 
     def data
       result = []
       fetch_data.each do |x|
-        result << 
+        result <<
         [
-          x.SPID, 
-          x.SPNAME,
-          x.PAYPERIOD,
+          x.CPID,
+          x.LOGINNAME,
+          x.CPNAME,
+          x.STATUS,
           x.CREATETIME.strftime("%Y-%m-%d"),
-          "<a href=configure/#{x.SPID}>配置</a>|<a href=/sp_business/list/#{x.SPID}>通道</a>"
+          "<a href=configure/#{x.CPID}>编辑</a>|<a href=/cp_info/change_password/#{x.CPID}>密码</a>"
         ]
       end
       return result

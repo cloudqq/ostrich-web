@@ -1,9 +1,30 @@
 Rspp::Application.routes.draw do
+  get "cp_business/create"
+  get "cp_business/list"
+  get "cp_business/destroy"
+  get "cp_business/update"
+  get "cp_business/configure"
+  get "cp_business/submit_configure"
+
+  get "cp_business/list_for_table"
+
   get "sp_business/create"
   get "sp_business/list"
   get "sp_business/destroy"
   get "sp_business/update"
   get "sp_business/list_for_table"
+  get "sp_business/configure"
+
+  match "/sp_business/configure/:id" => "sp_business#configure", :as => :sp_business
+  match "/sp_business/list/:id" => "sp_business#list", :as => :sp_business
+
+
+  get "cp_info/list"
+  get "cp_info/list_for_table"
+  get "cp_info/configure"
+  post "cp_info/submit_configure"
+  match "/cp_info/configure/:id" => "cp_info#configure", :as => :cp_info
+  match "/cp_info/submit_configure/:id" => "cp_info#submit_configure", :as => :cp_info
 
   authenticated :user do
     root :to => 'cp#dashboard'

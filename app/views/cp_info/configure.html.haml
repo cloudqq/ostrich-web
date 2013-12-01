@@ -1,0 +1,24 @@
+%form{:class => 'form-horizontal', :action=>"/cp_info/submit_configure/#{@cp_info.CPID}", :method =>"post"}
+  %legend #{@cp_info.CPNAME}
+  .control-group
+    %label{:class => 'control-label'} 
+      登录账号
+    .controls
+      %input{:name => 'loginname', :class => "input-large" ,:value => "#{@cp_info.LOGINNAME}" }
+  .control-group
+    %label{:class => 'control-label'} 
+      密码
+    .controls
+      %input{:name => 'loginpassword', :class=>"input-large", :value => "#{@cp_info.LOGINPASSWORD}" }
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'}
+        - if @cp_info.STATUS == 1
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
+        - else
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
+
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        保存配置
