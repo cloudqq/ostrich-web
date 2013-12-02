@@ -5,7 +5,7 @@ $.fn.easyTable = (options,adv_options) ->
     table_id = options.table_id
   else
     table_id = table_id
-
+  
   if options.column_names != undefined
     table_def = '<table id="' + table_id + '" cellspacing="0" cellpadding="0" border="0" class="table table-striped table-bordered" width="100%"><thead>'
     for name in options.column_names
@@ -23,6 +23,9 @@ $.fn.easyTable = (options,adv_options) ->
 
   settings =
     fnServerData: (url,data,callback,oSettings) ->
+      if options.server_params != undefined
+        for param in options.server_params
+                data.push(param)
       oSettings.jqXHR = $.ajax
         url: oSettings.sAjaxSource || options.url
         type: "GET"

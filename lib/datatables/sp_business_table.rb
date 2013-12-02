@@ -6,6 +6,11 @@ module Datatable
     def initialize(view)
       super
       self.model = SpBusiness
+      if params[:spid].present?
+        self.cause = "SPID = #{params[:spid]}"
+      else
+        self.cause = nil
+      end
     end
 
     def data

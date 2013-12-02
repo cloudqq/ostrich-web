@@ -1,1 +1,10 @@
 #business_table
+:javascript
+ $(document).ready(function(){
+   server_params = [
+     {name: "spid", value: "#{@spid}"},
+   ]
+
+   load_business_list(server_params)
+ });
+  

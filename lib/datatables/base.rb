@@ -1,7 +1,7 @@
 module Datatable
   class Base
     delegate :params, :h, :link_to, :number_to_currency, to: :@view
-    attr_accessor :model
+    attr_accessor :model, :cause
     def initialize(view)
       @view = view
     end
@@ -19,7 +19,11 @@ module Datatable
     end
 
     def fetch_data
-      model.page(page).per_page(per_page)
+      if cause.nil?
+        model.page(page).per_page(per_page)
+      else
+        model.page(page).per_page(per_page).where(cause)
+      end
     end
 
   private

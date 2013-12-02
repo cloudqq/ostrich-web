@@ -12,11 +12,13 @@ TableTools.BUTTONS.create_new_sp_business_div = $.extend true, TableTools.button
 
 tool_option = aButtons: [ sExtends: "create_new_sp_business_div", sButtonText: "新建通道", sDiv: "copy"]
 
-jQuery ->
+
+@load_business_list = (server_params) ->
         options =
                 column_names: ["通道ID","SPID","特服号码","指令","创建时间","操作"]
                 url: "/sp_business/list_for_table.json"
                 paging: true
+                server_params: server_params
         adv_options =
                 aLengthMenu: [10,25,50]
                 oTableTools: tool_option

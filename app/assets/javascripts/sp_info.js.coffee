@@ -49,7 +49,7 @@ jQuery ->
                 oTableTools: tool_option
                 aoColumnDefs: col_defs
 
-        $("#xyz").easyTable options, adv_options
+        $("#sp_info_table").easyTable options, adv_options
 
 $ ->
         $("#btn_spinfo_create_and_configure").click (event) ->

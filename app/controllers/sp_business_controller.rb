@@ -5,8 +5,7 @@ class SpBusinessController < ApplicationController
   end
 
   def list
-
-    
+    @spid = params[:id]
   end
 
   def list_for_table
