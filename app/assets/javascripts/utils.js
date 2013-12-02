@@ -47,7 +47,7 @@
       sDom: 'T<"clear">lfrtip',
       sPaginationType: "bootstrap",
       bServerSide: true,
-      bProcessing: true,
+      bProcessing: false,
       aaSorting: [],
       aoColumnDefs: [
         {

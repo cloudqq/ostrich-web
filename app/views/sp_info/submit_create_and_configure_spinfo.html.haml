@@ -1,0 +1,59 @@
+%form{:class => 'form-horizontal', :action=>"/sp_info/submit_configure/#{@sp_info.SPID}", :method =>"post"}
+  %legend #{@sp_info.SPNAME}
+  .control-group
+    %label{:class => 'control-label'} 业务类型
+    .controls
+      %select{:name => 'accept_type'}
+        - if  @sp_info.ACCEPTTYPE == 0
+          %option{:value => '0', :selected => true}
+            短信
+          %option{:value => '1'}
+            IVR 
+        - else
+          %option{:value => '0'}
+            短信
+          %option{:value => '1', :selected => true}
+            IVR 
+  .control-group
+    %label{:class => 'control-label'} 接口类型
+    .controls
+      %select{:name => 'category'}
+        - if @sp_info.CATAGORY == 0
+          %option{:value => '0', :selected => true}  
+            MO/MR
+          %option{:value => '1'}  
+            组合
+        - else
+          %option{:value => '0'}  
+            MO/MR
+            %option{:value => '1', :selected => true}  
+              组合
+  .control-group
+    %label{:class => 'control-label'} MO 后缀
+    .controls
+      %input{:type=>"text", :class => "input-xxlarge",:id=> "input_mo_suffix", :name => "mo_suffix", :value => "#{@sp_info.MOREQSUFFIX}" }
+  .control-group
+    %label{:class => 'control-label'} MO 参数
+    .controls
+      %input{:type =>"text", :class => "input-xxlarge", :id => "input_mo_params", :name => "mo_params", :value => "#{@sp_info.MOREQPRAMLIST}"}
+  .control-group
+    %label{:class => 'control-label'} MR 后缀
+    .controls
+      %input{:type=>"text", :class => "input-xxlarge", :id=> "input_mr_suffix", :name => "mr_suffix", :value => "#{@sp_info.MRREQSUFFIX}"} 
+  .control-group
+    %label{:class => 'control-label'} MR 参数
+    .controls
+      %input{:type =>"text", :class => "input-xxlarge", :id => "input_mr_params", :name => "mr_params", :value => "#{@sp_info.MRREQPRAMLIST}"}
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'}
+        - if @sp_info.STATUS == 1
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
+        - else
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        保存配置
+        
+  

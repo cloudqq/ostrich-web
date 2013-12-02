@@ -52,6 +52,7 @@ Rspp::Application.routes.draw do
 #  get  "sp_info/configure"
   post "sp_info/submit_create_spinfo"
   post "sp_info/submit_configure"
+  post "sp_info/submit_create_and_configure_spinfo"
 
   match "/sp_info/configure/:id" => "sp_info#configure", :as => :sp_info
   match "/sp_info/submit_configure/:id" => "sp_info#submit_configure", :as => :sp_info

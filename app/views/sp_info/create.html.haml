@@ -1,13 +1,13 @@
-%form{:class => 'form-horizontal', :action=>"/sp_info/submit_create_spinfo", :method =>"post"}
+%form{:class => 'form-horizontal', :action=>"", :method =>"post", :id=> "sp_info_create_form"}
   .control-group
     %label{:class => 'control-label',:for=>'inputSpName'} SP名称
     .controls
       %input{:type=>"text",:id=>"inputSpName",:placeholder=> 'SP名称', :name => 'spname'}
   .control-group
     .controls
-      %button{:type => "submit", :class=>"btn"}
+      %button{:type => "button", :class=>"btn", :id=> "btn_spinfo_create"}
         创建
-      %button{:type => "submit", :class=>"btn"}
+      %button{:type => "button", :class=>"btn", :id=> "btn_spinfo_create_and_configure"}
         创建并配置
 
         

@@ -36,6 +36,17 @@ class SpInfoController < ApplicationController
 
   end
 
+  def submit_create_and_configure_spinfo
+    spname = params[:spname]
+    info = SpInfo.new
+    info.SPNAME = spname
+    info.ACCEPTTYPE = 0
+    info.CATAGORY = 0
+    info.save!
+
+    @sp_info = SpInfo.find(info.SPID)
+  end
+
   def configure
     id = params[:id]
     @sp_info = SpInfo.find(id)
