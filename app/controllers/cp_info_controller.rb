@@ -1,4 +1,5 @@
 require File.expand_path('../../../lib/datatables/cp_info_table', __FILE__)
+require File.expand_path('../../../lib/datatables/assignment_table', __FILE__)
 
 class CpInfoController < ApplicationController
   #before_filter :authenticate_user!
@@ -39,5 +40,15 @@ class CpInfoController < ApplicationController
     respond_to do |format|
       format.html { redirect_to :action => "list"}
     end
+  end
+
+  def list_for_assignment_table
+    respond_to do |format|
+      format.json { render json: Datatable::AssignmentTable.new(view_context)}
+    end
+  end
+
+  def cmd_assignment
+
   end
 end

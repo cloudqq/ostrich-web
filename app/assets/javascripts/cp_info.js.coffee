@@ -20,6 +20,40 @@ jQuery ->
         adv_options =
                 aLengthMenu: [10,25,50]
                 oTableTools: tool_option
+
         
         $("#cp_info_table").easyTable options, adv_options
+
+@list_cmd_assignment_table = (server_params) ->
+        column_defs = [
+                mRender: (data,type,row) ->
+                        data + "xyz"
+                aTargets: [0],
+                fnCreatedCell: (nTd,sData,oData,iRow,iCol) ->
+                        $(nTd).prepend($("<b>OK</b>"))
+                sTitle: "Holy shit",
+                mRender: (data,type,row) ->
+                        "OOO"
+                aTargets: [6]
+        ]
+                
+        options =
+                column_names:["SP名称","特服号","指令","结算比例","扣量比例","通道概要","操作"]
+                url: "/cp_info/list_for_assignment_table.json"
+                paging: true
+        adv_options =
+                aLengthMenu: [10,25,50]
+                oTableTools: tool_option
+                aoColumnDefs: column_defs
+                aoColumns:[
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        mData:null
+                ]
+        $("#cmd_assignment_table").easyTable options, adv_options
+                
 
