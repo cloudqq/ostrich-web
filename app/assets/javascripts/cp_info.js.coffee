@@ -79,8 +79,17 @@ jQuery ->
   pay_percent = $("td:eq(4) input",rowObj).val()
   dis_percent = $("td:eq(5) input",rowObj).val()
   create_business_url = "/cp_business/create?cpid=#{cpid}&spid=#{spid}&c=#{cmd}&pp=#{pay_percent}&dp=#{dis_percent}"
-  $(location).attr('href',create_business_url)
-
+  $.ajax
+    url: "/cp_business/occupied"
+    type: "GET"
+    dataType: "json"
+    data:
+      spid: spid
+      cmd: cmd
+    success: ->
+      $(location).attr('href',create_business_url)  
+    error: (xhr,error,thrown) ->
+      alert(error)
     
 @list_cmd_assignment_table = (server_params,cpid) ->
         tb_cmd_assignment_row_callback = (nRow,aData,iDisplayIndex, iDisplayIndexFull) ->

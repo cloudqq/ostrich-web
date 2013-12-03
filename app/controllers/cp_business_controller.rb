@@ -14,7 +14,7 @@ class CpBusinessController < ApplicationController
     ret = CpBusiness.business_cmd_occupied? params[:spid], params[:cmd]
 
     respond_to do |format|
-      format.json { render :json => "{ occupied : #{ret} }" }
+      format.json { render :json => '{ "occupied":"#{ret}" }' }
     end
   end
 
