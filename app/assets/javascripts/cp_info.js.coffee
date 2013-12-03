@@ -89,7 +89,13 @@ jQuery ->
     success: ->
       $(location).attr('href',create_business_url)  
     error: (xhr,error,thrown) ->
-      alert(error)
+      html = """
+              <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                指令已经存在，请重新选择扩展指令
+              </div>
+             """
+      $("#cmd_assignment_table").before(html)
     
 @list_cmd_assignment_table = (server_params,cpid) ->
         tb_cmd_assignment_row_callback = (nRow,aData,iDisplayIndex, iDisplayIndexFull) ->
