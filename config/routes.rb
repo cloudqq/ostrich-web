@@ -5,11 +5,13 @@ Rspp::Application.routes.draw do
   get "cp_business/update"
   get "cp_business/configure"
   get "cp_business/submit_configure"
+  get "cp_business/occupied"
   post " cp_business/submit_create"
 
   get "cp_business/list_for_table"
 
   match "/cp_business/create/:id" => "cp_business#create", :as => :cp_business
+  match "/cp_business/occupied/:spid/:cmd" => "cp_business#occupied", :as => :cp_business
 
   get "sp_business/create"
   get "sp_business/list"
