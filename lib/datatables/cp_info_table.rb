@@ -18,7 +18,7 @@ module Datatable
           x.CPNAME,
           x.STATUS,
           x.CREATETIME.strftime("%Y-%m-%d"),
-          "<a href=configure/#{x.CPID}>编辑</a>|<a href=/cp_info/change_password/#{x.CPID}>密码</a>"
+          ""
         ]
       end
       return result

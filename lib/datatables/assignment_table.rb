@@ -19,16 +19,19 @@ module Datatable
           x.spinfo.SPNAME,
           x.SPNUMBER,
           x.CMD,
+          '',
           '0',
           '0',
-          x.AREALIST
+          x.AREALIST,
+          x.CMDTYPE,
+          x.spinfo.SPID
         ]
       end
       result
     end
 
     def fetch_data
-      fields = %w(SPINFO.SPNAME SPNUMBER CMD AREALIST BUSINESSTYPE ISASSIGN STATUS PRICE CMDTYPE)
+      fields = %w(SPINFO.SPNAME SPNUMBER CMD AREALIST BUSINESSTYPE ISASSIGN STATUS PRICE CMDTYPE SPINFO.SPID)
       self.total_count = SpBusiness.count
       records = SpBusiness.select(fields).includes(:spinfo).page(page).per_page(per_page)
     end

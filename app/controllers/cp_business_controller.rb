@@ -1,6 +1,12 @@
 require File.expand_path('../../../lib/datatables/cp_business_table',__FILE__)
 class CpBusinessController < ApplicationController
   def create
+    
+  end
+
+  def submit_create
+
+
   end
 
   def list
