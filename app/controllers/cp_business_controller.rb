@@ -14,18 +14,24 @@ class CpBusinessController < ApplicationController
    spid
 =end
   def create
-    @spbusiness = Spbusiness.find_by_SPID params[:spid]
+    @spbusiness = SpBusiness.find_by_SPID params[:spid]
     unless @spbusiness.nil?
-      cmd = params[:c].blank? ? spbusiness.CMD ? spbusiness.CMD + params[:c]
-      unless CpBusiness.business_cmd_occupied? @spbusiness.SPID, cmd
+      cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
+      unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, cmd)
         cpbusiness = CpBusiness.new
         cpbusiness.CMD = cmd
+        cpbusiness.BUSINESSID = Serial.new_serial("BZ")
+        cpbusiness.save!
       end
     end
 
     respond_to do |format|
-      format.html {}
+      format.html { redirect_to "/cp_business/configure/#{cpbusiness.ID}"}
     end
+  end
+
+
+  def configure
 
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003133718) do
+ActiveRecord::Schema.define(:version => 20131203134157) do
 
   create_table "CP_BUSINESS", :primary_key => "ID", :force => true do |t|
     t.integer   "CPID"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20121003133718) do
     t.timestamp "CREATETIME",                                 :null => false
   end
 
+  create_table "SERIALS", :force => true do |t|
+    t.string   "CODE",                      :null => false
+    t.integer  "MAXNO",      :default => 0
+    t.integer  "LENGTH",     :default => 2
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
   create_table "SP_ACCOUNT", :primary_key => "USERID", :force => true do |t|
     t.string  "USERNAME",      :limit => 20
     t.string  "PASSWORD",      :limit => 20, :null => false
@@ -61,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20121003133718) do
   create_table "SP_BUSINESS", :primary_key => "ID", :force => true do |t|
     t.integer   "SPID"
     t.string    "BUSINESSID",   :limit => 10,                  :null => false
-    t.string    "SPNUMBER",     :limit => 15
+    t.string    "SPNUMBER",     :limit => 25
     t.string    "CMD",          :limit => 30,                  :null => false
     t.float     "PRICE",        :limit => 4
     t.integer   "CMDTYPE"
@@ -199,12 +207,30 @@ ActiveRecord::Schema.define(:version => 20121003133718) do
     t.datetime "updated_at"
   end
 
+  create_table "rest", :id => false, :force => true do |t|
+    t.integer "spid"
+    t.string  "businessid",  :limit => 10,                 :null => false
+    t.integer "cpid"
+    t.string  "content",     :limit => 100
+    t.string  "spnumber",    :limit => 50,                 :null => false
+    t.string  "phonenumber", :limit => 11
+    t.string  "status",      :limit => 50,                 :null => false
+    t.integer "valid",                      :default => 1
+    t.integer "isdiscount"
+  end
+
   create_table "roles", :force => true do |t|
     t.integer  "type"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "sample", :id => false, :force => true do |t|
+    t.string "phone", :limit => 13
+  end
+
+  add_index "sample", ["phone"], :name => "sample_phone"
 
   create_table "sp_alerts", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -225,6 +251,75 @@ ActiveRecord::Schema.define(:version => 20121003133718) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "spc_001_mo", :id => false, :force => true do |t|
+    t.string    "linkid",    :limit => 100
+    t.integer   "motype"
+    t.string    "spcode",    :limit => 10
+    t.string    "mobile",    :limit => 12
+    t.string    "content",   :limit => 20
+    t.integer   "feeprice"
+    t.integer   "feetype"
+    t.datetime  "motime"
+    t.datetime  "update_at"
+    t.timestamp "create_at",                :null => false
+  end
+
+  create_table "spc_001_mr", :id => false, :force => true do |t|
+    t.string    "msgid",       :limit => 100
+    t.string    "linkid",      :limit => 100
+    t.string    "status",      :limit => 20
+    t.string    "mobile",      :limit => 12
+    t.integer   "price"
+    t.integer   "feetype"
+    t.integer   "continued"
+    t.datetime  "create_date"
+    t.datetime  "update_at"
+    t.timestamp "create_at",                  :null => false
+  end
+
+  add_index "spc_001_mr", ["msgid"], :name => "idx_spc_mr"
+
+  create_table "stat_7", :id => false, :force => true do |t|
+    t.integer   "ID",                         :default => 0, :null => false
+    t.integer   "SPID"
+    t.string    "BUSINESSID",  :limit => 10,                 :null => false
+    t.integer   "CPID"
+    t.string    "CONTENT",     :limit => 100
+    t.string    "SPNUMBER",    :limit => 50,                 :null => false
+    t.string    "LINKID",      :limit => 50,                 :null => false
+    t.string    "PHONENUMBER", :limit => 11
+    t.timestamp "CREATETIME",                                :null => false
+    t.string    "TELESEG",     :limit => 7
+  end
+
+  add_index "stat_7", ["CREATETIME"], :name => "stat_7_createtime"
+  add_index "stat_7", ["LINKID"], :name => "idx_stat_linkid"
+  add_index "stat_7", ["PHONENUMBER"], :name => "idx_stat_phone"
+
+  create_table "stat_mr7", :id => false, :force => true do |t|
+    t.integer   "ID",                        :default => 0, :null => false
+    t.integer   "SPID"
+    t.string    "BUSINESSID",  :limit => 10,                :null => false
+    t.integer   "CPID"
+    t.string    "PHONENUMBER", :limit => 11,                :null => false
+    t.string    "LINKID",      :limit => 50,                :null => false
+    t.string    "STATUS",      :limit => 50,                :null => false
+    t.integer   "ISDISCOUNT"
+    t.timestamp "CREATETIME",                               :null => false
+    t.integer   "VALID",                     :default => 1
+    t.string    "TELESEG",     :limit => 7
+  end
+
+  add_index "stat_mr7", ["CREATETIME"], :name => "stat_mr7_createtime"
+  add_index "stat_mr7", ["LINKID"], :name => "idx_stat_mr_linkid"
+  add_index "stat_mr7", ["PHONENUMBER"], :name => "idx_stat_mr_phone"
+
+  create_table "tmp1", :id => false, :force => true do |t|
+    t.string "phone", :limit => 12
+  end
+
+  add_index "tmp1", ["phone"], :name => "idx_tmp_phone"
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -247,5 +342,36 @@ ActiveRecord::Schema.define(:version => 20121003133718) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "xt_mon_1_3", :id => false, :force => true do |t|
+    t.integer   "ID",                         :default => 0, :null => false
+    t.integer   "SPID"
+    t.string    "BUSINESSID",  :limit => 10,                 :null => false
+    t.integer   "CPID"
+    t.string    "CONTENT",     :limit => 100
+    t.string    "SPNUMBER",    :limit => 50,                 :null => false
+    t.string    "LINKID",      :limit => 50,                 :null => false
+    t.string    "PHONENUMBER", :limit => 11
+    t.timestamp "CREATETIME",                                :null => false
+    t.string    "TELESEG",     :limit => 7
+  end
+
+  create_table "xt_mon_1_3_phone", :id => false, :force => true do |t|
+    t.integer   "ID",                         :default => 0, :null => false
+    t.integer   "SPID"
+    t.string    "BUSINESSID",  :limit => 10,                 :null => false
+    t.integer   "CPID"
+    t.string    "CONTENT",     :limit => 100
+    t.string    "SPNUMBER",    :limit => 50,                 :null => false
+    t.string    "LINKID",      :limit => 50,                 :null => false
+    t.string    "PHONENUMBER", :limit => 11
+    t.timestamp "CREATETIME",                                :null => false
+    t.string    "TELESEG",     :limit => 7
+  end
+
+  create_table "xt_mon_1_3_phone_list", :id => false, :force => true do |t|
+    t.string  "phonenumber", :limit => 11
+    t.integer "count(1)",    :limit => 8,  :default => 0, :null => false
+  end
 
 end
