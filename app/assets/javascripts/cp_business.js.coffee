@@ -12,7 +12,7 @@
   TableTools.BUTTONS.create_new_cp_business_div = $.extend true, TableTools.buttonBase, params
   
   options =
-    column_names: ["CP名称","指令","特服号码","金额","结算比例","扣量比例","操作"]
+    column_names: ["编号","CP","SP","特服号码","金额","结算比例","扣量比例","操作"]
     url: "/cp_business/list_for_table.json"
     paging: true
   adv_options =

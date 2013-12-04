@@ -24,7 +24,8 @@ module Datatable
           '0',
           x.AREALIST,
           x.CMDTYPE,
-          x.spinfo.SPID
+          x.spinfo.SPID,
+          x.ID
         ]
       end
       result

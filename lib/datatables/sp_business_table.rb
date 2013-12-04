@@ -18,12 +18,16 @@ module Datatable
       fetch_data.each do |x|
         result << 
           [
+          x.spinfo.SPNAME,
           x.BUSINESSID,
-          x.SPID, 
           x.SPNUMBER,
           x.CMD,
+          x.PRICE,
+          x.BUSINESSTYPE,
           x.CREATETIME.strftime("%Y-%m-%d"), 
-          "<a href=/sp_business/configure/#{x.ID}>配置</a>"
+          "<a href=/sp_business/configure/#{x.ID}>配置</a>",
+          x.SPID, 
+          x.CMDTYPE
         ]        
       end
       return result

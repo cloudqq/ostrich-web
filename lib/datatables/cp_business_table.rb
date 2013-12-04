@@ -14,6 +14,8 @@ module Datatable
         result <<
           [
           x.ID,
+          x.cpinfo.CPNAME,
+          x.spinfo.SPNAME,
           x.CMD,
           x.CPID,
           x.SPID,
@@ -24,6 +26,10 @@ module Datatable
           x.STATUS,
           x.CMD,
           x.CREATETIME.strftime("%Y-%m-%d"), 
+          x.INTERFACEURL,
+          x.REPORTVALID,
+          x.REQUESTMETHOD,
+          x.URLTEMPLATE,
           "<a href=/cp_business/configure/#{x.ID}>配置</a>"
         ]
       end

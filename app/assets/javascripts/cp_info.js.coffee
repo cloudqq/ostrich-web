@@ -80,7 +80,10 @@
   $("#cp_info_table").easyTable options, adv_options
 
 
-@create_business = (index,spid,cpid) ->
+@create_business = (index,spid,cpid,sp_business_id) ->
+  ###
+   sp_business_id not SPID
+  ###
   cmd = ""
   rowObj = $("#tb_cmd_assignment tr:eq(#{index+1})")
   cmdObj = $("td:eq(3) input", rowObj)
@@ -88,7 +91,7 @@
     cmd = cmdObj.val()
   pay_percent = $("td:eq(4) input",rowObj).val()
   dis_percent = $("td:eq(5) input",rowObj).val()
-  create_business_url = "/cp_business/create?cpid=#{cpid}&spid=#{spid}&c=#{cmd}&pp=#{pay_percent}&dp=#{dis_percent}"
+  create_business_url = "/cp_business/create?cpid=#{cpid}&spid=#{spid}&c=#{cmd}&pp=#{pay_percent}&dp=#{dis_percent}&spuid=#{sp_business_id}"
   $.ajax
     url: "/cp_business/occupied"
     type: "GET"
@@ -118,13 +121,28 @@
         TableTools.BUTTONS.create_new_cp_info_div = $.extend true, TableTools.buttonBase, params
   
         tb_cmd_assignment_row_callback = (nRow,aData,iDisplayIndex, iDisplayIndexFull) ->
+                  ###
+                  aData
+                  ~~~~~~~~~~~~~~~~~
+                  spname
+                  spnumber
+                  cmd
+                  ''
+                  0
+                  0
+                  arealist
+                  cmdtype
+                  spid
+                  id
+
+                  create_business(rowid, spid, cpid, sp_business_uid)
+                  ###
                   cmdObj = $("td:eq(3) input", nRow)
                   cmd = ""
                   if cmdObj.length
                     cmd = cmdObj.val()
-
                   html = """
-                         <a href=# onclick="javascript:create_business(#{iDisplayIndex},#{aData[7]},#{cpid})">分配</a>
+                         <a href=# onclick="javascript:create_business(#{iDisplayIndex},#{aData[8]},#{cpid},#{aData[9]})">分配</a>
                          """
                   $("td:eq(7)",nRow).html(html)
         options =

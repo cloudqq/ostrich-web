@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203134157) do
+ActiveRecord::Schema.define(:version => 20131204070126) do
 
   create_table "CP_BUSINESS", :primary_key => "ID", :force => true do |t|
     t.integer   "CPID"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20131203134157) do
     t.string    "REPORTVALID",   :limit => 30,  :default => ""
     t.integer   "REQUESTMETHOD",                :default => 0
     t.string    "URLTEMPLATE",   :limit => 200, :default => ""
+    t.string    "SPNUMBER",      :limit => 25
+    t.integer   "PRICE"
   end
 
   create_table "CP_INFO", :primary_key => "CPID", :force => true do |t|

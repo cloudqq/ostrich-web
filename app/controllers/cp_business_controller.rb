@@ -12,25 +12,35 @@ class CpBusinessController < ApplicationController
    dp    dis_percent
    pp    pay_percent
    spid
+   spuid sp business uid
 =end
   def create
-    @spbusiness = SpBusiness.find_by_SPID params[:spid]
+    @spbusiness = SpBusiness.find_by_ID(params[:spuid])
+
     unless @spbusiness.nil?
       cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
       unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, cmd)
         cpbusiness = CpBusiness.new
         cpbusiness.CMD = cmd.upcase
-        cpbusiness.BUSINESSID = Serial.new_serial("BZ")
-        cpbusiness.PAY_PERCENT = 0
-        cpbusiness.DIS_PERCENT = 0
+        cpbusiness.BUSINESSID = @spbusiness.BUSINESSID
+        cpbusiness.PAYPRCT = 100
+        cpbusiness.DISCOUNTPRCT = 0
+        cpbusiness.SPNUMBER = @spbusiness.SPNUMBER
+        cpbusiness.CMDTYPE = @spbusiness.CMDTYPE
+        cpbusiness.PRICE = @spbusiness.PRICE
         cpbusiness.CPID = params[:cpid]
         cpbusiness.SPID = params[:spid]
         cpbusiness.save!
+
+        respond_to do |format|
+          format.html { redirect_to "/cp_business/configure/#{cpbusiness.ID}"}
+        end
+        return 
       end
     end
 
     respond_to do |format|
-      format.html { redirect_to "/cp_business/configure/#{cpbusiness.ID}"}
+      format.html { render :inline => "create cp business failed."}
     end
   end
 
