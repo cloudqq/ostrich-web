@@ -1,0 +1,19 @@
+%legend
+  统计报表查询
+%form{:class => 'navbar-form pull-left', :action=>"/cp_business/submit_configure", :method =>"post"}
+  %input{:type=>"text",:id=>"input_cpname", :class=>"input-small", :placeholder=>"CP名称"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-small", :placeholder=>"SP名称"}
+  %input{:type=>"text",:id=>"input_start_date",  :class=>"input-small", :placeholder=>"起始时间"}
+  %input{:type=>"text",:id=>"input_end_date", :class=>"input-small", :placeholder=>"结束时间"}
+  %button{:type=>"button", :class=>"btn" , :onclick=>"javascript:search()"}
+    查询
+  %button{:type=>"button", :class=>"btn", :onclick=>"javascript:search_today()"}
+    当天
+  %button{:type=>"button", :class=>"btn"}
+    本月
+  %button{:type=>"button", :class=>"btn"}
+    全部
+
+%br
+%br
+#tb_report_stat_table

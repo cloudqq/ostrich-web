@@ -5,17 +5,20 @@
     %label{:class => 'control-label'} 
       特服号码
     .controls
-      %input{:type =>"text", :class => "input-large", :name => "spnumber", :value => "#{@cpbusiness['spnumber']}" , :disabled=> "true"}
+      %span{:class => "input-large uneditable-input"}
+        #{@cpbusiness['spnumber']}
   .control-group
     %label{:class => 'control-label'} 
       分配指令
     .controls
-      %input{:name => 'pay_percent', :type=>"text", :class=>"input-large", :value => "#{@cpbusiness['cmd']}" ,:disabled=> "true"}
+      %span{:class => "input-large uneditable-input"}
+        #{@cpbusiness['cmd']}
   .control-group
     %label{:class => 'control-label'} 
       单价
     .controls
-      %input{:name => 'pay_percent', :type=>"text", :class=>"input-large", :value => "#{@cpbusiness['price']}" ,:disabled=> "true"}
+      %span{:class=>"input-large uneditable-input"}
+        #{@cpbusiness['price']}
   .control-group
     %label{:class => 'control-label'} 
       结算比例

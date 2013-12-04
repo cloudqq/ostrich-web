@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+require File.expand_path('../../../lib/datatables/report_stat_table',__FILE__)
 require 'iconv'
 class ReportController < ApplicationController
-  before_filter :authenticate_admin!
-  before_filter do
-    redirect_to "/" unless current_admin && admin_signed_in?
-  end
+  # before_filter :authenticate_admin!
+  # before_filter do
+  #   redirect_to "/" unless current_admin && admin_signed_in?
+  # end
+
   respond_to :html, :xml, :json
   def moindex
     @mologs = MrLog.includes(:spinfo).limit(10)
@@ -282,5 +284,11 @@ class ReportController < ApplicationController
   def stat
   end
   def ivr
+  end
+
+  def list_stat_for_table
+    respond_to do |format|
+      format.json {render json: Datatable::ReportStatTable.new(view_context) }
+    end
   end
 end
