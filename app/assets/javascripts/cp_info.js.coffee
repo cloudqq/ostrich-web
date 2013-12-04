@@ -108,6 +108,15 @@
       $("#cmd_assignment_table").before(html)
     
 @list_cmd_assignment_table = (server_params,cpid) ->
+        params =
+          sNewLine: "<br>"
+          sButtonText: "Copy to element"
+          sDiv: ""
+          fnClick: (nButton, oConfig) ->
+            $(window).attr("location", "/cp_info/create")
+                
+        TableTools.BUTTONS.create_new_cp_info_div = $.extend true, TableTools.buttonBase, params
+  
         tb_cmd_assignment_row_callback = (nRow,aData,iDisplayIndex, iDisplayIndexFull) ->
                   cmdObj = $("td:eq(3) input", nRow)
                   cmd = ""
@@ -126,7 +135,12 @@
         adv_options =
                 fnRowCallback: tb_cmd_assignment_row_callback
                 aLengthMenu: [10,25,50]
-                oTableTools: tool_option
+                oTableTools:
+                  aButtons:[
+                    sExtends: "create_new_cp_info_div"
+                    sButtonText:"创建CP"
+                    sDiv: "copy"
+                  ]
                 aoColumnDefs: [
                         {
                           sWidth: "24%"
