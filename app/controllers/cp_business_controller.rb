@@ -30,8 +30,10 @@ class CpBusinessController < ApplicationController
     end
   end
 
-
   def configure
+    @spbusiness = SpBusiness.find(params[:id])
+
+
 
   end
 

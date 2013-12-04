@@ -1,2 +1,21 @@
-%h1 CpBusiness#configure
-%p Find me in app/views/cp_business/configure.html.haml
+%form{:class => 'form-horizontal', :action=>"/cp_business/submit_configure", :method =>"post"}
+  %legend 指令分配
+  .control-group
+    %label{:class => 'control-label'} 
+      分配指令
+    .controls
+      %input{:name => 'cmd', :class => "input-large" ,:value => "" }
+  .control-group
+    %label{:class => 'control-label'} 
+      结算比例
+    .controls
+      %input{:name => 'pay_percent', :class=>"input-large", :value => "" }
+  .control-group
+    %label{:class => 'control-label'} 
+      扣量比例
+    .controls
+      %input{:name => 'discount_percent', :class=>"input-large", :value => "" }
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        保存配置

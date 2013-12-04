@@ -6,7 +6,8 @@ Rspp::Application.routes.draw do
 
   get "cp_business/submit_configure"
   get "cp_business/occupied"
-  post " cp_business/submit_create"
+  post "cp_business/submit_create"
+  post "cp_business/submit_configure"
 
   get "cp_business/list_for_table"
   get "cp_business/configure"
