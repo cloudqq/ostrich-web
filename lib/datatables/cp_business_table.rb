@@ -16,21 +16,21 @@ module Datatable
           x.ID,
           x.cpinfo.CPNAME,
           x.spinfo.SPNAME,
+          x.SPNUMBER,
           x.CMD,
-          x.CPID,
-          x.SPID,
-          x.BUSINESSID,
-          x.CMDTYPE,
+          x.PRICE,
           x.PAYPRCT,
           x.DISCOUNTPRCT,
           x.STATUS,
-          x.CMD,
           x.CREATETIME.strftime("%Y-%m-%d"), 
+          "<a href=/cp_business/configure/#{x.ID}>配置</a>",
           x.INTERFACEURL,
           x.REPORTVALID,
           x.REQUESTMETHOD,
           x.URLTEMPLATE,
-          "<a href=/cp_business/configure/#{x.ID}>配置</a>"
+          x.CPID,
+          x.SPID,
+          x.CMDTYPE
         ]
       end
       return result

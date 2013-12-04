@@ -52,8 +52,14 @@ class CpBusinessController < ApplicationController
       "spname" => cpbiz.spinfo.SPNAME,
       "cmd"    => cpbiz.CMD,
       "status" => cpbiz.STATUS,
+      "spnumber" => cpbiz.SPNUMBER,
       "pay_percent" => cpbiz.PAYPRCT,
-      "dis_percent" => cpbiz.DISCOUNTPRCT
+      "dis_percent" => cpbiz.DISCOUNTPRCT,
+      "interface_url" => cpbiz.INTERFACEURL,
+      "url_template" => cpbiz.URLTEMPLATE,
+      "report_valid" => cpbiz.REPORTVALID,
+      "request_method" => cpbiz.REQUESTMETHOD,
+      "price" => cpbiz.PRICE
     }
   end
 
@@ -92,7 +98,10 @@ class CpBusinessController < ApplicationController
       cpbusiness.PAYPRCT = params[:pay_percent].to_i
       cpbusiness.DISCOUNTPRCT = params[:dis_percent].to_i
       cpbusiness.STATUS = params[:enabled].blank? ? 0 : 1
-
+      cpbusiness.REQUESTMETHOD = params[:request_method]
+      cpbusiness.URLTEMPLATE = params[:url_template]
+      cpbusiness.INTERFACEURL = params[:interface_url]
+      cpbusiness.REPORTVALID = params[:report_valid]
       cpbusiness.save!
     end
     respond_to do |format|
