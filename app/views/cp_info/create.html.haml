@@ -1,0 +1,21 @@
+%form{:class => 'form-horizontal', :action=>"/cp_info/submit_create", :method =>"post"}
+  .control-group
+    %label{:class => 'control-label'} 
+      CP名称
+    .controls
+      %input{:type =>"text", :class => "input-large", :name => "cpname"}
+  .control-group
+    %label{:class => 'control-label'} 
+      登录用户名
+    .controls
+      %input{:type =>"text", :class => "input-large", :name => "loginname", :value => ""}
+  .control-group
+    %label{:class => 'control-label', :name=> "loginpassword"} 
+      登录密码
+    .controls
+      %input{:name => 'loginpassword', :class=>"input-large", :type=>"text"}
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        创建新CP
+

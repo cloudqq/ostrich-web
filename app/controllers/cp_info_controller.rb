@@ -6,6 +6,8 @@ class CpInfoController < ApplicationController
   def dashboard
 
   end
+  def create
+  end
 
   def list_for_table
     respond_to do |format|

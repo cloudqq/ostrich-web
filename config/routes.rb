@@ -28,11 +28,13 @@ Rspp::Application.routes.draw do
 
 
   get "cp_info/list"
+  get "cp_info/create"
   get "cp_info/list_for_table"
   get "cp_info/configure"
   get "cp_info/assignment" , to: "cp_info#cmd_assignment"
   get "cp_info/list_for_assignment_table"
   post "cp_info/submit_configure"
+  post "cp_info/submit_create"
   
 
   match "/cp_info/configure/:id" => "cp_info#configure", :as => :cp_info
