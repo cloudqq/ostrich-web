@@ -43,6 +43,11 @@
                   {
                     sWidth:"10%"
                     aTargets:[3]
+                    mRender:(data,type,row) ->
+                      if data == 1
+                        "正常"
+                      else
+                        "关闭"
                   },
                   {
                     sWidth:"10%"

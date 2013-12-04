@@ -6,7 +6,22 @@ class CpInfoController < ApplicationController
   def dashboard
 
   end
+
   def create
+
+  end
+
+  def submit_create
+    cpinfo = CpInfo.new
+    cpinfo.CPNAME = params[:cpname]
+    cpinfo.LOGINNAME = params[:loginname]
+    cpinfo.LOGINPASSWORD = params[:loginpassword]
+
+    cpinfo.save!
+
+    respond_to do | format|
+      format.html { redirect_to :action => "list" }
+    end
   end
 
   def list_for_table
