@@ -66,7 +66,7 @@ class CpInfoController < ApplicationController
   end
 
   def cmd_assignment
-    
+
 
   end
 end

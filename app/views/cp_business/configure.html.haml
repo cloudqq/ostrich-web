@@ -1,20 +1,28 @@
 %form{:class => 'form-horizontal', :action=>"/cp_business/submit_configure", :method =>"post"}
-  %legend 指令分配
+  %legend "指令分配 #{@cpbusiness['spname']} -- #{@cpbusiness["cpname"]}"
+  %input{:type=>"hidden", :value =>"#{@cpbusiness['id']}", :name=> "id"}
   .control-group
     %label{:class => 'control-label'} 
       分配指令
     .controls
-      %input{:name => 'cmd', :class => "input-large" ,:value => "" }
+      %input{:name => 'pay_percent', :type=>"text", :class=>"input-large", :value => "#{@cpbusiness['cmd']}" ,:disabled=> "true"}
   .control-group
     %label{:class => 'control-label'} 
       结算比例
     .controls
-      %input{:name => 'pay_percent', :class=>"input-large", :value => "" }
+      %input{:name => 'pay_percent', :class=>"input-large", :value => "#{@cpbusiness["pay_percent"]}" }
   .control-group
     %label{:class => 'control-label'} 
       扣量比例
     .controls
-      %input{:name => 'discount_percent', :class=>"input-large", :value => "" }
+      %input{:name => 'discount_percent', :class=>"input-large", :value => "#{@cpbusiness['dis_percent']}" }
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'}
+        - if @cpbusiness['status'] == 0
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
+        - else
+          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
   .control-group
     .controls
       %button{:type => "submit", :class=>"btn"}

@@ -19,8 +19,12 @@ class CpBusinessController < ApplicationController
       cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
       unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, cmd)
         cpbusiness = CpBusiness.new
-        cpbusiness.CMD = cmd
+        cpbusiness.CMD = cmd.upcase
         cpbusiness.BUSINESSID = Serial.new_serial("BZ")
+        cpbusiness.PAY_PERCENT = 0
+        cpbusiness.DIS_PERCENT = 0
+        cpbusiness.CPID = params[:cpid]
+        cpbusiness.SPID = params[:spid]
         cpbusiness.save!
       end
     end
@@ -31,10 +35,16 @@ class CpBusinessController < ApplicationController
   end
 
   def configure
-    @spbusiness = SpBusiness.find(params[:id])
-
-
-
+    cpbiz = CpBusiness.find(params[:id])
+    @cpbusiness = {
+      "id"     => cpbiz.ID,
+      "cpname" => cpbiz.cpinfo.CPNAME,
+      "spname" => cpbiz.spinfo.SPNAME,
+      "cmd"    => cpbiz.CMD,
+      "status" => cpbiz.STATUS,
+      "pay_percent" => cpbiz.PAYPRCT,
+      "dis_percent" => cpbiz.DISCOUNTPRCT
+    }
   end
 
   def occupied
@@ -66,10 +76,18 @@ class CpBusinessController < ApplicationController
   def update
   end
 
-  def configure
-  end
-
   def submit_configure
+    cpbusiness = CpBusiness.find(params[:id])
+    unless cpbusiness.nil?
+      cpbusiness.PAYPRCT = params[:pay_percent].to_i
+      cpbusiness.DISCOUNTPRCT = params[:dis_percent].to_i
+      cpbusiness.STATUS = params[:enabled].blank? ? 0 : 1
+
+      cpbusiness.save!
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => "list"}
+    end
   end
 
   def list_for_table
