@@ -1,39 +1,89 @@
 # -*- coding: utf-8 -*-
-require File.expand_path('../base',__FILE__)
+require File.expand_path('../datatable_base',__FILE__)
 
 module Datatable
-  class CpBusinessTable < Base
+  class CpBusinessTable
+    delegate :params, :h, :link_to, :number_to_currency, to: :@view
+
+    attr_accessor :total_count
+
     def initialize(view)
-      super
-      self.model = CpBusiness
+      @view = view
     end
 
     def data
       result = []
       fetch_data.each do |x|
-        result <<
-          [
-          x.ID,
-          x.cpinfo.CPNAME,
-          x.spinfo.SPNAME,
-          x.SPNUMBER,
-          x.CMD,
-          x.PRICE,
-          x.PAYPRCT,
-          x.DISCOUNTPRCT,
-          x.STATUS,
-          x.CREATETIME.strftime("%Y-%m-%d"), 
-          "<a href=/cp_business/configure/#{x.ID}>配置</a>",
-          x.INTERFACEURL,
-          x.REPORTVALID,
-          x.REQUESTMETHOD,
-          x.URLTEMPLATE,
-          x.CPID,
-          x.SPID,
-          x.CMDTYPE
-        ]
+        result << {
+          spname: x.spinfo.SPNAME,
+          cpname: x.cpinfo.CPNAME,
+          spnumber: x.SPNUMBER,
+          cmd: x.CMD,
+          cmdtype: x.CMDTYPE,
+          price: x.PRICE,
+          pay_percent: x.PAYPRCT,
+          dis_percent: x.DISCOUNTPRCT,
+          status: x.STATUS,
+          createtime: x.CREATETIME.strftime("%Y-%m-%d"),
+          options: "",
+          interfaceurl: x.INTERFACEURL,
+          report_valid: x.REPORTVALID,
+          request_method: x.REQUESTMETHOD,
+          url_template: x.URLTEMPLATE,
+          cpid: x.CPID,
+          spid: x.SPID,
+          id: x.ID
+        }
       end
       return result
     end
+
+    def fetch_data
+
+      conditions = " 1=1 "
+      conditions << " AND CP_INFO.CPNAME LIKE '%#{params[:cpname]}%'" unless params[:cpname].blank?
+      conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%'" unless params[:spname].blank?
+      conditions << " AND SPNUMBER LIKE '%#{params[:spnumber]}%'" unless params[:spnumber].blank?
+      conditions << " AND CMD LIKE '%#{params[:cmd]}%'" unless params[:cmd].blank?
+
+      fields = %w(
+          ID
+          CP_INFO.CPNAME
+          SP_INFO.SPNAME
+          SPNUMBER
+          CMD
+          PRICE
+          PAYPRCT
+          DISCOUNTPRCT
+          STATUS
+          CREATETIME
+          INTERFACEURL
+          REPORTVALID
+          REQUESTMETHOD
+          URLTEMPLATE
+          CPID
+          SPID
+          CMDTYPE
+      )
+
+      self.total_count = CpBusiness.select(fields).includes(:cpinfo,:spinfo).where(conditions).count
+      records = CpBusiness.select(fields).includes(:cpinfo, :spinfo).where(conditions)
+        .page(page)
+        .per_page(per_page)
+    end
+
+
+    def as_json(options={})
+      mydata = data
+      {
+        sEcho: params[:sEcho].to_i,
+        iTotalRecord: self.total_count,
+        iTotalDisplayRecords: self.total_count,
+        aaData: mydata
+      }
+    end
+
+    private
+    include DataTableBase
   end
 end

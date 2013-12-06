@@ -11,7 +11,7 @@
   var_spnumber = $("#input_spnumber").val()
   var_cmd = $("#input_cmd").val()
 
-  if var_spnumber != undefined
+  if var_spname != undefined
     params.push({ name: "spname", value: var_spname})
   if var_spnumber != undefined
     params.push({ name: "spnumber", value: var_spnumber})

@@ -1,5 +1,18 @@
+%legend
+  分配通道查询
+%form{:class => 'navbar-form pull-left', :action=>"", :method =>"post"}
+  %input.input-large{:type=>"text",:id=>"input_spname",:placeholder=>"SP名称"}
+  %input.input-large{:type=>"text",:id=>"input_cpname",:placeholder=>"CP名称"}
+  %input.input-small{:type=>"text",:id=>"input_spnumber",:placeholder=>"特服号码"}  
+  %input.input-small{:type=>"text",:id=>"input_cmd",:placeholder=>"指令"}  
+  %button{:type=>"button", :class=>"btn" , :onclick=>"cp_business_search()"}
+    查询
+
+%br
+%br
+%br
 #cp_business_table
 :javascript
- $(document).ready(function() {
-   list_cp_business_table()
- });
+  $(document).ready(function() {
+    list_cp_business_table()
+  });
