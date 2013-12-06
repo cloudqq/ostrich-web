@@ -1,0 +1,23 @@
+%legend
+  明细查询
+%form{:class => 'navbar-form pull-left', :action=>"/cp_business/submit_configure", :method =>"post"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-small", :placeholder=>"SP名称"}
+  %input{:type=>"text",:id=>"input_cpname", :class=>"input-small", :placeholder=>"CP名称"}
+  %input{:type=>"text",:id=>"input_phone", :class=>"input-small", :placeholder=>"手机号码"}
+  %input{:type=>"text",:id=>"input_date",  :class=>"input-small", :value=> Time.now.strftime("%Y-%m-%d")}
+  %button{:type=>"button", :class=>"btn" , :onclick=>"javascript:search_detail()"}
+    查询
+  %button{:type=>"button", :class=>"btn", :onclick=>"search_yesterday()"}
+    昨天
+
+%br
+%br
+%br
+
+#tb_report_detail_table
+:javascript
+  search_yesterday = function()
+  {
+    $(input_date).val('#{(Time.now - 1.day).strftime('%Y-%m-%d')}' )
+    search_detail()
+  } 
