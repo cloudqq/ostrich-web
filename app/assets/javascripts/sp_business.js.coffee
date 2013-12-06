@@ -19,6 +19,7 @@
     server_params: server_params
   adv_options =
     aLengthMenu: [10,25,50]
+    bSort:false
     oTableTools:
       aButtons:[
         sExtends: "create_new_sp_business_div"

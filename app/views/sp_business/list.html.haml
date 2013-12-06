@@ -1,11 +1,18 @@
+%legend
+  通道信息
+%form{:class => 'navbar-form pull-left', :action=>"", :method =>"post"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-xlarge", :placeholder=>"SP名称"}
+  %button{:type=>"button", :class=>"btn" , :onclick=>"sp_info_search()"}
+    查询
+
+%br
+%br
+%br
 #business_table
 :javascript
-
- $(document).ready(function(){
-   server_params = [
-     {name: "spid", value: "#{@spid}"},
-   ]
-
-   load_business_list(server_params)
- });
-  
+  $(document).ready(function(){
+    server_params = [
+      {name: "spid", value: "#{@spid}"},
+    ]
+    load_business_list(server_params)
+  })

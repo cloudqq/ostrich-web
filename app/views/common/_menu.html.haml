@@ -3,6 +3,8 @@
   %li
     = link_to "SP 列表", '/sp_info/list'
   %li
+    = link_to "创建SP", '/sp_info/create'
+  %li
     = link_to "通道列表", '/sp_business/list'
   %li{:class => 'nav-header'} 通道分配
   %li
@@ -11,17 +13,8 @@
     = link_to '通道分配', '/cp_info/assignment'
   %li
     = link_to "已分配通道", '/cp_business/list'
-
-  %li{:class => 'nav-header'} 接收报告
   %li{:class => 'nav-header'} 数据统计
   %li
     = link_to "统计查询", '/report/stat'
   %li
-    = link_to "异常查询", '/report/alert'
-  %li
-    = link_to "分时统计", '/report/view_by_hour'
-  %li
-    = link_to "分省统计", '/report/view_by_province'
-  %li
     = link_to "明细查询", '/report/detail'
-  %li{:class => 'nav-header'} 其它

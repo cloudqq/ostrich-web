@@ -4,52 +4,117 @@
 #
 #
 #
-params =
-        sNewLine: "<br>"
-        sButtonText: "Copy to element"
-        sDiv: ""
-        fnClick: (nButton, oConfig) ->
-                $(window).attr("location", "/sp_info/create")
-col_defs = [
-        {
-        sWidth: "10%",
-        aTargets: [0]
-        }
-        ,
-        {
-        sWidth: "50%",
-        aTargets: [1]
-        },
-        {
-        sWidth: "10%",
-        aTargets: [2]
-        },
-        {
-        sWidth: "20%",
-        aTargets: [3]
-        },
-        {
-        sWidth: "10%",
-        aTargets: [0]
-        }                        
-]            
+@sp_info_search = ->
+  params = []
+  var_spname = $("#input_spname").val()
 
-TableTools.BUTTONS.create_new_sp_div = $.extend true, TableTools.buttonBase, params
+  if var_spname != undefined
+    params.push( { name: "spname", value: var_spname })
 
-tool_option = aButtons: [ sExtends: "create_new_sp_div", sButtonText: "新建SP", sDiv: "copy"]
 
-jQuery ->
+  list_sp_info_table(params)
+
+@list_sp_info_table = (params) ->
         options =
-                column_names: ["SP编号","SP名称","付款周期","创建时间","操作"]
+                column_names: ["编号","名称","类型","付款周期","创建时间","状态","操作"]
                 url: "/sp_info/list_for_table.json"
                 paging: true
-                dom:"<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
+                dom:'<"clear">tlpi'
+                server_params: params
         adv_options =
                 aLengthMenu: [10,25,50]
-                oTableTools: tool_option
-                aoColumnDefs: col_defs
+                bSort: false
+                aoColumnDefs:[
+                  {
+                    sWidth: "6%",
+                    aTargets: [0]
+                  },
+                  {
+                    sWidth: "20%",
+                    aTargets: [1]
+                  },
+                  {
+                    sWidth: "6%",
+                    aTargets: [2],
+                    mRender: (data, type, row) ->
+                      if data == 0
+                        "短信"
+                      else
+                        "IVR"                    
+                  },
+                  {
+                    sWidth: "10%",
+                    aTargets: [3],
+                    mRender: (data,type,row) ->
+                      type = switch data.payperiodtype
+                               when 1 then "天"
+                               when 2 then "周"
+                               when 3 then "月"
+                              
+                      "#{data.payperiod} #{type}"
+                  },
+                  {
+                    sWidth: "10%",
+                    aTargets: [4]
+                  },
+                  {
+                    sWidth: "%6",
+                    aTargets: [5],
+                    mRender: (data,type,row) ->
+                      if data == 0
+                        "关闭"
+                      else
+                        "正常"
+                  },
+                  {
+                    aTargets:[6]
+                    sWidth: "42%"
+                    mRender: (data, type, row) ->
+                      """
+                      <a href=/sp_info/configure/#{data}>配置</a> |
+                      <a href=/sp_business/list/#{data}>通道</a>
+                      """
+                  }                        
+                ]
+                aoColumns:[
+                  {
+                    aTargets:[0],
+                    mData: "spid"
+                  },
+                  {
+                    aTargets:[1],
+                    mData: "spname"
+                  },
+                  {
+                    aTargets:[2],
+                    mData: "catagory"
+                  },
+                  {
+                    aTargets:[3],
+                    mData: (source, type, val) ->
+                      {
+                        payperiod: source.payperiod
+                        payperiodtype: source.payperiodtype
+                      }
+                  },
+                  {
+                    aTargets:[4],
+                    mData: "createtime"
+                  },
+                  {
+                    aTargets:[5],
+                    mData: "status"
+                  },
+                  {
+                    aTargets:[6],
+                    mData: (source, type, val) ->
+                      source.spid
+                  }
+                ]
 
         $("#sp_info_table").easyTable options, adv_options
+
+# 配置界面                
 
 $ ->
         $("#btn_spinfo_create_and_configure").click (event) ->

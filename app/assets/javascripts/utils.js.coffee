@@ -35,7 +35,7 @@ $.fn.easyTable = (options,adv_options) ->
         error: (xhr,error,thrown) ->
           alert('error')
     bPaginate: false
-    sDom: 'T<"clear">lfrtip'
+    sDom: '<"clear">tlpi'
     sPaginationType: "bootstrap"
     bServerSide: true
     bProcessing: false
@@ -48,6 +48,10 @@ $.fn.easyTable = (options,adv_options) ->
       oPaginate:
         sNext: "下页"
         sPrevious: "上页"
+      sZeroRecords: "没有找到记录"
+      sInfoFiltered: ""
+      sLengthMenu: "每页 _MENU_ 项"
+      sSearch: ""
 
   if options.sorting != undefined
     settings.aaSorting = options.sorting

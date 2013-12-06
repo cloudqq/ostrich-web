@@ -4,30 +4,29 @@
     %label{:class => 'control-label'} 业务类型
     .controls
       %select{:name => 'accept_type'}
-        - if  @sp_info.ACCEPTTYPE == 0
-          %option{:value => '0', :selected => true}
-            短信
-          %option{:value => '1'}
-            IVR 
-        - else
-          %option{:value => '0'}
-            短信
-          %option{:value => '1', :selected => true}
-            IVR 
+        %option{:value => '0', :selected => ( @sp_info.ACCEPTTYPE == 0)}
+          短信
+        %option{:value => '1', :selected => ( @sp_info.ACCEPTTYPE == 1)}
+          IVR 
   .control-group
     %label{:class => 'control-label'} 接口类型
     .controls
       %select{:name => 'category'}
-        - if @sp_info.CATAGORY == 0
-          %option{:value => '0', :selected => true}  
-            MO/MR
-          %option{:value => '1'}  
-            组合
-        - else
-          %option{:value => '0'}  
-            MO/MR
-            %option{:value => '1', :selected => true}  
-              组合
+        %option{:value => '0', :selected => ( @sp_info.CATAGORY == 0)}  
+          MO/MR
+        %option{:value => '1', :selected => ( @sp_info.CATAGORY == 1)}  
+          组合
+  .control-group
+    %label{:class => 'control-label'} 结算周期
+    .controls
+      %input.input-large{:type=>"text", :value=> "#{@sp_info.PAYPERIOD}" }
+      %select{:name => "payperiodtype" ,:class=> "input-small"}
+        %option{:value => "1", :selected => ( @sp_info.PAYPERIODTYPE == 1)}
+          天
+        %option{:value => "2", :selected => ( @sp_info.PAYPERIODTYPE == 2)}
+          周
+        %option{:value => "3", :selected => ( @sp_info.PAYPERIODTYPE == 3)}
+          月
   .control-group
     %label{:class => 'control-label'} MO 后缀
     .controls

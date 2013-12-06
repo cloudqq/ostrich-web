@@ -4,16 +4,8 @@ class SpInfoController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   respond_to :html, :xml, :json
 
-  def indexdata
-    @infos = SpInfo.all
-    @result = {'Result' => 'OK','Records' => @infos}
-    respond_with(@result, :location=>nil)
-  end
-
   def list_for_table
     respond_to do |format|
-      format.html #
-      format.xml { render :xml => @sp_infos }
       format.json {render json: Datatable::SpInfoTable.new(view_context)} 
     end
   end
@@ -42,6 +34,8 @@ class SpInfoController < ApplicationController
     info.SPNAME = spname
     info.ACCEPTTYPE = 0
     info.CATAGORY = 0
+    info.PAYPERIOD = 30
+    info.PAYPERIODTYPE = 1
     info.save!
 
     @sp_info = SpInfo.find(info.SPID)
@@ -58,6 +52,8 @@ class SpInfoController < ApplicationController
     info.SPNAME = spname
     info.ACCEPTTYPE = 0
     info.CATAGORY = 0
+    info.PAYPERIOD = 30
+    info.PAYPERIODTYPE = 1
     info.save!
     respond_to do |format|
       format.html { redirect_to :action => "list"}

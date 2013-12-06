@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require File.expand_path('../../../lib/datatables/report_stat_table',__FILE__)
+require File.expand_path('../../../lib/datatables/report_detail_table',__FILE__)
 require 'iconv'
 class ReportController < ApplicationController
   # before_filter :authenticate_admin!
@@ -63,66 +64,11 @@ class ReportController < ApplicationController
   end
 
   def get_detail_data
-    if params[:jtStartIndex].to_i == 0
-      index = 1
-    else
-      index = params[:jtStartIndex].to_i / params[:jtPageSize].to_i + 1
-    end
-    size  = params[:jtPageSize]
 
-    conditions = " 1=1 "
-    if params[:sdate] && !params[:sdate].blank?
-      t1 = Time.parse(params['sdate'])
-    else
-      t1 = Time.now
-    end
-    t1 = t1.strftime("%Y-%m-%d")
-
-    if params[:edate] && !params[:edate].blank?
-      t2 = Time.parse(params['edate'])
-    else
-      t2 = Time.now
-    end
-    t2 = t2.strftime("%Y-%m-%d")
-
-    conditions << " AND SP_MOLOG.CREATETIME > '#{t1}' AND SP_MOLOG.CREATETIME < '#{t2}' "
-    spnumber_filter = ""
-    if params[:spnumber] && !params[:spnumber].blank?
-      spnumber_filter = params[:spnumber]
-    end
-
-    conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%' " unless params[:spname].blank?
-
-    conditions << " AND CP_INFO.CPNAME LIKE '%#{params[:cpname]}%' " unless params[:cpname].blank?
-
-    total = MoLog.select('SP_MOLOG.SPNUMBER,SP_MOLOG.CONTENT,SP_MOLOG.PHONENUMBER,SP_MOLOG.SPID,SP_MOLOG.CPID,SP_MRLOG.LINKID')
-                 .joins(:mrlog,:cpinfo,:spinfo)
-                 .where(conditions)
-                 .count
-
-    @data = MoLog.select('SP_MOLOG.CREATETIME,SP_MOLOG.SPNUMBER,SP_MOLOG.CONTENT,SP_MOLOG.PHONENUMBER,SP_MOLOG.SPID,SP_MOLOG.CPID,SP_MRLOG.LINKID,SP_INFO.SPNAME AS SPNAME, CP_INFO.CPNAME AS CPNAME,SP_MRLOG.STATUS AS STATUS, SP_MRLOG.ISDISCOUNT AS ISDISCOUNT ')
-                 .joins(:mrlog,:cpinfo,:spinfo)
-                 .where(conditions).paginate(:page=>index, :per_page=>size)
-    list = []
-    @data.each do |item|
-      obj               = {}
-      obj['SPID']       = item.SPID
-      obj['CPID']       = item.CPID
-      obj['SPNAME']     = item.SPNAME
-      obj['CPNAME']     = item.CPNAME
-      obj['PHONE']      = item.PHONENUMBER
-      obj['CONTENT']    = item.CONTENT
-      obj['CREATETIME'] = item.CREATETIME.strftime("%Y-%m-%d %H:%M:%S")
-      obj['STATUS']     = item.STATUS
-      obj['ISDISCOUNT'] = item.ISDISCOUNT
-      list << obj
-    end
-    @result = {'Result' => 'OK', 'Records' => list, 'TotalRecordCount' => total}
-    respond_with(@result, :location =>nil)
   end
 
   def detail
-    
+
   end
 
   def alert
@@ -235,55 +181,18 @@ class ReportController < ApplicationController
   end
 
   def statdata
-    if params[:jtStartIndex].to_i == 0
-      index = 1
-    else
-      index = params[:jtStartIndex].to_i / params[:jtPageSize].to_i + 1
-    end
-    size  = params[:jtPageSize]
-
-    conditions = " 1 = 1 "
-
-    if params[:spname] && !params[:spname].blank?
-      conditions << " AND SP_INFO.SPNAME like '%#{params[:spname]}%' "
-    end
-    if params[:cpname] && !params[:cpname].blank?
-      conditions << " AND CP_INFO.CPNAME like '%#{params[:cpname]}%' "
-    end
-    if params[:date] && !params[:date].blank?
-      conditions << " AND STATDATE = '#{params[:date]}' "
-    end
-    if params[:sdate] && !params[:sdate].blank? && params[:edate] && !params[:edate].blank?
-      conditions << "AND STATDATE >='#{params[:sdate]}' AND STATDATE <= '#{params[:edate]}' "
-    end
-    puts "conditions => #{conditions}"
-    # if params[:sdate] && !params[:sdate].blank? && params[:edate] && !params[:edate].blank?
-
-    # end
-    
-    
-    total = Report.includes(:spinfo,:cpinfo,:spbusiness).where(conditions).count
-    @data = Report.includes(:spinfo,:cpinfo,:spbusiness).where(conditions).order("STATDATE DESC").paginate(:page=>index, :per_page=>size)
-
-    list = []
-    @data.each do |item|
-      obj               = {}
-      obj['SPID']       = item['SPID']
-      obj['CPID']       = item['CPID']
-      obj['SPNAME']     = item.spinfo['SPNAME']
-      obj['CPNAME']     = item.cpinfo['CPNAME']
-      obj['STATDATE']   = item['STATDATE']
-      obj['COUNT']      = item['COUNT']
-      obj['VALIDCOUNT'] = item['VALIDCOUNT']
-      obj['PRICE']      = item.spbusiness.nil? ? 0.0 : item.spbusiness['PRICE']
-      list << obj
-    end
-    @result = {'Result' => 'OK', 'Records' => list, 'TotalRecordCount' => total}
-    respond_with(@result, :location =>nil)
   end
+
   def stat
   end
+
   def ivr
+  end
+
+  def list_detail_for_table
+    respond_to do |format|
+      format.json {render json: Datatable::ReportDetailTable.new(view_context)}
+    end
   end
 
   def list_stat_for_table

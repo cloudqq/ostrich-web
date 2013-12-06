@@ -1,1 +1,16 @@
+%legend
+  SP信息
+%form{:class => 'navbar-form pull-left', :action=>"", :method =>"post"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-xlarge", :placeholder=>"SP名称"}
+  %button{:type=>"button", :class=>"btn" , :onclick=>"sp_info_search()"}
+    查询
+
+%br
+%br
+%br
+
 #sp_info_table
+:javascript
+  $(document).ready(function(){
+    list_sp_info_table([])
+  })

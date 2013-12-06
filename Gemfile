@@ -24,7 +24,7 @@ gem 'jquery-rails', '2.0.2'
 gem 'to_xls', '1.5.1'
 gem 'json','1.7.5'
 gem 'devise', '2.1.2'
-
+gem 'rack', '1.4.1'
 
 
 gem 'composite_primary_keys', '5.0.2' # :git => 'http://github.com/drnic/composite_primary_keys.git'
