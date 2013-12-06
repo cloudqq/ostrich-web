@@ -1,35 +1,54 @@
-%form{:class => 'form-horizontal', :action=>"/sp_business/submit_configure/#{@sp_business.ID}", :method =>"post"}
-  %legend #{@sp_business.SPID}  #{@sp_business.BUSINESSID}
+%legend
+  通道配置 
+%form{:class => 'form-horizontal', :action=>"/sp_business/submit_configure/#{@spbusiness.ID}", :method =>"post"}
   .control-group
     %label{:class => 'control-label'} 
-      特服号
+      SP名称
     .controls
-      %input{:name => 'spnumber', :class => "input-large" ,:value => "#{@sp_business.SPNUMBER}" }
+      %span.input-large.uneditable-input
+        = @spbusiness.spinfo.SPNAME
+  .control-group
+    %label{:class => 'control-label'} 
+      通道类型
+    .controls
+      %span.input-large.uneditable-input
+        = @spbusiness.spinfo.ACCEPTTYPE == 0 ? "短信" : "IVR"
+  .control-group
+    %label{:class => 'control-label'} 
+      业务编号
+    .controls
+      %span.input-large.uneditable-input
+        = @spbusiness.BUSINESSID
+  .control-group
+    %label{:class => 'control-label'} 
+      特服号码
+    .controls
+      %input{:type =>"text", :class => "input-large", :name => "input_spnumber", :value=> "#{@spbusiness.SPNUMBER}"}
   .control-group
     %label{:class => 'control-label'} 
       指令
     .controls
-      %input{:name => 'cmd', :class=>"input-large", :value => "#{@sp_business.CMD}" }
+      %input.input-small{:name => 'input_cmd', :value => "#{@spbusiness.CMD}" }
+      %select.input-small{:name => "input_cmdtype"}
+        %option{:value => "1", :selected => ( @spbusiness.CMDTYPE == 1)}
+          模糊
+        %option{:value => "2", :selected => ( @spbusiness.CMDTYPE == 2)}
+          精确
   .control-group
     %label{:class => 'control-label'} 
-      金额
+      单价
     .controls
-      %input{:type =>"text", :class => "input-large", :name => "price", :value => "#{@sp_business.PRICE}"}
+      %input{:type =>"text", :class => "input-large", :name => "input_price", :value => "#{@spbusiness.PRICE}"}
+  .control-group
+    %label{:class => 'control-label'} 
+      通道简要说明
+    .controls
+      %textarea.span4{:rows=>"3", :name=> "input_arealist"}
+        #{@spbusiness.AREALIST}
   .control-group
     .controls
       %label{:class => 'checkbox inline'} 
-        - if @sp_business.CMDTYPE == 0
-          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled" } 启用
-        - else
-          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
-  .control-group
-    .controls
-      %label{:class => 'checkbox inline'}
-        - if @sp_business.STATUS == 1
-          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
-        - else
-          %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
-
+        %input{:type =>"checkbox", :name=>"input_enabled", :id=>"option_enabled", :value=>"enabled", :checked => (@spbusiness.STATUS == 1)  } 启用
   .control-group
     .controls
       %button{:type => "submit", :class=>"btn"}

@@ -1,8 +1,10 @@
 %legend
   通道信息
 %form{:class => 'navbar-form pull-left', :action=>"", :method =>"post"}
-  %input{:type=>"text",:id=>"input_spname", :class=>"input-xlarge", :placeholder=>"SP名称"}
-  %button{:type=>"button", :class=>"btn" , :onclick=>"sp_info_search()"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-large", :placeholder=>"SP名称"}
+  %input{:type=>"text",:id=>"input_spnumber", :class=>"input-large", :placeholder=>"特服号码"}  
+  %input{:type=>"text",:id=>"input_cmd", :class=>"input-small", :placeholder=>"指令"}  
+  %button{:type=>"button", :class=>"btn" , :onclick=>"sp_business_search()"}
     查询
 
 %br

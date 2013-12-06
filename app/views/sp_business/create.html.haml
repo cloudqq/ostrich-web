@@ -1,2 +1,56 @@
-%h1 SpBusiness#create
-%p Find me in app/views/sp_business/create.html.haml
+%legend
+  创建通道
+%form{:class => 'form-horizontal', :action=>"/sp_business/submit_create", :method =>"post"}
+  
+  .control-group
+    %label{:class => 'control-label'} 
+      SP名称
+    .controls
+      %span.input-large.uneditable-input
+        = "#{@spbusiness.spinfo.SPNAME}"
+      %input{:type=>"hidden",:name=>"spid",:value=>"#{@spbusiness.SPID}"}
+  .control-group
+    %label{:class => 'control-label'} 
+      通道类型
+    .controls
+      %span.input-large.uneditable-input
+        = @spbusiness.spinfo.ACCEPTTYPE == 0 ? "短信" : "IVR"
+  .control-group
+    %label{:class => 'control-label'} 
+      业务编号
+    .controls
+      %input.input-large{:type=>"text", :name=> "input_businessid", :value=> "#{@spbusiness.BUSINESSID}"}
+  .control-group
+    %label{:class => 'control-label'} 
+      特服号码
+    .controls
+      %input{:type =>"text", :class => "input-large", :name => "input_spnumber"}
+  .control-group
+    %label{:class => 'control-label'} 
+      指令
+    .controls
+      %input{:type =>"text", :class => "input-small", :name => "input_cmd"}
+      %select.input-small{:name => "input_cmdtype"}
+        %option{:value => "1" ,:default=> true}
+          模糊
+        %option{:value => "2" }
+          精确
+  .control-group
+    %label{:class => 'control-label'} 
+      单价
+    .controls
+      %input.input-large{:type =>"text", :name => "input_price"}
+  .control-group
+    %label{:class => 'control-label'} 
+      通道简要说明
+    .controls
+      %textarea.span4{:rows=>"3",  :name=> "input_arealist", :value=> "#{@spbusiness.AREALIST}"}
+  .control-group
+    .controls
+      %label{:class => 'checkbox inline'}
+        %input{:type=>"checkbox", :name=>"input_enabled", :value=>"1", :checked => "checked"} 启用
+  .control-group
+    .controls
+      %button{:type => "submit", :class=>"btn"}
+        创建通道
+

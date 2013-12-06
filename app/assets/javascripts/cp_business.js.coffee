@@ -15,6 +15,7 @@
     column_names: ["编号","CP","SP","特服号码","指令","金额","结算比例","扣量比例","状态","创建时间","操作"]
     url: "/cp_business/list_for_table.json"
     paging: true
+
   adv_options =
     aLengthMenu: [10,25,50]
     oTableTools:

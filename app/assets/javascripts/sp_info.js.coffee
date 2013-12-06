@@ -72,7 +72,8 @@
                     mRender: (data, type, row) ->
                       """
                       <a href=/sp_info/configure/#{data}>配置</a> |
-                      <a href=/sp_business/list/#{data}>通道</a>
+                      <a href=/sp_business/list/#{data}>通道</a> |
+                      <a href=/sp_business/create?spid=#{data}>新建通道</a>
                       """
                   }                        
                 ]

@@ -23,9 +23,12 @@ Rspp::Application.routes.draw do
   get "sp_business/list_for_table"
   get "sp_business/configure"
 
+  post "sp_business/submit_create"
+  post "sp_business/submit_configure"
+
   match "/sp_business/configure/:id" => "sp_business#configure", :as => :sp_business
   match "/sp_business/list/:id" => "sp_business#list", :as => :sp_business
-
+  match "/sp_business/submit_configure/:id" => "sp_business#submit_configure", :as => :sp_business
 
   get "cp_info/list"
   get "cp_info/create"
