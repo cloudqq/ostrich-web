@@ -1,5 +1,5 @@
-#source 'http://rubygems.org'
-source 'http://ruby.taobao.org'
+source 'http://rubygems.org'
+#source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.3'
 
@@ -17,7 +17,7 @@ group :assets do
   gem 'rails-asset-jqueryui', '0.0.3'
   gem 'haml-rails', '~>0.3.5'
   gem 'twitter-bootstrap-rails', '2.1.0' #:git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
-  gem 'jquery-datatables-rails', :git => 'http://github.com/rweng/jquery-datatables-rails'
+  gem 'jquery-datatables-rails', '1.12.2' #:git => 'http://github.com/rweng/jquery-datatables-rails'
 end
 
 gem 'jquery-rails', '2.0.2'
