@@ -20,6 +20,7 @@
     paging: true
   adv_options =
     aLengthMenu: [10,25,50]
+    bSort:false    
     oTableTools:
       aButtons:[
         sExtends: "create_new_cp_info_div"
@@ -153,6 +154,7 @@
         adv_options =
                 fnRowCallback: tb_cmd_assignment_row_callback
                 aLengthMenu: [10,25,50]
+                bSort: false
                 oTableTools:
                   aButtons:[
                     sExtends: "create_new_cp_info_div"

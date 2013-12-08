@@ -60,6 +60,7 @@
     server_params: server_params
   adv_options =
     aLengthMenu: [10,25,50]
+    bSort:false
     oTableTools:
       aButtons: [
         sExtends: "create_new_cp_business_div"
@@ -106,6 +107,7 @@
     server_params: server_params
     dom:'<"clear">tlpi'
   adv_options =
+    bSort:false
     aLengthMenu: [10,25,50]
     aoColumnDefs:[
       {

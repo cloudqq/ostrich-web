@@ -7,6 +7,7 @@ gem 'rails', '3.2.3'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2' , '0.3.11'
+gem 'thin'   , '1.6.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -25,6 +26,7 @@ gem 'to_xls', '1.5.1'
 gem 'json','1.7.5'
 gem 'devise', '2.1.2'
 gem 'rack', '1.4.1'
+#gem 'thin', '1.6.1'
 
 
 gem 'composite_primary_keys', '5.0.2' # :git => 'http://github.com/drnic/composite_primary_keys.git'

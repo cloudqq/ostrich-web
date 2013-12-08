@@ -1,4 +1,5 @@
 class Serial < ActiveRecord::Base
+  self.table_name = "SERIALS"
   attr_accessible :CODE, :MAXNO, :LENGTH
 
   def self.new_serial (code)
