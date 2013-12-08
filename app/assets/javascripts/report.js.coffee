@@ -107,8 +107,8 @@
     server_params: server_params
     dom:'<"clear">tlpi'
   adv_options =
-    bSort:false
     aLengthMenu: [10,25,50]
+    bSort: false    
     aoColumnDefs:[
       {
         sWidth:"14%"

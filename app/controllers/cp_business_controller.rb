@@ -23,13 +23,14 @@ class CpBusinessController < ApplicationController
         cpbusiness = CpBusiness.new
         cpbusiness.CMD = cmd.upcase
         cpbusiness.BUSINESSID = @spbusiness.BUSINESSID
-        cpbusiness.PAYPRCT = 100
-        cpbusiness.DISCOUNTPRCT = 0
+        cpbusiness.PAYPRCT = params[:pp].to_f
+        cpbusiness.DISCOUNTPRCT = params[:dp].to_i
         cpbusiness.SPNUMBER = @spbusiness.SPNUMBER
         cpbusiness.CMDTYPE = @spbusiness.CMDTYPE
         cpbusiness.PRICE = @spbusiness.PRICE
         cpbusiness.CPID = params[:cpid]
         cpbusiness.SPID = params[:spid]
+        cpbusiness.INTERFACE_URL = ""
         cpbusiness.save!
 
         respond_to do |format|

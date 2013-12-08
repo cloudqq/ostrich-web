@@ -1,20 +1,21 @@
-%ul{:class => 'nav nav-list'}
-  %li{:class => 'nav-header'} 通道管理
-  %li
-    = link_to "SP 列表", '/sp_info/list'
-  %li
-    = link_to "创建SP", '/sp_info/create'
-  %li
-    = link_to "通道列表", '/sp_business/list'
-  %li{:class => 'nav-header'} 通道分配
-  %li
-    = link_to "创建CP", '/cp_info/create'
-  %li
-    = link_to "CP管理", '/cp_info/list'
-  %li
-    = link_to "管理通道", '/cp_business/list'
-  %li{:class => 'nav-header'} 数据统计
-  %li
-    = link_to "统计查询", '/report/stat'
-  %li
-    = link_to "明细查询", '/report/detail'
+.well{}
+  %ul{:class => 'nav nav-list'}
+    %li{:class => 'nav-header'} 通道管理
+    %li
+      = link_to "SP 列表", '/sp_info/list'
+    %li
+      = link_to "创建SP", '/sp_info/create'
+    %li
+      = link_to "通道列表", '/sp_business/list'
+    %li{:class => 'nav-header'} 通道分配
+    %li
+      = link_to "创建CP", '/cp_info/create'
+    %li
+      = link_to "CP管理", '/cp_info/list'
+    %li
+      = link_to "管理通道", '/cp_business/list'
+    %li{:class => 'nav-header'} 数据统计
+    %li
+      = link_to "统计查询", '/report/stat'
+    %li
+      = link_to "明细查询", '/report/detail'
