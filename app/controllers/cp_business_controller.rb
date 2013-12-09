@@ -30,7 +30,7 @@ class CpBusinessController < ApplicationController
         cpbusiness.PRICE = @spbusiness.PRICE
         cpbusiness.CPID = params[:cpid]
         cpbusiness.SPID = params[:spid]
-        cpbusiness.INTERFACE_URL = ""
+        cpbusiness.INTERFACEURL = ""
         cpbusiness.save!
 
         respond_to do |format|
