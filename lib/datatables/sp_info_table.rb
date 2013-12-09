@@ -20,6 +20,7 @@ module Datatable
           payperiod: x.PAYPERIOD,
           payperiodtype: x.PAYPERIODTYPE,
           catagory: x.CATAGORY,
+          accepttype: x.ACCEPTTYPE,
           createtime: x.CREATETIME.strftime("%Y-%m-%d"),
           status: x.STATUS,
           options: "",

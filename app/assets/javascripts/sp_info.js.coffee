@@ -16,7 +16,7 @@
 
 @list_sp_info_table = (params) ->
         options =
-                column_names: ["编号","名称","类型","付款周期","创建时间","状态","操作"]
+                column_names: ["编号","名称","业务类型","接口类型","付款周期","创建时间","状态","操作"]
                 url: "/sp_info/list_for_table.json"
                 paging: true
                 dom:'<"clear">tlpi'
@@ -34,7 +34,7 @@
                     aTargets: [1]
                   },
                   {
-                    sWidth: "6%",
+                    sWidth: "10%",
                     aTargets: [2],
                     mRender: (data, type, row) ->
                       if data == 0
@@ -44,7 +44,13 @@
                   },
                   {
                     sWidth: "10%",
-                    aTargets: [3],
+                    aTargets:[3],
+                    mRender: (data,type,row) ->
+                     if data == 0 then "MO/MR" else "组合"                                            
+                  },
+                  {
+                    sWidth: "10%",
+                    aTargets: [4],
                     mRender: (data,type,row) ->
                       type = switch data.payperiodtype
                                when 1 then "天"
@@ -55,11 +61,11 @@
                   },
                   {
                     sWidth: "10%",
-                    aTargets: [4]
+                    aTargets: [5]
                   },
                   {
                     sWidth: "%6",
-                    aTargets: [5],
+                    aTargets: [6],
                     mRender: (data,type,row) ->
                       if data == 0
                         "关闭"
@@ -67,8 +73,8 @@
                         "正常"
                   },
                   {
-                    aTargets:[6]
-                    sWidth: "42%"
+                    aTargets:[7]
+                    sWidth: "28%"
                     mRender: (data, type, row) ->
                       """
                       <a href=/sp_info/configure/#{data}>配置</a> |
@@ -92,6 +98,10 @@
                   },
                   {
                     aTargets:[3],
+                    mData: "accepttype"
+                  },                  
+                  {
+                    aTargets:[4],
                     mData: (source, type, val) ->
                       {
                         payperiod: source.payperiod
@@ -99,15 +109,15 @@
                       }
                   },
                   {
-                    aTargets:[4],
+                    aTargets:[5],
                     mData: "createtime"
                   },
                   {
-                    aTargets:[5],
+                    aTargets:[6],
                     mData: "status"
                   },
                   {
-                    aTargets:[6],
+                    aTargets:[7],
                     mData: (source, type, val) ->
                       source.spid
                   }
