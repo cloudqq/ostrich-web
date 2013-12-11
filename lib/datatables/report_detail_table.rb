@@ -57,7 +57,7 @@ module Datatable
                  )
 
       self.total_count = MoLog.select(fields).joins(:mrlog, :cpinfo,:spinfo).where(conditions).count
-      records = MoLog.select(fields).joins(:mrlog, :cpinfo,:spinfo).where(conditions)
+      records = MoLog.select(fields).joins(:mrlog, :cpinfo,:spinfo).where(conditions).order("CREATETIME DESC")
         .page(page)
         .per_page(per_page)
     end
