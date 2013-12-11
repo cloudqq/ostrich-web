@@ -12,10 +12,11 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: spp
+  database: ostrich
   pool: 5
   username: root
   password: bjydmysql
+# host: 10.10.0.54
   socket: /tmp/mysql.sock
 #  socket: /var/lib/mysql/mysql.sock
 

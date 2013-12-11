@@ -1,20 +1,21 @@
 %form{:class => 'form-horizontal', :action=>"/sp_info/submit_configure/#{@sp_info.SPID}", :method =>"post"}
   %legend #{@sp_info.SPNAME}
+
   .control-group
     %label{:class => 'control-label'} 业务类型
     .controls
-      %select{:name => 'accept_type'}
-        %option{:value => '0', :selected => ( @sp_info.ACCEPTTYPE == 0)}
-          短信
-        %option{:value => '1', :selected => ( @sp_info.ACCEPTTYPE == 1)}
-          IVR 
-  .control-group
-    %label{:class => 'control-label'} 接口类型
-    .controls
       %select{:name => 'category'}
         %option{:value => '0', :selected => ( @sp_info.CATAGORY == 0)}  
-          MO/MR
+          短信
         %option{:value => '1', :selected => ( @sp_info.CATAGORY == 1)}  
+          IVR
+  .control-group
+    %label{:class => 'control-label'} 接口方式
+    .controls
+      %select{:name => 'accept_type'}
+        %option{:value => '0', :selected => ( @sp_info.ACCEPTTYPE == 0)}
+          MO/MR
+        %option{:value => '1', :selected => ( @sp_info.ACCEPTTYPE == 1)}
           组合
   .control-group
     %label{:class => 'control-label'} 结算周期

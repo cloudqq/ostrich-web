@@ -35,18 +35,18 @@
                   },
                   {
                     sWidth: "10%",
+                    aTargets:[3],
+                    mRender: (data,type,row) ->
+                     if data == 0 then "MO/MR" else "组合"                                            
+                  },
+                  {
+                    sWidth: "10%",
                     aTargets: [2],
                     mRender: (data, type, row) ->
                       if data == 0
                         "短信"
                       else
                         "IVR"                    
-                  },
-                  {
-                    sWidth: "10%",
-                    aTargets:[3],
-                    mRender: (data,type,row) ->
-                     if data == 0 then "MO/MR" else "组合"                                            
                   },
                   {
                     sWidth: "10%",

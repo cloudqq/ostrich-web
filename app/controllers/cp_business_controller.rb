@@ -19,7 +19,7 @@ class CpBusinessController < ApplicationController
 
     unless @spbusiness.nil?
       cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
-      unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, cmd)
+      unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, @spbusiness.SPNUMBER, cmd)
         cpbusiness = CpBusiness.new
         cpbusiness.CMD = cmd.upcase
         cpbusiness.BUSINESSID = @spbusiness.BUSINESSID
@@ -72,7 +72,7 @@ class CpBusinessController < ApplicationController
       cmd = params[:cmd].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:cmd]
     end
 
-    ret = CpBusiness.business_cmd_occupied? @spbusiness.SPID, cmd
+    ret = CpBusiness.business_cmd_occupied? @spbusiness.SPID, @spbusiness.SPNUMBER, cmd
 
     respond_to do |format|
       format.json { render :json => '{ "occupied":"#{ret}" }' }

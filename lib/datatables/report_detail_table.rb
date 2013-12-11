@@ -15,7 +15,7 @@ module Datatable
       fetch_data.each do |x|
         result << 
           {
-            createtime: x.CREATETIME.strftime("%Y-%d-%m %T"),
+            createtime: x.CREATETIME.strftime("%Y-%m-%d %T"),
             phonenumber: x.PHONENUMBER,
             content: x.CONTENT,
             linkid: x.LINKID,
