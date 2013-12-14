@@ -3,4 +3,5 @@ class Report < ActiveRecord::Base
   belongs_to :spinfo, :class_name => 'SpInfo', :foreign_key => 'SPID'
   belongs_to :cpinfo, :class_name => 'CpInfo', :foreign_key => 'CPID'
   belongs_to :spbusiness, :class_name => 'SpBusiness', :foreign_key => [:SPID,:BUSINESSID]
+  belongs_to :cpbusiness, :class_name => 'CpBusiness', :foreign_key => 'BUSINESSID'
 end

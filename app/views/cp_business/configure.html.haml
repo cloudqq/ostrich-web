@@ -47,14 +47,14 @@
   .control-group
     .controls
       %label{:class => 'checkbox inline'}
-        - if @cpbusiness['request_method'] == 0
+        - if @cpbusiness['request_method'] == 1
           %input{:type =>"checkbox", :name=>"request_method", :id=>"option_enabled", :value=>"enabled", :checked => true} 使用POST方式进行提交
         - else
           %input{:type =>"checkbox", :name=>"request_method", :id=>"option_enabled", :value=>"enabled"} 使用POST方式进行提交
   .control-group
     .controls
       %label{:class => 'checkbox inline'}
-        - if @cpbusiness['status'] == 0
+        - if @cpbusiness['status'] == 1
           %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
         - else
           %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用

@@ -30,7 +30,9 @@ class CpBusinessController < ApplicationController
         cpbusiness.PRICE = @spbusiness.PRICE
         cpbusiness.CPID = params[:cpid]
         cpbusiness.SPID = params[:spid]
+        cpbusiness.REQUESTMETHOD = 0
         cpbusiness.INTERFACEURL = ""
+        cpbusiness.URLTEMPLATE = "linkid=$(LINKID)&content=$(MOCMD)&spnumber=$(SPNUMBER)&mobile=$(PHONE)&sendtime=$(MOTIME)&status=DELIVRD&feeprice=100"
         cpbusiness.save!
 
         respond_to do |format|
