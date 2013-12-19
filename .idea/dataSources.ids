@@ -1992,6 +1992,8 @@
       <column name="PURGED" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
       <column name="CREATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
       <column name="UPDATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <column name="LIMITED_DAY_PHONE" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="LIMITED_MON_PHONE" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="SERIALS" schema="" catalog="spp" type="TABLE">
@@ -2103,6 +2105,30 @@
       <primary-key name="PRIMARY" columns="ID"/>
       <index name="IDX_SP_MRLOG_LINKID" unique="false" columns="LINKID"/>
     </table>
+    <table name="SP_POLICIES" schema="" catalog="spp" type="TABLE">
+      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="SP_BUSINESS_ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="ENABLED" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="CREATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="UPDATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="SP_POLICY_ITEMS" schema="" catalog="spp" type="TABLE">
+      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="POLICY_ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="PARENT_ID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="TARGET" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
+      <column name="HASH" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
+      <column name="ENABLED" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MQ=="/>
+      <column name="LIMITED_DAY_MAX" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="LIMITED_MON_MAX" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="LIMITED_DAY_PHONE" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="LIMITED_MON_PHONE" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="NOTE" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="CREATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="UPDATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
     <table name="SP_REPORT" schema="" catalog="spp" type="TABLE">
       <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="CPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -2134,6 +2160,17 @@
       <column name="REQTYPE" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="RECEIVETIME" sqlType="DATE" length="10" precision="0" nullable="true" jdbcType="91"/>
       <column name="CREATETIME" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <primary-key name="PRIMARY" columns="ID"/>
+    </table>
+    <table name="SYS_INFO" schema="" catalog="spp" type="TABLE">
+      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="INFO_TYPE" sqlType="VARCHAR" length="10" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="PARENT_ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="IDX" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
+      <column name="CONTEXT" sqlType="VARCHAR" length="60" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="EXTRA" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="CREATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
+      <column name="UPDATED_AT" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
       <primary-key name="PRIMARY" columns="ID"/>
     </table>
     <table name="admins" schema="" catalog="spp" type="TABLE">
@@ -2219,31 +2256,6 @@
       <column name="updated_at" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="spc_001_mo" schema="" catalog="spp" type="TABLE">
-      <column name="linkid" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="motype" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="spcode" sqlType="VARCHAR" length="10" precision="0" nullable="true" jdbcType="12"/>
-      <column name="mobile" sqlType="VARCHAR" length="12" precision="0" nullable="true" jdbcType="12"/>
-      <column name="content" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="feeprice" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="feetype" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="motime" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="update_at" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="create_at" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-    </table>
-    <table name="spc_001_mr" schema="" catalog="spp" type="TABLE">
-      <column name="msgid" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="linkid" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="status" sqlType="VARCHAR" length="20" precision="0" nullable="true" jdbcType="12"/>
-      <column name="mobile" sqlType="VARCHAR" length="12" precision="0" nullable="true" jdbcType="12"/>
-      <column name="price" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="feetype" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="continued" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="create_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="update_at" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
-      <column name="create_at" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA="/>
-      <index name="idx_spc_mr" unique="false" columns="msgid"/>
-    </table>
     <table name="stat_7" schema="" catalog="spp" type="TABLE">
       <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
       <column name="SPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
@@ -2275,10 +2287,6 @@
       <index name="idx_stat_mr_phone" unique="false" columns="PHONENUMBER"/>
       <index name="stat_mr7_createtime" unique="false" columns="CREATETIME"/>
     </table>
-    <table name="tmp1" schema="" catalog="spp" type="TABLE">
-      <column name="phone" sqlType="VARCHAR" length="12" precision="0" nullable="true" jdbcType="12"/>
-      <index name="idx_tmp_phone" unique="false" columns="phone"/>
-    </table>
     <table name="users" schema="" catalog="spp" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="username" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12"/>
@@ -2300,34 +2308,6 @@
       <primary-key name="PRIMARY" columns="id"/>
       <index name="index_users_on_email" unique="true" columns="email"/>
       <index name="index_users_on_reset_password_token" unique="true" columns="reset_password_token"/>
-    </table>
-    <table name="xt_mon_1_3" schema="" catalog="spp" type="TABLE">
-      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="SPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="BUSINESSID" sqlType="VARCHAR" length="10" precision="0" nullable="false" jdbcType="12"/>
-      <column name="CPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="CONTENT" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="SPNUMBER" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="LINKID" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="PHONENUMBER" sqlType="VARCHAR" length="11" precision="0" nullable="true" jdbcType="12"/>
-      <column name="CREATETIME" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="TELESEG" sqlType="VARCHAR" length="7" precision="0" nullable="true" jdbcType="12"/>
-    </table>
-    <table name="xt_mon_1_3_phone" schema="" catalog="spp" type="TABLE">
-      <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA=="/>
-      <column name="SPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="BUSINESSID" sqlType="VARCHAR" length="10" precision="0" nullable="false" jdbcType="12"/>
-      <column name="CPID" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
-      <column name="CONTENT" sqlType="VARCHAR" length="100" precision="0" nullable="true" jdbcType="12"/>
-      <column name="SPNUMBER" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="LINKID" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
-      <column name="PHONENUMBER" sqlType="VARCHAR" length="11" precision="0" nullable="true" jdbcType="12"/>
-      <column name="CREATETIME" sqlType="TIMESTAMP" length="19" precision="0" nullable="false" jdbcType="93" def="JzAwMDAtMDAtMDAgMDA6MDA6MDAn"/>
-      <column name="TELESEG" sqlType="VARCHAR" length="7" precision="0" nullable="true" jdbcType="12"/>
-    </table>
-    <table name="xt_mon_1_3_phone_list" schema="" catalog="spp" type="TABLE">
-      <column name="phonenumber" sqlType="VARCHAR" length="11" precision="0" nullable="true" jdbcType="12"/>
-      <column name="count(1)" sqlType="BIGINT" length="19" precision="0" nullable="false" jdbcType="-5" def="MA=="/>
     </table>
     <table name="CP_BUSINESS" schema="" catalog="spp2" type="TABLE">
       <column name="ID" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>

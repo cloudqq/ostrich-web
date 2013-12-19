@@ -1,0 +1,14 @@
+.hero-unit
+  %p
+    没有发现配置策略，您可以选择创建新策略或着放弃此项操作。
+  .well{:style=>'max-width: 400px; margin: 0 auto 10px;'}
+    %br
+    %br
+    %br
+    %form{:class =>'form-horizontal', :action=>"/policy/new/#{params[:id]}", :method=>'post'}
+      %button{:class=> 'btn btn-large btn-block btn-primary', :type=>'submit', :style=>"width:100%"}
+        配置策略
+      %br
+      %br
+      %button{:class=>'btn btn-large btn-block', :type=>'button', :style=>"width:100%", :onclick=>"giveup()"}
+        放弃

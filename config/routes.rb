@@ -1,4 +1,32 @@
 Rspp::Application.routes.draw do
+  get "sp_policy_items/create"
+  get "sp_policy_items/update"
+  get "sp_policy_items/list"
+  get "sp_policy_items/show"
+  get "sp_policy_items/destroy"
+
+  post "sp_policy/create"
+  get "sp_policy/update"
+  get "sp_policy/destroy"
+  get "sp_policy/list"
+  get "sp_policy/show"
+  get "sp_policy/configure"
+
+  match "/sp_policy/configure/:id" => "sp_policy#configure", :as => :sp_policy
+  match "/sp_policy/create/:id" => "sp_policy#create", :as => :sp_policy
+
+  get "cp_cp_policy/create"
+  get "cp_policy/update"
+  get "cp_policy/destroy"
+  get "cp_policy/list"
+  get "cp_policy/show"
+  get "cp_policy/configure"
+  post "cp_policy/new"
+
+  match "/cp_policy/configure/:id" => "cp_policy#configure", :as => :cp_policy
+  match "/cp_policy/create/:id" => "cp_policy#create", :as => :cp_policy
+  match "/cp_policy/new/:id" => "cp_policy#new", :as => :cp_policy
+
   get "cp_business/create"
   get "cp_business/list"
   get "cp_business/destroy"
