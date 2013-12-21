@@ -73,6 +73,7 @@
         mData: (source, type, val) ->
           {
             cp_business_id: source.id
+            policy_id: source.policyid
           }
       }                                                      
     ]
@@ -82,7 +83,7 @@
         aTargets:[0]
       },
       {
-        swidth:"20%"
+        swidth:"10%"
         aTargets:[1]
       },
       {
@@ -102,11 +103,11 @@
         aTargets:[5]
       },
       {
-        swidth:"6%"
+        swidth:"5%"
         aTargets:[6]
       },
       {
-        swidth:"%%"
+        swidth:"4%"
         aTargets:[7]
         mRender: (data,type,row) ->
           switch data
@@ -114,16 +115,23 @@
             when 1 then "正常"
       },
       {
-        swidth:"10%"
+        swidth:"6%"
         aTargets:[8]
       },
       {
-        swidth:"10%"
+        swidth:"24%"
         aTargets:[9]
         mRender: (data,type,row) ->
-          """
-            <a href=/cp_business/configure/#{data.cp_business_id}>配置</a>
-          """
+          if data.policy_id == 0
+            """
+              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a>|
+              <a href=/cp_policy/create/#{data.cp_business_id}>策略</a>
+            """
+          else
+            """
+              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a>
+              <a href=/cp_policy/configure/#{data.policy_id}>策略</a>
+            """
       }
 
     ]

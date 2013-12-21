@@ -52,6 +52,8 @@ group :test,:development do
   gem 'rspec-rails','2.11.4'
   gem 'minitest', '4.0.0'
   gem 'guard-rails', '0.4.7'
+  gem 'spork', '1.0.0rc3'
+  gem 'spork-rails','4.0.0'
 end
 
 gem 'will_paginate'

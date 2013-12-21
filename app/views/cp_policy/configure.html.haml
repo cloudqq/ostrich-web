@@ -1,1 +1,113 @@
-%p configure
+%p
+%button{:class=>"btn",:"data-toggle"=>'modal', :"data-target"=>'#mymodel'}
+  增加省份策略
+%br
+%br
+#policy_data_table
+:javascript
+  $(document).ready(function(){
+    load_policy_items({"policy_id": 254});
+  });
+
+.modal.hide.fade{:id=>'mymodel',:tabindex=>"-1",:role=>"dialog",:"aria-labelledby"=>'mymodalLabel',:"aria-hidden"=>'true'}
+  %form{:class => 'form-horizontal',:id=>'create_new_policy_item',:role=>'form', :action=>"/cp_policy_item/submit_create", :method =>"post"}
+    .modal-header
+      %button{:type=>'button', :class=>'close',:"data-dismiss"=>'modal',:"aria-hidden"=>'true'}
+        x
+      %h3
+        通道策略配置
+    .modal-body
+      %input{:type=>'hidden', :name=>'input_policy_id',:value=>"#{params[:id]}"}
+      .control-group
+        %label{:class=>'control-label'}
+          设定的省份
+        .controls
+          %select.input-large{:name=>"input_region", :id=>'input_region'}
+            %option{:value=>'上海'}
+              上海
+            %option{:value=>'云南'}
+              云南
+            %option{:value=>'内蒙古'}
+              内蒙古
+            %option{:value=>'北京'}
+              北京
+            %option{:value=>'吉林'}
+              吉林
+            %option{:value=>'四川'}
+              四川
+            %option{:value=>'天津'}
+              天津
+            %option{:value=>'宁夏'}
+              宁夏
+            %option{:value=>'安徽'}
+              安徽
+            %option{:value=>'山东'}
+              山东
+            %option{:value=>'山西'}
+              山西
+            %option{:value=>'广东'}
+              广东
+            %option{:value=>'广西'}
+              广西
+            %option{:value=>'新疆'}
+              新疆
+            %option{:value=>'江苏'}
+              江苏
+            %option{:value=>'江西'}
+              江西
+            %option{:value=>'河北'}
+              河北
+            %option{:value=>'河南'}
+              河南
+            %option{:value=>'浙江'}
+              浙江
+            %option{:value=>'海南'}
+              海南
+            %option{:value=>'湖北'}
+              湖北
+            %option{:value=>'湖南'}
+              湖南
+            %option{:value=>'甘肃'}
+              甘肃
+            %option{:value=>'福建'}
+              福建
+            %option{:value=>'西藏'}
+              西藏
+            %option{:value=>'贵州'}
+              贵州
+            %option{:value=>'辽宁'}
+              辽宁
+            %option{:value=>'重庆'}
+              重庆
+            %option{:value=>'陕西'}
+              陕西
+            %option{:value=>'青海'}
+              青海
+            %option{:value=>'黑龙江'}
+              黑龙江
+      .control-group
+        %label{:class=>'col-sm-2 control-label', :for=>"input_mon_limit", }
+          通道月限量
+        .controls
+          %input{:type=>'text',:class=>'input-large', :id=>"input_mon_limit", :name=>"input_mon_limit"}
+      .control-group
+        %label{:class=>'col-sm-2 control-label', :for=>"input_day_limit", }
+          通道日限量
+        .controls
+          %input{:type=>'text',:class=>'input-large', :id=>"input_day_limit", :name=>"input_day_limit"}
+      .control-group
+        %label{:class=>'col-sm-2 control-label', :for=>"input_day_phone_limit", }
+          手机日上行
+        .controls
+          %input{:type=>'text',:class=>'input-large', :id=>"input_day_phone_limit", :name=>"input_day_phone_limit"}
+      .control-group
+        %label{:class=>'col-sm-2 control-label', :for=>"input_mon_phone_limit", }
+          手机月上行
+        .controls
+          %input{:type=>'text',:class=>'input-large', :id=>"input_mon_phone_limit", :name=>"input_mon_phone_limit"}
+    %p
+    .modal-footer
+      %button{:class=>'btn',:"data-dismiss"=>"modal", :"aria-hidden"=>"true"}
+        Close
+      %button{:class=>'btn btn-primary', :onclick=>"$('create_new_policy_item').submit();"}
+        Save

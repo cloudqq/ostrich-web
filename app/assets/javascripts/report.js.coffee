@@ -86,6 +86,7 @@
   var_spname = $("#input_spname").val()
   var_date = $("#input_date").val()
   var_phone = $("#input_phone").val()
+  var_cmd = $("#input_cmd").val()
 
   if var_cpname != undefined
     params.push( { name: "cpname", value: var_cpname })
@@ -95,6 +96,8 @@
     params.push( { name: "date", value: var_date})
   if var_phone != undefined
     params.push( {name: "phone", value: var_phone})
+  if var_cmd != undefined
+    params.push( {name:"cmd",value: var_cmd})
 
   list_report_detail_table(params)    
 

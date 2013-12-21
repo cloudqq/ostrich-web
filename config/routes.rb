@@ -1,4 +1,9 @@
 Rspp::Application.routes.draw do
+  get "cp_policy_item/create"
+  get "cp_policy_item/list_for_table"
+  post "cp_policy_item/submit_create"
+  match "/cp_policy_item/list_for_table" => "cp_policy_item#list_for_table", :as => :cp_policy_item
+
   get "sp_policy_items/create"
   get "sp_policy_items/update"
   get "sp_policy_items/list"
@@ -15,7 +20,7 @@ Rspp::Application.routes.draw do
   match "/sp_policy/configure/:id" => "sp_policy#configure", :as => :sp_policy
   match "/sp_policy/create/:id" => "sp_policy#create", :as => :sp_policy
 
-  get "cp_cp_policy/create"
+  get "cp_policy/create"
   get "cp_policy/update"
   get "cp_policy/destroy"
   get "cp_policy/list"

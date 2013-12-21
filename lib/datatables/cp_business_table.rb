@@ -32,7 +32,8 @@ module Datatable
           url_template: x.URLTEMPLATE,
           cpid: x.CPID,
           spid: x.SPID,
-          id: x.ID
+          id: x.ID,
+          policyid: x.POLICY_ID
         }
       end
       return result
@@ -64,6 +65,7 @@ module Datatable
           CPID
           SPID
           CMDTYPE
+          POLICY_ID
       )
 
       self.total_count = CpBusiness.select(fields).includes(:cpinfo,:spinfo).where(conditions).count

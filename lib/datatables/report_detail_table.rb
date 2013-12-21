@@ -41,6 +41,7 @@ module Datatable
       conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%'" unless params[:spname].blank?
       conditions << " AND CP_INFO.CPNAME LIKE '%#{params[:cpname]}%'" unless params[:cpname].blank?
       conditions << " AND SP_MOLOG.PHONENUMBER LIKE '%#{params[:phone]}%'" unless params[:phone].blank?
+      conditions << " AND SP_MOLOG.CONTENT LIKE '#{params[:cmd]}%'" unless params[:cmd].blank?
 
       fields = %w(
                    SP_MOLOG.CREATETIME
