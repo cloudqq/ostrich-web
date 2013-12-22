@@ -23,7 +23,7 @@
   
 @list_cp_business_table = (params) ->
   options =
-    column_names: ["SP名称","CP名称","特服号码","指令","金额","结算比例%","扣量比例%","状态","创建时间","操作"]
+    column_names: ["SP名称","CP名称","特服号码","指令","金额","结算","扣量","状态","创建时间","操作"]
     url: "/cp_business/list_for_table.json"
     paging: true
     server_params: params
@@ -79,35 +79,35 @@
     ]
     aoColumnDefs:[
       {
-        swidth:"15%"
+        sWidth:"15%"
         aTargets:[0]
       },
       {
-        swidth:"10%"
+        sWidth:"10%"
         aTargets:[1]
       },
       {
-        swidth:"10%"
+        sWidth:"10%"
         aTargets:[2]
       },
       {
-        swidth:"10%"
+        sWidth:"10%"
         aTargets:[3]
       },
       {
-        swidth:"10%"
+        sWidth:"10%"
         aTargets:[4]
       },
       {
-        swidth:"6%"
+        sWidth:"6%"
         aTargets:[5]
       },
       {
-        swidth:"5%"
+        sWidth:"6%"
         aTargets:[6]
       },
       {
-        swidth:"4%"
+        sWidth:"6%"
         aTargets:[7]
         mRender: (data,type,row) ->
           switch data
@@ -115,25 +115,24 @@
             when 1 then "正常"
       },
       {
-        swidth:"6%"
+        sWidth:"10%"
         aTargets:[8]
       },
       {
-        swidth:"24%"
+        sWidth:"17%"
         aTargets:[9]
         mRender: (data,type,row) ->
           if data.policy_id == 0
             """
-              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a>|
-              <a href=/cp_policy/create/#{data.cp_business_id}>策略</a>
+              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a> |
+              <a href=/cp_policy/create/#{data.cp_business_id}>新建策略</a>
             """
           else
             """
-              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a>
-              <a href=/cp_policy/configure/#{data.policy_id}>策略</a>
+              <a href=/cp_business/configure/#{data.cp_business_id}>配置</a> |
+              <a href=/cp_policy/configure/#{data.policy_id}>修改策略</a>
             """
       }
-
     ]
         
   $("#cp_business_table").easyTable options, adv_options

@@ -37,15 +37,8 @@ module Datatable
     end
 
     def fetch_data
-      unless params[:policy_id].blank?
-        policy_id = "#{params[:policy_id]}"
-      end
-
-      conditions = " 1=1 AND CP_POLICY_ITEMS.PURGED = 0"
-      # conditions << " AND SP_MOLOG.CREATETIME > '#{sdate}' AND SP_MOLOG.CREATETIME < '#{edate}' "
-      # conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%'" unless params[:spname].blank?
-      # conditions << " AND CP_INFO.CPNAME LIKE '%#{params[:cpname]}%'" unless params[:cpname].blank?
-      # conditions << " AND SP_MOLOG.PHONENUMBER LIKE '%#{params[:phone]}%'" unless params[:phone].blank?
+      conditions = " 1=1 AND CP_POLICY_ITEMS.PURGED = 0 "
+      conditions << " AND CP_POLICY_ITEMS.POLICY_ID = #{params[:policy_id]} " unless params[:policy_id].blank?
 
       fields = %w(
                    CP_POLICY_ITEMS.ID

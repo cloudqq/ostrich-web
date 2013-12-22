@@ -2,13 +2,56 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+jQuery ->
+  $("#btn_create_new_policy_item").click ->
+    $('#update_policy_item_form').attr('action','/cp_policy_item/submit_create');
+    $('#modal_form_title').text("新增通道配置策略");
+    $('#input_region').val()
+    $('#input_region').attr("disabled",false)
+    $('#input_mon_limit').val()
+    $('#input_day_limit').val()
+    $('#input_mon_phone_limit').val()
+    $('#input_day_phone_limit').val()
+    $('#input_discount_mon_limit').val()
+    $('#input_discount_day_limit').val()
+    $('#input_discount_base').val()
+    $('#input_discount_start').val()
+    $('#input_enabled').attr('checked',false)
+
+    $('#update_policy_item_modal').modal('show');
+    return
+
+@update_policy_item = (policy_item_id) ->
+  $("#update_policy_item_form").attr("action", "/cp_policy_item/update/#{policy_item_id}")
+  $('#modal_form_title').text("修改通道配置策略");
+  $.getJSON "/cp_policy_item/get_data/#{policy_item_id}", (data) ->
+    $('#input_region').val(data["TARGET"])
+    $('#input_region').attr("disabled",true)
+    $('#input_mon_limit').val(data["LIMITED_MON_MAX"])
+    $('#input_day_limit').val(data["LIMITED_DAY_MAX"])
+    $('#input_mon_phone_limit').val(data["LIMITED_MON_PHONE"])
+    $('#input_day_phone_limit').val(data["LIMITED_DAY_PHONE"])
+    $('#input_discount_mon_limit').val(data["DISCOUNT_MON_MAX"])
+    $('#input_discount_day_limit').val(data["DISCOUNT_DAY_MAX"])
+    $('#input_discount_base').val(data["DISCOUNT_BASE"])
+    $('#input_discount_start').val(data["DISCOUNT_START"])
+    if data["ENABLED"] == 1
+      $('#input_enabled').attr('checked','checked')
+
+  $("#update_policy_item_modal").modal('show')
+  return
+
+@create_policy_item = ->
+  $("update_policy_item_modal").modal('show')
+  return
+
 @giveup = ()->
   history.back(1)
   
 
 @load_policy_items = (server_params) ->
   options =
-    column_names: ["省份","上限/月","上限/日","上限/号月","上线/号日","月扣","日扣","基数","起点","控制"]
+    column_names: ["省份","上限/月","上限/日","上限/号月","上线/号日","月扣","日扣","基数","起点","控制","操作"]
     url: "/cp_policy_item/list_for_table.json"
     paging: true
     server_params: server_params
@@ -52,17 +95,32 @@
         aTargets:[6]
       },
       {
-        sWidth: "14%"
+        sWidth: "8%"
         aTargets:[7]
       },
       {
-        sWidth: "10%"
+        sWidth: "6%"
         aTargets:[8]
       },
       {
         sWidth: "8%"
         aTargets:[9]
+        mRender:(data,type,row) ->
+          if data == 1
+            "开启"
+          else
+            "关闭"
+      },
+      {
+        sWidth:"10%"
+        aTargets:[10]
+        mRender:(data,type,row) ->
+          """
+            <a class="btn btn-mini" href="#" onclick="update_policy_item(#{data.policy_item_id}); return false;">修改</a>
+            <a class="btn btn-mini" href="/cp_policy_item/destroy/#{data.policy_item_id}">删除</a>
+          """
       }
+      
     ]
     aoColumns: [
       {
@@ -104,6 +162,13 @@
       {
         aTargets:[9],
         mData: "enabled"
+      },
+      {
+        aTargets:[10],
+        mData: (source,type,val) ->
+          {
+            policy_item_id : source.id
+          }
       }
     ]
   $('#policy_data_table').easyTable options, adv_options

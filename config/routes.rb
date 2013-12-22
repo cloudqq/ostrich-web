@@ -1,8 +1,14 @@
 Rspp::Application.routes.draw do
   get "cp_policy_item/create"
+  post "cp_policy_item/destroy"
+  post "cp_policy_item/update"
   get "cp_policy_item/list_for_table"
+  get "cp_policy_item/get_data"
   post "cp_policy_item/submit_create"
   match "/cp_policy_item/list_for_table" => "cp_policy_item#list_for_table", :as => :cp_policy_item
+  match "/cp_policy_item/destroy/:id" => "cp_policy_item#destroy", :as => :cp_policy_item
+  match "/cp_policy_item/get_data/:id" => "cp_policy_item#get_data", :as=> :cp_policy_item
+  match "/cp_policy_item/update/:id" => "cp_policy_item#update", :as => :cp_policy_item
 
   get "sp_policy_items/create"
   get "sp_policy_items/update"

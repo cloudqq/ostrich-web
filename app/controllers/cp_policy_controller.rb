@@ -7,17 +7,7 @@ class CpPolicyController < ApplicationController
 
 
   def create
-      if params[:id].blank?
-        render :text => 'not found cp business id.'
-        return
-      end
 
-      policy = CpPolicy.new
-      policy.CP_BUSINESS_ID = params[:id]
-      policy.ENABLED = 1
-      policy.save
-
-      redirect_to :action => 'configure', :id => policy.id
   end
 
   def update
@@ -35,7 +25,22 @@ class CpPolicyController < ApplicationController
   #@param
   # id is cp_business_id
   def new
+      if params[:id].blank?
+        render :text => 'not found cp business id.'
+        return
+      end
 
+    cpbusiness = CpBusiness.find_by_ID(params[:id])
+    unless cpbusiness.nil?
+      policy = CpPolicy.new
+      policy.CP_BUSINESS_ID = params[:id]
+      policy.ENABLED = 1
+      policy.save
+
+      cpbusiness.POLICY_ID = policy.ID
+      cpbusiness.save
+      redirect_to :action => 'configure', :id => policy.id
+    end
   end
 
   def configure
