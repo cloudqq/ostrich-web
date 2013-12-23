@@ -1,10 +1,18 @@
 Rspp::Application.routes.draw do
+  get "sys_info/create"
+  get "sys_info/update"
+  get "sys_info/delete"
+  get "sys_info/get_cities"
+  match "/sys_info/get_cities/:id" => "sys_info#get_cities", :as => :sys_info
+
   get "cp_policy_item/create"
   post "cp_policy_item/destroy"
   post "cp_policy_item/update"
   get "cp_policy_item/list_for_table"
   get "cp_policy_item/get_data"
   post "cp_policy_item/submit_create"
+  get "cp_policy_item/get_policy_cities"
+
   match "/cp_policy_item/list_for_table" => "cp_policy_item#list_for_table", :as => :cp_policy_item
   match "/cp_policy_item/destroy/:id" => "cp_policy_item#destroy", :as => :cp_policy_item
   match "/cp_policy_item/get_data/:id" => "cp_policy_item#get_data", :as=> :cp_policy_item

@@ -37,7 +37,7 @@ module Datatable
     end
 
     def fetch_data
-      conditions = " 1=1 AND CP_POLICY_ITEMS.PURGED = 0 "
+      conditions = " 1=1 AND CP_POLICY_ITEMS.PURGED = 0 AND PARENT_ID=0"
       conditions << " AND CP_POLICY_ITEMS.POLICY_ID = #{params[:policy_id]} " unless params[:policy_id].blank?
 
       fields = %w(

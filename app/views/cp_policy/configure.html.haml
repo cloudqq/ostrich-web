@@ -21,116 +21,134 @@
       %input{:type=>'hidden', :name=>'input_policy_id',:value=>"#{params[:id]}"}
       .control-group
         %label{:class=>'control-label'}
-          设定的省份
+          省份
         .controls
           %select.input-large{:name=>"input_region", :id=>'input_region'}
-            %option{:value=>'上海'}
+            %option{:value=>"1"}
               上海
-            %option{:value=>'云南'}
+            %option{:value=>'3'}
               云南
-            %option{:value=>'内蒙古'}
+            %option{:value=>'20'}
               内蒙古
-            %option{:value=>'北京'}
+            %option{:value=>'38'}
               北京
-            %option{:value=>'吉林'}
+            %option{:value=>'40'}
               吉林
-            %option{:value=>'四川'}
+            %option{:value=>'52'}
               四川
-            %option{:value=>'天津'}
+            %option{:value=>'75'}
               天津
-            %option{:value=>'宁夏'}
+            %option{:value=>'77'}
               宁夏
-            %option{:value=>'安徽'}
+            %option{:value=>'83'}
               安徽
-            %option{:value=>'山东'}
+            %option{:value=>'101'}
               山东
-            %option{:value=>'山西'}
+            %option{:value=>'119'}
               山西
-            %option{:value=>'广东'}
+            %option{:value=>'131'}
               广东
-            %option{:value=>'广西'}
+            %option{:value=>'153'}
               广西
-            %option{:value=>'新疆'}
+            %option{:value=>'168'}
               新疆
-            %option{:value=>'江苏'}
+            %option{:value=>'185'}
               江苏
-            %option{:value=>'江西'}
+            %option{:value=>'199'}
               江西
-            %option{:value=>'河北'}
+            %option{:value=>'211'}
               河北
-            %option{:value=>'河南'}
+            %option{:value=>'223'}
               河南
-            %option{:value=>'浙江'}
+            %option{:value=>'241'}
               浙江
-            %option{:value=>'海南'}
+            %option{:value=>'253'}
               海南
-            %option{:value=>'湖北'}
+            %option{:value=>'256'}
               湖北
-            %option{:value=>'湖南'}
+            %option{:value=>'272'}
               湖南
-            %option{:value=>'甘肃'}
+            %option{:value=>'287'}
               甘肃
-            %option{:value=>'福建'}
+            %option{:value=>'302'}
               福建
-            %option{:value=>'西藏'}
+            %option{:value=>'312'}
               西藏
-            %option{:value=>'贵州'}
+            %option{:value=>'320'}
               贵州
-            %option{:value=>'辽宁'}
+            %option{:value=>'330'}
               辽宁
-            %option{:value=>'重庆'}
+            %option{:value=>'345'}
               重庆
-            %option{:value=>'陕西'}
+            %option{:value=>'350'}
               陕西
-            %option{:value=>'青海'}
+            %option{:value=>'361'}
               青海
-            %option{:value=>'黑龙江'}
+            %option{:value=>'374'}
               黑龙江
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_mon_limit"}
-          通道月限量
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_mon_limit", :name=>"input_mon_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_day_limit"}
-          通道日限量
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_day_limit", :name=>"input_day_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_day_phone_limit"}
-          手机日上行
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_day_phone_limit", :name=>"input_day_phone_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_mon_phone_limit"}
-          手机月上行
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_mon_phone_limit", :name=>"input_mon_phone_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_discount_mon_limit"}
-          月扣量
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_discount_mon_limit", :name=>"input_discount_mon_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_discount_day_limit"}
-          日扣量
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_discount_day_limit", :name=>"input_discount_day_limit"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_discount_base"}
-          扣量基数
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_discount_base", :name=>"input_discount_base"}
-      .control-group
-        %label{:class=>'col-sm-2 control-label', :for=>"input_discount_start"}
-          扣量起始
-        .controls
-          %input{:type=>'text',:class=>'input-large', :id=>"input_discount_start", :name=>"input_discount_start"}
       .control-group
         .controls
           %label{:class=>"checkbox inline"}
             %input{:type=>'checkbox', :name=>"input_enabled", :id=>"input_enabled"}
               开放通道
+      .tabbable
+        %ul.nav.nav-tabs
+          %li.active
+            %a{:href=>"#tab1", :"data-toggle"=>"tab"}
+              限量
+          %li  
+            %a{:href=>"#tab2", :"data-toggle"=>"tab"}
+              扣量
+          %li  
+            %a{:href=>"#tab3", :"data-toggle"=>"tab"}
+              地市屏蔽
+        .tab-content
+          .tab-pane.active{:id=>"tab1"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_mon_limit"}
+                通道月限量
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_mon_limit", :name=>"input_mon_limit", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_day_limit"}
+                通道日限量
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_day_limit", :name=>"input_day_limit", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_day_phone_limit"}
+                手机日上行
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_day_phone_limit", :name=>"input_day_phone_limit", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_mon_phone_limit"}
+                手机月上行
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_mon_phone_limit", :name=>"input_mon_phone_limit", :autocomplete=>"off"}
+          .tab-pane{:id=>"tab2"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_discount_mon_limit"}
+                月扣量
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_discount_mon_limit", :name=>"input_discount_mon_limit", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_discount_day_limit"}
+                日扣量
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_discount_day_limit", :name=>"input_discount_day_limit", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_discount_base"}
+                扣量基数
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_discount_base", :name=>"input_discount_base", :autocomplete=>"off"}
+            .control-group
+              %label{:class=>'col-sm-2 control-label', :for=>"input_discount_start"}
+                扣量起始
+              .controls
+                %input{:type=>'text',:class=>'input-large', :id=>"input_discount_start", :name=>"input_discount_start", :autocomplete=>"off"}
+          .tab-pane{:id=>"tab3"}
+            .tabcon.tabcon-multi{:id=>"city_list_container"}
+            .cities_selected{:id=>"city_selected_container"}
+              %ul.f-list
     %p
     .modal-footer
       %button{:class=>'btn',:"data-dismiss"=>"modal", :"aria-hidden"=>"true"}
