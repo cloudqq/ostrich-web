@@ -1,4 +1,5 @@
 class CpPolicyController < ApplicationController
+#  before_filter :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   def record_not_foud
@@ -41,6 +42,8 @@ class CpPolicyController < ApplicationController
       cpbusiness.save
       redirect_to :action => 'configure', :id => policy.id
     end
+
+
   end
 
   def configure

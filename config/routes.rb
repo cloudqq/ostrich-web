@@ -92,11 +92,14 @@ Rspp::Application.routes.draw do
 
 
   authenticated :user do
-    root :to => 'cp#dashboard'
+    root :to => 'home#index'
   end
-  
+
+  get "user/index"
+
   root :to => 'home#index'
   devise_for :users
+
 
   devise_for :users, :path => "usuarios", :path_names => { 
     :sign_in => 'login', 

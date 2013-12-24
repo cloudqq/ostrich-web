@@ -2,6 +2,7 @@ require File.expand_path('../../../lib/datatables/sp_info_table', __FILE__)
 
 class SpInfoController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+#  before_filter :authenticate_user!
   respond_to :html, :xml, :json
 
   def list_for_table

@@ -99,3 +99,15 @@ position:relative;
 left:40px;
 top:100px;
 }
+
+#user_info{
+  float:right;
+  display:block;
+  height:auto;
+  overflow:  visible;
+  position: relative;
+  font-size:13px;
+  line-height: 20px;
+  padding-top:10px;
+  padding-bottom:10px;
+}

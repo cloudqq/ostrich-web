@@ -3,6 +3,7 @@ require File.expand_path('../../../lib/datatables/report_stat_table',__FILE__)
 require File.expand_path('../../../lib/datatables/report_detail_table',__FILE__)
 require 'iconv'
 class ReportController < ApplicationController
+#  before_filter :authenticate_user!
   # before_filter :authenticate_admin!
   # before_filter do
   #   redirect_to "/" unless current_admin && admin_signed_in?

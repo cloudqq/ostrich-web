@@ -1,6 +1,7 @@
 require File.expand_path('../../../lib/datatables/sp_business_table',__FILE__)
 
 class SpBusinessController < ApplicationController
+#  before_filter :authenticate_user!
   def create
     if params[:spid].blank?
       respond_to do |format|

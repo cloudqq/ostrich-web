@@ -4,4 +4,6 @@ class Role < ActiveRecord::Base
   ROLE_TYPE_USER  = 1           # 普通用户
 
   attr_accessible :created_at, :name, :type, :updated_at
+
+  has_many :users
 end

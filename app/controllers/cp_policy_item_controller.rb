@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require  File.expand_path('../../../lib/datatables/policy_table', __FILE__)
 class CpPolicyItemController < ApplicationController
+#  before_filter :authenticate_user!
   def create
   end
 
@@ -43,7 +44,7 @@ class CpPolicyItemController < ApplicationController
     pi.UPDATED_AT        = Time.now.strftime("%F %T")
     pi.save
 
-    if params[:cities].length > 0
+    if !params[:cities].blank? && params[:cities].length > 0
       CpPolicyItem.update_all(['PURGED=?, UPDATED_AT =? ',1, Time.now.strftime("%F %T")],['POLICY_ID=? AND PARENT_ID=?', policy_id,pi.ID])
         CpPolicyItem.transaction do
           params[:cities].each do |city|
@@ -85,7 +86,7 @@ class CpPolicyItemController < ApplicationController
       pi.ENABLED           = 1 unless params[:input_enabled].blank?
       pi.save
 
-    if params[:cities].length > 0
+    if !params[:cities].blank? && params[:cities].length > 0
       CpPolicyItem.update_all(['PURGED=?, UPDATED_AT =? ',1, Time.now.strftime("%F %T")],['POLICY_ID=? AND PARENT_ID=?', policy_id,pi.ID])
       CpPolicyItem.transaction do
         params[:cities].each do |city|

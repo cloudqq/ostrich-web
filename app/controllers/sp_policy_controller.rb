@@ -1,6 +1,6 @@
 class SpPolicyController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :policy_not_found
-
+#  before_filter :authenticate_user!
   def policy_not_found
     render :template => 'sp_policy/policy_not_found'
   end

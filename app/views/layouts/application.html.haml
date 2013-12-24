@@ -7,6 +7,23 @@
     = javascript_include_tag :application
     = csrf_meta_tag
   %body{ :class => @body_class }
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          %button.btn.btn-navbar
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          #user_info
+            %a{:herf=>"#"}
+              - #{current_user.email} unless current_user.nil?
+            %a{:herf=>"#"}
+              =link_to '退出', destroy_user_session_path, :method=> :delete
+          .nav-collapse.collapse
+            %ul.nav
+              %li.active
+                %a{:href=>"/"}
+                  首页
     #wrap
       #header
       #body

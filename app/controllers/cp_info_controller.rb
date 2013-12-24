@@ -2,6 +2,7 @@ require File.expand_path('../../../lib/datatables/cp_info_table', __FILE__)
 require File.expand_path('../../../lib/datatables/assignment_table', __FILE__)
 
 class CpInfoController < ApplicationController
+  before_filter :authenticate_user!
   #before_filter :authenticate_user!
   def dashboard
 

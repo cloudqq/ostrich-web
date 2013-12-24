@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class UserController < ApplicationController
+#  before_filter :authenticate_user!
   def new
     @user = User.new
   end
@@ -15,7 +16,15 @@ class UsersController < ApplicationController
   end
 
   def login
-    
+
+  end
+
+  def index
+    if params[:approved] == "false"
+      @users = User.find_all_by_approved(false)
+    else
+      @users = User.all
+    end
   end
 end
 

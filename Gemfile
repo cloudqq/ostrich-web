@@ -24,7 +24,7 @@ end
 gem 'jquery-rails', '2.0.2'
 gem 'to_xls', '1.5.1'
 gem 'json','1.7.5'
-gem 'devise', '2.1.2'
+gem 'devise', '2.2.0'
 gem 'rack', '1.4.1'
 #gem 'thin', '1.6.1'
 
