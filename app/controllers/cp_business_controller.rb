@@ -102,7 +102,7 @@ class CpBusinessController < ApplicationController
       cpbusiness.PAYPRCT = params[:pay_percent].to_i
       cpbusiness.DISCOUNTPRCT = params[:dis_percent].to_i
       cpbusiness.STATUS = params[:enabled].blank? ? 0 : 1
-      cpbusiness.REQUESTMETHOD = params[:request_method]
+      cpbusiness.REQUESTMETHOD = params[:request_method].blank? ? 0 : 1 
       cpbusiness.URLTEMPLATE = params[:url_template]
       cpbusiness.INTERFACEURL = params[:interface_url]
       cpbusiness.REPORTVALID = params[:report_valid]
