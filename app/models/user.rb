@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  after_create :send_admin_mail
+#  after_create :send_admin_mail
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -15,12 +15,15 @@ class User < ActiveRecord::Base
 
   private
   def set_default_role
-    self.role ||= Role.find_by_name('registered')
+#    self.role ||= Role.find_by_name('registered')
   end
 
   def active_for_authentication?
-    super & approved?
+    true
   end
+#  def active_for_authentication?
+#    super & approved?
+#  end
 
   def inactive_message
     if !approved?

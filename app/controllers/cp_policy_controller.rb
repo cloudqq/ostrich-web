@@ -51,9 +51,9 @@ class CpPolicyController < ApplicationController
       respond_to do |format|
         format.html { render :inline => 'require policy id.' }
       end
-
     else
       @policy = CpPolicy.find(params[:id])
+      @cpbusiness = CpBusiness.find_by_POLICY_ID params[:id].to_i
     end
   end
 end
