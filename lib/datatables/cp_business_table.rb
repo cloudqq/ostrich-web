@@ -33,7 +33,8 @@ module Datatable
           cpid: x.CPID,
           spid: x.SPID,
           id: x.ID,
-          policyid: x.POLICY_ID
+          policyid: x.POLICY_ID,
+          offline: x.OFFLINE
         }
       end
       return result
@@ -46,6 +47,11 @@ module Datatable
       conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%'" unless params[:spname].blank?
       conditions << " AND SPNUMBER LIKE '%#{params[:spnumber]}%'" unless params[:spnumber].blank?
       conditions << " AND CMD LIKE '%#{params[:cmd]}%'" unless params[:cmd].blank?
+      if params[:offline].blank?
+        conditions << " AND OFFLINE = 0 "
+      else
+        conditions << " AND OFFLINE = 1 "
+      end
 
       fields = %w(
           ID
@@ -73,7 +79,6 @@ module Datatable
         .page(page)
         .per_page(per_page)
     end
-
 
     def as_json(options={})
       mydata = data

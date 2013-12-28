@@ -36,6 +36,10 @@ class CpBusinessController < ApplicationController
         cpbusiness.URLTEMPLATE = "linkid=$(LINKID)&content=$(MOCMD)&spnumber=$(SPNUMBER)&mobile=$(PHONE)&sendtime=$(MOTIME)&status=DELIVRD&feeprice=100"
         cpbusiness.save!
 
+        unless cpbusiness.spbusiness.nil?
+          cpbusiness.spbusiness.ISASSIGN = 1
+        end
+
         respond_to do |format|
           format.html { redirect_to "/cp_business/configure/#{cpbusiness.ID}"}
         end
@@ -94,6 +98,34 @@ class CpBusinessController < ApplicationController
   end
 
   def update
+  end
+
+  # 参数 cp_business_id
+  def make_offline
+    if params[:id].blank?
+      render :text => 'cp business id can not be empty'
+      return
+    end
+
+    cpbusiness = CpBusiness.find(params[:id])
+    unless cpbusiness.nil?
+      cpbusiness.OFFLINE = 1
+      cpbusiness.UPDATED_AT = Time.now.strftime("%F %T")
+      cpbusiness.save!
+
+      spbusiness = cpbusiness.spbusiness
+      cmd_recycle = CmdRecycle.new
+      cmd_recycle.UPDATED_AT = Time.now.strftime("%F %T")
+      cmd_recycle.SP_ID = spbusiness.SPID
+      cmd_recycle.SP_BUSINESS_ID = spbusiness.ID
+      cmd_recycle.CMD = spbusiness.CMD
+      cmd_recycle.EXTENDED_CMD = cpbusiness.CMD
+      cmd_recycle.SPNUMBER = spbusiness.SPNUMBER
+      cmd_recycle.save!
+
+      render :text => 'ok'
+      return
+    end
   end
 
   def submit_configure

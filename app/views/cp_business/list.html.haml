@@ -5,8 +5,10 @@
   %input.input-large{:type=>"text",:id=>"input_cpname",:placeholder=>"CP名称"}
   %input.input-small{:type=>"text",:id=>"input_spnumber",:placeholder=>"特服号码"}  
   %input.input-small{:type=>"text",:id=>"input_cmd",:placeholder=>"指令"}  
-  %button{:type=>"button", :class=>"btn" , :onclick=>"cp_business_search()"}
+  %button{:type=>"button", :class=>"btn" , :onclick=>"cp_business_search(false)"}
     查询
+  %button{:type=>"button", :class=>"btn", :onclick=>"cp_business_search(true)"}
+    已下线
 
 %br
 %br

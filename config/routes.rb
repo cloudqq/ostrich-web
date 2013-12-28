@@ -1,4 +1,8 @@
 Rspp::Application.routes.draw do
+  get "cmd_recycle/create"
+
+  get "cmd_recycle/list"
+
   get "sys_info/create"
   get "sys_info/update"
   get "sys_info/delete"
@@ -55,6 +59,7 @@ Rspp::Application.routes.draw do
   get "cp_business/occupied"
   post "cp_business/submit_create"
   post "cp_business/submit_configure"
+  post "cp_business/make_offline"
 
   get "cp_business/list_for_table"
   get "cp_business/configure"
@@ -62,6 +67,7 @@ Rspp::Application.routes.draw do
   match "/cp_business/create/:id" => "cp_business#create", :as => :cp_business
   match "/cp_business/occupied/:spid/:cmd" => "cp_business#occupied", :as => :cp_business
   match "/cp_business/configure/:id" => "cp_business#configure", :as => :cp_business
+  match "/cp_business/make_offline/:id" => "cp_business#make_offline", :as => :cp_business
 
   get "sp_business/create"
   get "sp_business/list"

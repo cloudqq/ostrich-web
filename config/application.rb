@@ -38,7 +38,7 @@ module Rspp
       g.template_engine :haml
     end
 
-    config.i18n.default_locale = "zh-CN".to_sym
+#    config.i18n.default_locale = "zh-CN".to_sym
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
