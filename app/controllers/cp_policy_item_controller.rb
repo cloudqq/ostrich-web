@@ -40,7 +40,7 @@ class CpPolicyItemController < ApplicationController
     pi.DISCOUNT_MON_MAX  = params[:input_discount_mon_limit] unless params[:input_discount_mon_limit].blank?
     pi.DISCOUNT_BASE     = params[:input_discount_base] unless params[:input_discount_base].blank?
     pi.DISCOUNT_START    = params[:input_discount_start] unless params[:input_discount_start].blank?
-    pi.ENABLED           = 1 unless params[:input_enabled].blank?
+    pi.ENABLED           = params[:input_enabled].blank? ? 0: 1
     pi.UPDATED_AT        = Time.now.strftime("%F %T")
     pi.save
 
@@ -83,7 +83,7 @@ class CpPolicyItemController < ApplicationController
       pi.DISCOUNT_MON_MAX  = params[:input_discount_mon_limit] unless params[:input_discount_mon_limit].blank?
       pi.DISCOUNT_BASE     = params[:input_discount_base] unless params[:input_discount_base].blank?
       pi.DISCOUNT_START    = params[:input_discount_start] unless params[:input_discount_start].blank?
-      pi.ENABLED           = 1 unless params[:input_enabled].blank?
+      pi.ENABLED           = params[:input_enabled].blank? ? 0: 1
       pi.save
 
     if !params[:cities].blank? && params[:cities].length > 0
