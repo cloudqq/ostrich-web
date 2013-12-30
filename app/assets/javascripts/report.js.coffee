@@ -29,13 +29,20 @@
   params = []
   var_cpname = $("#input_cpname").val()
   var_spname = $("#input_spname").val()
+  var_spnumber = $("#input_spnumber").val()
+  var_cmd = $("#input_cmd").val()
   var_start_date = $("#input_start_date").val()
   var_end_date = $("#input_end_date").val()
-
+  
   if var_cpname != undefined
     params.push( { name: "cpname", value: var_cpname })
   if var_spname != undefined
     params.push( { name: "spname", value: var_spname })
+  if var_spnumber != undefined
+    params.push( { name: "spnumber", value: var_spnumber})
+  if var_cmd != undefined
+    params.push( { name: "cmd", value: var_cmd })
+  
   if var_start_date != undefined && var_end_date != undefined
     params.push( { name: "sdate", value: var_start_date })
     params.push( { name: "edate", value: var_end_date})
@@ -54,7 +61,7 @@
   TableTools.BUTTONS.create_new_cp_business_div = $.extend true, TableTools.buttonBase, params
   
   options =
-    column_names: ["统计日期","SPID","SP名称","CPID","CP名词","接收数量","单价","同步数据","同步金额","扣量"]
+    column_names: ["统计日期","SP名称","CP名词","特服号","指令","MO","MR","省份控制","扣量","成功","转发"]
     url: "/report/list_stat_for_table.json"
     paging: true
     server_params: server_params
@@ -67,15 +74,71 @@
         sButtonText: "新建"
         sDiv: "copy"
       ]
+    aoColumns:[
+      {
+        aTargets:[0]
+        mData: 'statdate'
+      },
+      {
+        aTargets:[1]
+        mData: 'spname'
+      },
+      {
+        aTargets:[2]
+        mData: 'cpname'
+      },
+      {
+        aTargets:[3]
+        mData: 'spnumber'  
+      },
+      {
+        aTargets:[4]
+        mData: 'cmd'
+      },
+      {
+        aTargets:[5]
+        mData: 'mo_count'
+      },
+      {
+        aTargets:[6]
+        mData: 'mr_count'
+      },
+      {
+        aTargets:[7]
+        mData: 'forward'
+      },
+      {
+        aTargets:[8]
+        mData: 'discount'
+      },
+      {
+        aTargets:[9]
+        mData: 'delivrd'
+      },
+      {
+        aTargets:[10]
+        mData: 'dispatch'
+      }      
+
+    ]
     aoColumnDefs:[
       {
-        sWidth:"5%"
+        sWidth:"10%"
         aTargets:[0]
       },
       {
-        sWidth:"4%"
+        sWidth:"15%"
         aTargets:[1]
-      }
+      },
+      {
+        sWidth:"12%"
+        aTargets:[2]
+      },
+      {
+        sWidth:"10%"
+        aTargets:[3]
+      },            
+      
     ]
         
   $("#tb_report_stat_table").easyTable options, adv_options
@@ -104,7 +167,7 @@
 # 明细查询报表
 @list_report_detail_table = (server_params) ->
   options =
-    column_names: ["上行时间","手机号码","内容","LINKID","SP","CP","状态","扣量"]
+    column_names: ["上行时间","手机号码","内容","省市", "LINKID","SP","CP","状态","扣","屏","转"]
     url: "/report/list_detail_for_table.json"
     paging: true
     server_params: server_params
@@ -114,7 +177,7 @@
     bSort: false    
     aoColumnDefs:[
       {
-        sWidth:"14%"
+        sWidth:"18%"
         aTargets:[0]
       },
       {
@@ -126,26 +189,56 @@
         aTargets:[2]
       },
       {
-        sWidth:"16%"
+        sWidth:"12%"
         aTargets:[3]
+        mRender:(data,type,row) ->
+          """
+            #{data.province} #{data.city}
+          """
       },
       {
         sWidth:"10%"
         aTargets:[4]
       },
       {
-        sWidth:"10%"
+        sWidth:"8%"
         aTargets:[5]
       },
       {
-        sWidth:"10%"
+        sWidth:"8%"
         aTargets:[6]
       },
       {
-        sWidth:"10%"
+        sWidth:"8%"
         aTargets:[7]
-      },                         
-      
+      },
+      {
+        sWidth:"6%"
+        aTargets:[8]
+        mRender: (data,type,row) ->
+          if data == 1
+            "是"
+          else
+            "否"
+      },
+      {
+        sWidth:"6%"
+        aTargets:[9]
+        mRender: (data,type,row) ->
+          if data == 1
+            "否"
+          else
+            "是"
+      },
+      {
+        sWidth:"10%"
+        aTargets:[10]
+        mRender: (data,type,row) ->
+          if data == 1
+            "是"
+          else
+            "否"          
+      }
     ]
     aoColumns:[
       {
@@ -161,25 +254,41 @@
         aTargets:[2]
       },
       {
-        mData: "linkid"
+        mData: (source,type,val) ->
+          {
+            province: source.province,
+            city: source.city
+          }
         aTargets:[3]
       },
       {
-        mData: "spname"
+        mData: "linkid"
         aTargets:[4]
       },
       {
-        mData: "cpname"
+        mData: "spname"
         aTargets:[5]
       },
       {
-        mData: "status"
+        mData: "cpname"
         aTargets:[6]
       },
       {
-        mData: "discount"
+        mData: "status"
         aTargets:[7]
-      }
+      },
+      {
+        mData: "discount"
+        aTargets:[8]
+      },
+      {
+        mData: "forward"
+        aTargets:[9]
+      },
+      {
+        mData: "dispatch"
+        aTargets:[10]
+      }                  
     ]
         
   $("#tb_report_detail_table").easyTable options, adv_options

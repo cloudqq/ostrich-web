@@ -30,8 +30,8 @@
 
   cb_row =  (nRow,aData,iDisplayIndex,iDisplayIndexFull) ->
     if aData.offline == 0
-      create_buttons = "<a href=/cp_business/configure/#{aData.id}>配置</a> | <a href=/cp_policy/create/#{aData.id}>新建策略</a> | <a href='#' onclick='make_offline(#{aData.id}, #{iDisplayIndex}); return false;'>下线</a>"
-      update_buttons = "<a href=/cp_business/configure/#{aData.id}>配置</a> | <a href=/cp_policy/configure/#{aData.id}>修改策略</a> | <a href='#' onclick='make_offline(#{aData.id}, #{iDisplayIndex}); return false;'>下线</a>"
+      create_buttons = "<a href=/cp_business/configure/#{aData.id}>配置</a> | <a href=/cp_policy/create/#{aData.policyid}>新建策略</a> | <a href='#' onclick='make_offline(#{aData.id}, #{iDisplayIndex}); return false;'>下线</a>"
+      update_buttons = "<a href=/cp_business/configure/#{aData.id}>配置</a> | <a href=/cp_policy/configure/#{aData.policyid}>修改策略</a> | <a href='#' onclick='make_offline(#{aData.id}, #{iDisplayIndex}); return false;'>下线</a>"
       if aData.policyid == 0
         $("td:eq(9)",nRow).html(create_buttons)
       else

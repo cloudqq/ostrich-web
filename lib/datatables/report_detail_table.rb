@@ -23,8 +23,13 @@ module Datatable
             cpname: x.CPNAME,
             status: x.STATUS,
             discount: x.ISDISCOUNT,
+            province: x.PROVINCE,
+            city: x.CITY,
             cpid: x.CPID,
-            spid: x.SPID
+            spid: x.SPID,
+            forward: x.FORWARD,
+            discount: x.DISCOUNT,
+            dispatch: x.DISPATCH
           }
       end
       result
@@ -50,6 +55,11 @@ module Datatable
                    SP_MOLOG.PHONENUMBER
                    SP_MOLOG.SPID
                    SP_MOLOG.CPID
+                   SP_MOLOG.FORWARD
+                   SP_MOLOG.DISCOUNT
+                   SP_MOLOG.PROVINCE
+                   SP_MOLOG.CITY
+                   SP_MRLOG.DISPATCH
                    SP_MRLOG.LINKID
                    SP_INFO.SPNAME
                    CP_INFO.CPNAME

@@ -14,18 +14,23 @@ module Datatable
     def data
       result = []
       fetch_data.each do |x|
-        result << [
-          x.STATDATE,
-          x.SPID,
-          x.spinfo.SPNAME,
-          x.CPID,
-          x.cpinfo.CPNAME,
-          x.COUNT,
-          x.spbusiness.nil? ? 0.0 : x.spbusiness.PRICE,
-          "",
-          x.VALIDCOUNT,
-          ""
-        ]
+        result << {
+          statdate: x.STATDATE,
+          sp_id: x.SPID,
+          spname: x.spinfo.SPNAME,
+          cp_id: x.CPID,
+          sp_business_id: x.SP_BUSINESS_ID,
+          cp_business_id: x.CP_BUSINESS_ID,
+          spnumber: x.SPNUMBER,
+          cmd: x.CMD,
+          cpname: x.cpinfo.CPNAME,
+          mo_count: x.MO_COUNT,
+          mr_count: x.MR_COUNT,
+          forward: x.FORWARD,
+          discount: x.DISCOUNT,
+          delivrd: x.DELIVRD,
+          dispatch: x.DISPATCH
+        }
       end
       result
     end
@@ -34,6 +39,8 @@ module Datatable
       conditions = " 1=1 "
       conditions << " AND SP_INFO.SPNAME LIKE '%#{params[:spname]}%'" unless params[:spname].blank?
       conditions << " AND CP_INFO.CPNAME LIKE '%#{params[:cpname]}%'" unless params[:cpname].blank?
+      conditions << " AND SPNUMBER LIKE '%#{params[:spnumber]}%'" unless params[:spnumber].blank?
+      conditions << " AND CMD LIKE '%#{params[:cmd]}%'" unless params[:cmd].blank?
       conditions << " AND STATDATE  =  '#{params[:date]}'" unless params[:date].blank?
       if !params[:sdate].blank? && !params[:edate].blank?
         conditions << " AND STATDATE >= '#{params[:sdate]}' AND STATDATE <= '#{params[:edate]}' "
