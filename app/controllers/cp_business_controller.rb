@@ -34,6 +34,7 @@ class CpBusinessController < ApplicationController
         cpbusiness.REQUESTMETHOD = 0
         cpbusiness.INTERFACEURL = ""
         cpbusiness.URLTEMPLATE = "linkid=$(LINKID)&content=$(MOCMD)&spnumber=$(SPNUMBER)&mobile=$(PHONE)&sendtime=$(MOTIME)&status=DELIVRD&feeprice=100"
+        cpbusiness.SP_BUSINESS_ID = @spbusiness.ID
         cpbusiness.save!
 
         unless cpbusiness.spbusiness.nil?

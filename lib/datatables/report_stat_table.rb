@@ -47,7 +47,7 @@ module Datatable
       end
 
       self.total_count = Report.includes(:spinfo, :cpinfo,:spbusiness).where(conditions).count
-      records = Report.includes(:spinfo,:cpinfo,:spbusiness).where(conditions)
+      records = Report.includes(:spinfo,:cpinfo,:spbusiness).where(conditions).order("STATDATE DESC")
         .page(page)
         .per_page(per_page)
     end
