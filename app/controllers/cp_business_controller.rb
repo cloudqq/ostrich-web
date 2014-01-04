@@ -21,6 +21,19 @@ class CpBusinessController < ApplicationController
     unless @spbusiness.nil?
       cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
       unless CpBusiness.business_cmd_occupied?(@spbusiness.SPID, @spbusiness.SPNUMBER, cmd)
+
+        usage = CmdUsage.new
+        usage.SP_ID = @spbusiness.SPID
+        usage.SP_BUSINESS_ID = @spbusiness.ID
+        usage.CMD_TYPE = @spbusiness.CMDTYPE
+        usage.SPNUMBER = @spbusiness.SPNUMBER
+        usage.CMD = @spbusiness.CMD
+        usage.EXTENDED_CMD = cmd.upcase
+        usage.UPDATED_AT = Time.now.strftime("%F %T")
+        usage.CP_BUSINESS_ID = 0
+        usage.CP_ID = 0
+        usage.save!
+
         cpbusiness = CpBusiness.new
         cpbusiness.CMD = cmd.upcase
         cpbusiness.BUSINESSID = @spbusiness.BUSINESSID
@@ -35,10 +48,18 @@ class CpBusinessController < ApplicationController
         cpbusiness.INTERFACEURL = ""
         cpbusiness.URLTEMPLATE = "linkid=$(LINKID)&content=$(MOCMD)&spnumber=$(SPNUMBER)&mobile=$(PHONE)&sendtime=$(MOTIME)&status=DELIVRD&feeprice=100"
         cpbusiness.SP_BUSINESS_ID = @spbusiness.ID
+        cpbusiness.USAGE_ID = usage.ID
+
         cpbusiness.save!
 
+        find_usage = CmdUsage.find(usage.id)
+        find_usage.CP_BUSINESS_ID = cpbusiness.ID
+        find_usage.CP_ID = cpbusiness.CPID
+        find_usage.save!
+
         unless cpbusiness.spbusiness.nil?
-          cpbusiness.spbusiness.ISASSIGN = 1
+          @spbusiness.ISASSIGN = 1
+          @spbusiness.save!
         end
 
         respond_to do |format|
@@ -124,6 +145,13 @@ class CpBusinessController < ApplicationController
       cmd_recycle.SPNUMBER = spbusiness.SPNUMBER
       cmd_recycle.save!
 
+      if(cpbusiness.USAGE_ID != 0)
+        usage = CmdUsage.find(cpbusiness.USAGE_ID)
+        unless usage.nil?
+          CmdUsage.delete(usage.ID)
+        end
+      end
+
       render :text => 'ok'
       return
     end
@@ -147,11 +175,8 @@ class CpBusinessController < ApplicationController
   end
 
   def list_for_table
-    respond_to do |format|
-      format.html
-      format.xml
-      format.json { render json: Datatable::CpBusinessTable.new(view_context)}
-    end
+    @extra = params[:sEcho].to_i
+    count, @business = CpBusiness.list_for_datatable params
   end
 
 end

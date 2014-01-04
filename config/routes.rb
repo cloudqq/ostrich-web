@@ -1,8 +1,8 @@
 Rspp::Application.routes.draw do
+  get "cmd_usage/list"
+  get "cmd_usage/get"
   get "cmd_recycle/create"
-
   get "cmd_recycle/list"
-
   get "sys_info/create"
   get "sys_info/update"
   get "sys_info/delete"

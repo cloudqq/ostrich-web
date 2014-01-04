@@ -61,9 +61,8 @@ class CpInfoController < ApplicationController
   end
 
   def list_for_assignment_table
-    respond_to do |format|
-      format.json { render json: Datatable::AssignmentTable.new(view_context)}
-    end
+    @extra = params[:sEcho].to_i
+    count, @assignments = SpBusiness.assignment_for_table params
   end
 
   def cmd_assignment

@@ -143,7 +143,7 @@
                   if cmdObj.length
                     cmd = cmdObj.val()
                   html = """
-                         <a href=# onclick="javascript:create_business(#{iDisplayIndex},#{aData[8]},#{cpid},#{aData[9]})">分配</a>
+                         <a href=# onclick="javascript:create_business(#{iDisplayIndex},#{aData.spid},#{cpid},#{aData.id}); return false;">分配</a>
                          """
                   $("td:eq(7)",nRow).html(html)
         options =
@@ -205,16 +205,42 @@
                         }
                 ]
                 aoColumns:[
-                        null,
-                        null,
-                        null,
-                        mData: (source,type,val) -> 
-                                source[7]
-                        null,
-                        null,
-                        null,
-                        null
-                          
+                        {
+                          aTargets:[0]
+                          mData: 'spname'
+                        },
+                        {
+                          aTargets:[1]
+                          mData: 'spnumber'
+                        },
+                        {
+                          aTargets:[2]
+                          mData: 'cmd'
+                        },
+                        {
+                          aTargets:[3]
+                          mData: (source,type,val) -> 
+                                source.cmdtype
+                        },                                                 
+                        {
+                          aTargets:[4]
+                          mData: (source, type, val) ->
+                            ""
+                        },
+                        {
+                          aTargets:[5]
+                          mData: (source, type,val) ->
+                            ""
+                        },  
+                        {
+                          aTargets:[6]
+                          mData: 'arealist'
+                        },
+                        {
+                          aTargets:[7]
+                          mData: (source, type, val) ->
+                            ""
+                        }
                 ]
         $("#cmd_assignment_table").easyTable options, adv_options
                 

@@ -26,6 +26,8 @@ gem 'to_xls', '1.5.1'
 gem 'json','1.7.5'
 gem 'devise', '2.2.0'
 gem 'rack', '1.4.1'
+gem 'rabl', '0.9.3'
+gem 'oj','2.5.2'
 #gem 'thin', '1.6.1'
 
 
