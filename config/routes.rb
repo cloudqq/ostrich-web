@@ -23,10 +23,13 @@ Rspp::Application.routes.draw do
   match "/cp_policy_item/update/:id" => "cp_policy_item#update", :as => :cp_policy_item
 
   get "sp_policy_items/create"
-  get "sp_policy_items/update"
+  post "sp_policy_items/update"
   get "sp_policy_items/list"
   get "sp_policy_items/show"
   get "sp_policy_items/destroy"
+
+  match "/sp_policy_item/update/:id" => "sp_policy_item#update", :as => :sp_policy_item
+  match "/sp_policy_item/destroy/:id" => "sp_policy_item#destroy", :as => :sp_policy_item
 
   post "sp_policy/create"
   get "sp_policy/update"
@@ -69,23 +72,46 @@ Rspp::Application.routes.draw do
   match "/cp_business/configure/:id" => "cp_business#configure", :as => :cp_business
   match "/cp_business/make_offline/:id" => "cp_business#make_offline", :as => :cp_business
 
+  get "sp_policy/create"
+  get "sp_policy/configure"
+  match "/sp_policy/create/:id" => "sp_policy#create", :as => :sp_policy
+  match "/sp_policy/configure/:id" => "sp_policy#configure", :as => :sp_policy
+
+  get "sp_policy_item/list_for_table"
+  post "sp_policy_item/submit_create"
+  get "sp_policy_item/get_data"
+  get "sp_policy_item/get_policy_cities"
+
+  match "/sp_policy_item/get_data/:id" => "sp_policy_item#get_data", :as => :sp_policy_item
+
   get "sp_business/create"
   get "sp_business/list"
   get "sp_business/destroy"
   get "sp_business/update"
   get "sp_business/list_for_table"
-  get "sp_business/configure"
+  get "sp_business/configure" 
+  get "sp_business/policy"
+  get "sp_business/mt"
+  get "sp_business/mt_for_table"
+  post "sp_business/add_new_mt"
+  post "sp_business/remove_mt"
 
   post "sp_business/submit_create"
   post "sp_business/submit_configure"
 
+  match "/sp_business/remove_mt/:id/" => "sp_business#remove_mt", :as => :sp_business
+  match "/sp_business/mt_for_table/:id" => "sp_business#mt_for_table", :as => :sp_business
   match "/sp_business/configure/:id" => "sp_business#configure", :as => :sp_business
+  match "/sp_business/mt/:id" => "sp_business#mt", :as => :sp_business
   match "/sp_business/list/:id" => "sp_business#list", :as => :sp_business
   match "/sp_business/submit_configure/:id" => "sp_business#submit_configure", :as => :sp_business
+  match "/sp_business/policy/:id" => "sp_business#policy", :as => :sp_business
 
   get "cp_info/list"
   get "cp_info/create"
+  get "cp_info/province"
   get "cp_info/list_for_table"
+  get "cp_info/province_for_table"
   get "cp_info/configure"
   get "cp_info/assignment" , to: "cp_info#cmd_assignment"
   get "cp_info/list_for_assignment_table"
@@ -93,6 +119,7 @@ Rspp::Application.routes.draw do
   post "cp_info/submit_create"
   
 
+  match "/cp_info/province/:id" => "cp_info#province", :as => :cp_info
   match "/cp_info/configure/:id" => "cp_info#configure", :as => :cp_info
   match "/cp_info/submit_configure/:id" => "cp_info#submit_configure", :as => :cp_info
 

@@ -34,7 +34,7 @@
   TableTools.BUTTONS.create_new_sp_business_div = $.extend true, TableTools.buttonBase, params
           
   options =
-    column_names: ["SP名称","业务编号","特服号码","指令","类型","单价","创建时间","操作"]
+    column_names: ["SP名称","业务名称","特服号码","指令","类型","单价","创建时间","操作"]
     url: "/sp_business/list_for_table.json"
     paging: true
     server_params: server_params
@@ -53,11 +53,11 @@
         aTargets:[0]
       },
       {
-        sWidth: "10%"
+        sWidth: "14%"
         aTargets:[1]
       },
       {
-        sWidth: "20%"
+        sWidth: "16%"
         aTargets:[2]
       },
       {
@@ -85,7 +85,9 @@
         aTargets:[7],
         mRender: (data,type,row) ->
           """
-            <a href=/sp_business/configure/#{data.business_uid}>配置</a>
+            <a href=/sp_business/configure/#{data.business_uid}>配置</a> |
+            <a href=/sp_business/policy/#{data.business_uid}>省份</a> |
+            <a href=/sp_business/mt/#{data.business_uid}>MT</a>
           """
       },                                          
     ]
@@ -96,7 +98,7 @@
       },
       {
         aTargets:[1],
-        mData: "businessid"
+        mData: "business_name"
       },
       {
         aTargets:[2],
@@ -129,3 +131,64 @@
 
   $("#business_table").easyTable options, adv_options
 
+@load_business_mt = () ->
+  options =
+    column_names: ["MT内容","操作"]
+    url: "/sp_business/mt_for_table.json"
+    paging: true
+    server_params: server_params
+  adv_options =
+    aLengthMenu: [10,25,50]
+    bSort:false
+    aoColumnDefs:[
+      {
+        sWidth: "80%"
+        aTargets:[0]
+      },
+      {
+        sWidth: "20%"
+        aTargets:[1]
+        mRender: (data,type,row) ->
+          """
+            <a href=# onclick='remove_mt(#{row.id});return false;'>删除</a>
+          """
+      }
+    ]
+    aoColumns: [
+      {
+        aTargets:[0],
+        mData: "mt_content"        
+      },
+      {
+        aTargets:[1],
+        mData: "sp_business_id"
+      }
+    ]
+
+  $("#mt_list_table").easyTable options, adv_options
+
+@remove_mt = (id) ->
+  $.ajax
+    url: "/sp_business/remove_mt"
+    type: "POST"
+    dataType: "text"
+    data:
+      id: id
+    success: ->
+      load_business_mt()
+    error: (xhr,error,thrown) ->
+      alert('fail')  
+
+@add_new_mt = (sp_business_id) ->
+  mt = $("#input_mt").val()
+  $.ajax
+    url: "/sp_business/add_new_mt"
+    type: "POST"
+    dataType: "text"
+    data:
+      sp_business_id: sp_business_id
+      mt_content: mt
+    success: ->
+      load_business_mt();
+    error: (xhr,error,thrown) ->
+      alert('fail')  

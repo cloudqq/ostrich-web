@@ -17,6 +17,8 @@ class CpBusinessController < ApplicationController
 =end
   def create
     @spbusiness = SpBusiness.find_by_ID(params[:spuid])
+    cpinfo     = CpInfo.find(params[:cpid])
+    spinfo     = SpInfo.find(params[:spid])
 
     unless @spbusiness.nil?
       cmd = params[:c].blank? ? @spbusiness.CMD : @spbusiness.CMD + params[:c]
@@ -44,8 +46,9 @@ class CpBusinessController < ApplicationController
         cpbusiness.PRICE = @spbusiness.PRICE
         cpbusiness.CPID = params[:cpid]
         cpbusiness.SPID = params[:spid]
+        cpbusiness.REPORTVALID = spinfo.SUCCESS_TAG
         cpbusiness.REQUESTMETHOD = 0
-        cpbusiness.INTERFACEURL = ""
+        cpbusiness.INTERFACEURL = cpinfo.SYNC_URL
         cpbusiness.URLTEMPLATE = "linkid=$(LINKID)&content=$(MOCMD)&spnumber=$(SPNUMBER)&mobile=$(PHONE)&sendtime=$(MOTIME)&status=DELIVRD&feeprice=100"
         cpbusiness.SP_BUSINESS_ID = @spbusiness.ID
         cpbusiness.USAGE_ID = usage.ID
@@ -151,6 +154,8 @@ class CpBusinessController < ApplicationController
           CmdUsage.delete(usage.ID)
         end
       end
+
+      CpPolicyItem.update_all(['PURGED=1, UPDATED_AT=NOW()'], ['POLICY_ID = ?', cpbusiness.POLICY_ID])
 
       render :text => 'ok'
       return

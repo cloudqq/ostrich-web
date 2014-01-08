@@ -11,6 +11,11 @@
     .controls
       %input{:name => 'loginpassword', :class=>"input-large", :value => "#{@cp_info.LOGINPASSWORD}" }
   .control-group
+    %label{:class => 'control-label'} 
+      同步地址
+    .controls
+      %input{:name => 'sync_url', :class=>"input-xxlarge", :value => "#{@cp_info.SYNC_URL}" }
+  .control-group
     .controls
       %label{:class => 'checkbox inline'}
         - if @cp_info.STATUS == 1

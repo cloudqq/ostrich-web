@@ -3,7 +3,6 @@ require File.expand_path('../../../lib/datatables/assignment_table', __FILE__)
 
 class CpInfoController < ApplicationController
   #before_filter :authenticate_user!
-  #before_filter :authenticate_user!
   def dashboard
 
   end
@@ -51,6 +50,7 @@ class CpInfoController < ApplicationController
     unless cpinfo.nil?
       cpinfo.LOGINNAME = loginname
       cpinfo.LOGINPASSWORD = loginpassword
+      cpinfo.SYNC_URL = params[:sync_url] unless params[:sync_url].blank?
       cpinfo.STATUS = enabled.nil? ? 0 : 1
 
       cpinfo.save!
@@ -66,7 +66,14 @@ class CpInfoController < ApplicationController
   end
 
   def cmd_assignment
+  end
 
+  def province
 
+  end
+
+  def province_for_table
+    @extra = params[:sEcho].to_i
+    count, @items = CpPolicyItem.province_for_table params
   end
 end

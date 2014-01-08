@@ -45,6 +45,10 @@
     .controls
       %input{:type =>"text", :class => "input-xxlarge", :id => "input_mr_params", :name => "mr_params", :value => "#{@sp_info.MRREQPRAMLIST}"}
   .control-group
+    %label{:class => 'control-label'} 成功标记
+    .controls
+      %input{:type =>"text", :class => "input-xxlarge", :id => "input_success_tag", :name => "success_tag", :value => "#{@sp_info.SUCCESS_TAG}"}
+  .control-group
     .controls
       %label{:class => 'checkbox inline'}
         - if @sp_info.STATUS == 1

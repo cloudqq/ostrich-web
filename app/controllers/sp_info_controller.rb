@@ -69,6 +69,7 @@ class SpInfoController < ApplicationController
     mr_suffix   = params[:mr_suffix]
     mo_params   = params[:mo_params]
     mr_params   = params[:mr_params]
+    success_tag = params[:success_tag]
 
     enabled = params[:enabled]
 
@@ -80,6 +81,7 @@ class SpInfoController < ApplicationController
       spinfo.MRREQSUFFIX = mr_suffix
       spinfo.MOREQPRAMLIST = mo_params
       spinfo.MRREQPRAMLIST = mr_params
+      spinfo.SUCCESS_TAG   = success_tag
 
       if enabled != nil
         spinfo.STATUS = 1

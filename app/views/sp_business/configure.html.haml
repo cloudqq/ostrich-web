@@ -21,6 +21,12 @@
         = @spbusiness.BUSINESSID
   .control-group
     %label{:class => 'control-label'} 
+      业务名称
+    .controls
+      %input.input-large{:type=>"text", :name => "input_business_name"}
+        = @spbusiness.BUSINESS_NAME
+  .control-group
+    %label{:class => 'control-label'} 
       特服号码
     .controls
       %input{:type =>"text", :class => "input-large", :name => "input_spnumber", :value=> "#{@spbusiness.SPNUMBER}"}

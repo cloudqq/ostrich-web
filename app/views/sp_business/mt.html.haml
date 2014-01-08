@@ -1,0 +1,17 @@
+%legend
+  MT下行配置 #{@sp_business.SPNUMBER}/#{@sp_business.CMD}
+%form.navbar-form.pull-left{:action => "#", :method=>"post"}
+  %input.input-xxlarge{:type=>'text',:id=> 'input_mt', :placeholder=>'MT 内容'}
+  %button.btn{:type=>"button", :onclick=>"javascript:add_new_mt(#{@sp_business.ID}); return false;"}
+    新增
+%br
+%br
+%br
+#mt_list_table
+:javascript
+  $(document).ready(function(){
+    server_params = [
+      {name: "sp_business_id", value: "#{@sp_business_id}"}
+    ]
+    load_business_mt(server_params)
+  })

@@ -152,8 +152,7 @@
         data:
           id: "#{cp_business_id}"
         success: ->
-          $(rowObj).fadeTo 400,0, ->
-            $(this).remove()
+          cp_business_search(false);
         error: (xhr,error,thrown) ->
           alert('fail')
 

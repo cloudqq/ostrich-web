@@ -4,15 +4,6 @@
 
 
 @list_cp_info_table = ->
-  params =
-    sNewLine: "<br>"
-    sButtonText: "Copy to element"
-    sDiv: ""
-    fnClick: (nButton, oConfig) ->
-      $(window).attr("location", "/cp_info/create")
-                
-  TableTools.BUTTONS.create_new_cp_info_div = $.extend true, TableTools.buttonBase, params
-
   options =
     table_id: "tb_cp_info"
     column_names: ["CP编号","登录账号","真实名称","状态","接入时间","操作"]
@@ -21,13 +12,6 @@
   adv_options =
     aLengthMenu: [10,25,50]
     bSort:false    
-    oTableTools:
-      aButtons:[
-        sExtends: "create_new_cp_info_div"
-        sButtonText:"创建CP"
-        sDiv: "copy"
-      ]
-      
     aoColumnDefs:[
                   {
                     sWidth:"10%"
@@ -61,7 +45,8 @@
                       data = """
                               <a href=/cp_info/configure/#{data.cpid}>编辑</a> |
                               <a href=/cp_info/change_password/#{data.cpid}>密码</a> |
-                              <a href=/cp_info/assignment?cpid=#{data.cpid}>分配</a>
+                              <a href=/cp_info/assignment?cpid=#{data.cpid}>分配</a> |
+                              <a href=/cp_info/province/#{data.cpid}>省份</a>
                              """
                   },                                                                                            
                 ],
@@ -77,9 +62,7 @@
                       cpname: source[5]
                     }
                  ]
-        
   $("#cp_info_table").easyTable options, adv_options
-
 
 @create_business = (index,spid,cpid,sp_business_id) ->
   ###
@@ -245,3 +228,85 @@
         $("#cmd_assignment_table").easyTable options, adv_options
                 
 
+@load_cp_province =  (cp_id) ->
+  params = [{name: 'cp_id', value: "#{cp_id}"}]
+  options =
+    table_id: "tb_cp_info"
+    column_names: ["省份","日总量","月总量","手机单日","手机单月","特服号","指令","状态", "最后更新"]
+    url: "/cp_info/province_for_table.json"
+    paging: true
+    server_params: params
+  adv_options =
+    aLengthMenu: [10,25,50]
+    bSort:false    
+    aoColumnDefs:[
+                  {
+                    sWidth:"10%"
+                    aTargets:[0]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[1]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[2]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[3]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[4]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[5]
+                  },
+                  {
+                    sWidth:"10%"
+                    aTargets:[7]
+                    mRender:(data,type,row) ->
+                      if data == 1
+                        "开放"
+                      else
+                        "关闭"
+                  }
+                ],
+                aoColumns:[
+                  {
+                    aTargets:[0]
+                    mData: 'target'
+                    
+                  },
+                  {
+                    aTargets:[1]
+                    mData:'limited_day_max'
+                  },
+                  {
+                    aTargets:[2]
+                    mData:'limited_mon_max'
+                  },
+                  {
+                    aTargets:[3]
+                    mData:'limited_day_phone'
+                  },                                    
+                  {
+                    aTargets:[4]
+                    mData:'limited_mon_phone'
+                  },                                    
+                  {
+                    mData:'spnumber'
+                  },
+                  {
+                    mData:'cmd'
+                  },
+                  {
+                    mData:'enabled'
+                  },
+                  {
+                    mData:'updated_at'
+                  }
+                 ]
+  $("#cp_province_table").easyTable options, adv_options  
