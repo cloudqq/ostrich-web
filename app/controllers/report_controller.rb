@@ -189,6 +189,9 @@ class ReportController < ApplicationController
 
   def ivr
   end
+  
+  def province_status
+  end
 
   def list_detail_for_table
     respond_to do |format|
@@ -201,4 +204,10 @@ class ReportController < ApplicationController
       format.json {render json: Datatable::ReportStatTable.new(view_context) }
     end
   end
+
+  def province_status_for_table
+    @extra = params[:sEcho].to_i
+    count, @items = MrLog.province_status_for_table params
+  end
+
 end

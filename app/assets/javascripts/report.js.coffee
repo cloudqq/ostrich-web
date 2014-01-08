@@ -293,4 +293,129 @@
         
   $("#tb_report_detail_table").easyTable options, adv_options
 
+
+
+@province_status_search_yestory = ->
+  today = new Date()
+  nextday = new Date()
+  nextday.setDate(nextday.getDate() - 1)
+  edate = nextday.getFullYear() + '-' + (nextday.getMonth()+1) + '-' + nextday.getDate();  
+  $("#input_date").val(edate)
+  province_status_search()
+
+@province_status_search = ->
+  params = []
+  var_cpname = $("#input_cpname").val()
+  var_spname = $("#input_spname").val()
+  var_date = $("#input_date").val()
+  var_spnumber = $("#input_spnumber").val()
+  var_cmd = $("#input_cmd").val()
+  var_province = $("#input_province").val()
+
+  if var_cpname != undefined
+    params.push( { name: "cpname", value: var_cpname })
+  if var_spname != undefined
+    params.push( { name: "spname", value: var_spname })
+  if var_date != undefined && var_date != undefined
+    params.push( { name: "date", value: var_date})
+  if var_cmd != undefined
+    params.push( {name:"cmd",value: var_cmd})
+  if var_spnumber != undefined
+    params.push( {name:"spnumber", value:var_spnumber})
+  if var_province != undefined
+    params.push({name:"province", value:var_province})
+
+  load_province_status_table(params)    
+  
+
+# 查询省份情况
+@load_province_status_table = (server_params) ->
+  options =
+    column_names: ["省份","CPID","SPID","特服号", "指令","MO","屏蔽","扣量","转发"]
+    url: "/report/province_status_for_table.json"
+    paging: true
+    server_params: server_params
+    dom:'<"clear">tlpi'
+  adv_options =
+    aLengthMenu: [10,25,50]
+    bSort: false    
+    aoColumnDefs:[
+      {
+        sWidth:"10%"
+        aTargets:[0]
+      },
+      {
+        sWidth:"10%"
+        aTargets:[1]
+      },
+      {
+        sWidth:"10%"
+        aTargets:[2]
+      },
+      {
+        sWidth:"12%"
+        aTargets:[3]
+      },
+      {
+        sWidth:"10%"
+        aTargets:[4]
+      },
+      {
+        sWidth:"8%"
+        aTargets:[5]
+      },
+      {
+        sWidth:"8%"
+        aTargets:[6]
+      },
+      {
+        sWidth:"8%"
+        aTargets:[7]
+      },
+      {
+        sWidth:"6%"
+        aTargets:[8]
+      }
+    ]
+    aoColumns:[
+      {
+        mData: "province"
+        aTargets:[0]
+      },
+      {
+        mData: "cpname"
+        aTargets:[1]
+      },
+      {
+        mData: "spname"
+        aTargets:[2]
+      },
+      {
+        aTargets:[3]
+        mData: "spnumber"
+      },
+      {
+        mData: "cmd"
+        aTargets:[4]
+      },
+      {
+        mData: "mo_count"
+        aTargets:[5]
+      },
+      {
+        mData: "not_forward"
+        aTargets:[6]
+      },
+      {
+        mData: "discount"
+        aTargets:[7]
+      },
+      {
+        mData: "dispatched"
+        aTargets:[8]
+      }
+    ]
+        
+  $("#tb_province_status_table").easyTable options, adv_options
+
   

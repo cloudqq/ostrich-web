@@ -1,0 +1,23 @@
+%legend
+  省份放量情况
+%form{:class => 'navbar-form pull-left', :action=>"", :method =>"post"}
+  %input{:type=>"text",:id=>"input_province", :class=>"input-small", :placeholder=>"省份"}
+  %input{:type=>"text",:id=>"input_cpname", :class=>"input-small", :placeholder=>"CP名称"}
+  %input{:type=>"text",:id=>"input_spname", :class=>"input-small", :placeholder=>"SP名称"}
+  %input{:type=>"text",:id=>"input_spnumber", :class=>"input-large", :placeholder=>"特服号码"}  
+  %input{:type=>"text",:id=>"input_cmd", :class=>"input-small", :placeholder=>"指令"}  
+  %input{:type=>"text",:id=>"input_date", :class=>"input-small", :placeholder=>"日期", :value=>"#{Time.now.strftime('%F')}"}
+
+  %button{:type=>"button", :class=>"btn" , :onclick=>"province_status_search()"}
+    查询
+  %button{:type=>"button", :class=>"btn" , :onclick=>"province_status_search_yestory()"}
+    昨天
+%br
+%br
+%br
+#tb_province_status_table
+:javascript
+  $(document).ready(function(){
+    load_province_status_table([]);
+  });
+

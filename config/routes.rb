@@ -167,9 +167,9 @@ Rspp::Application.routes.draw do
   post "report/get_detail_data"
 
   get  "report/stat"
-
   get  "report/detail"
-
+  get "report/province_status"
+  get "report/province_status_for_table"
 
   get "report/list_stat_for_table"
   get "report/list_detail_for_table"
