@@ -1,8 +1,8 @@
 node do
   {
     'sEcho' => @extra,
-    'iTotalRecords' => @items.length,
-    'iTotalDisplayRecords' => @items.length
+    'iTotalRecords' => @count,
+    'iTotalDisplayRecords' => @count
   }
 end
 node :aaData do

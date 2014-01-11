@@ -56,7 +56,11 @@ def self.province_status_for_table params
     CAST(SUM(IF(SP_MRLOG.DISPATCH=1,1,0))\ AS\ SIGNED)\ AS\ DISPATCHED
   )
 
-  return [0,
+  return [
+    MrLog.select(fields)
+    .joins(:molog,:cpinfo,:spinfo)
+    .where(conditions)
+    .group(group_by).length ,
   MrLog.select(fields)
     .joins(:molog,:cpinfo,:spinfo)
     .where(conditions)

@@ -30,7 +30,7 @@ jQuery ->
     $('#update_policy_item_modal').modal('show');
     return
 
-@update_policy_item = (policy_item_id) ->
+@update_policy_item_for_cp = (policy_item_id) ->
   $("#update_policy_item_form").attr("action", "/cp_policy_item/update/#{policy_item_id}")
   $('#modal_form_title').text("修改通道配置策略");
   $.getJSON "/cp_policy_item/get_data/#{policy_item_id}", (data) ->
@@ -82,7 +82,7 @@ jQuery ->
   history.back(1)
   
 
-@load_policy_items = (server_params) ->
+@load_policy_items_for_cp = (server_params) ->
   options =
     column_names: ["省份","上限/月","上限/日","上限/号月","上线/号日","月扣","日扣","基数","起点","控制","操作"]
     url: "/cp_policy_item/list_for_table.json"
@@ -149,7 +149,7 @@ jQuery ->
         aTargets:[10]
         mRender:(data,type,row) ->
           """
-            <a class="btn btn-mini" href="#" onclick="update_policy_item(#{data.policy_item_id}); return false;">修改</a>
+            <a class="btn btn-mini" href="#" onclick="update_policy_item_for_cp(#{data.policy_item_id}); return false;">修改</a>
             <a class="btn btn-mini" href="/cp_policy_item/destroy/#{data.policy_item_id}">删除</a>
           """
       }

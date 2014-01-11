@@ -7,7 +7,7 @@
 #policy_data_table
 :javascript
   $(document).ready(function(){
-    load_policy_items([{name: "policy_id", value: "#{params[:id]}" }]);
+    load_policy_items_for_cp([{name: "policy_id", value: "#{params[:id]}" }]);
   });
 
 .modal.hide.fade{:id=>'update_policy_item_modal',:tabindex=>"-1",:role=>"dialog",:"aria-labelledby"=>'mymodalLabel',:"aria-hidden"=>'true'}

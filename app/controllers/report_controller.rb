@@ -207,7 +207,7 @@ class ReportController < ApplicationController
 
   def province_status_for_table
     @extra = params[:sEcho].to_i
-    count, @items = MrLog.province_status_for_table params
+    @count, @items = MrLog.province_status_for_table params
   end
 
 end
