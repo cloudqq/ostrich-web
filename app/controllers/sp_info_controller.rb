@@ -70,8 +70,12 @@ class SpInfoController < ApplicationController
     mo_params   = params[:mo_params]
     mr_params   = params[:mr_params]
     success_tag = params[:success_tag]
+    protocol_template = params[:input_protocol_template]
+    protocol_status   = params[:input_protocol_status]
+
 
     enabled = params[:enabled]
+    xml_enabled = params[:request_format]
 
     spinfo = SpInfo.find(id)
     unless spinfo.nil?
@@ -82,6 +86,10 @@ class SpInfoController < ApplicationController
       spinfo.MOREQPRAMLIST = mo_params
       spinfo.MRREQPRAMLIST = mr_params
       spinfo.SUCCESS_TAG   = success_tag
+      spinfo.PROTOCOL_TEMPLATE = protocol_template
+      spinfo.PROTOCOL_STATUS = protocol_status
+
+      spinfo.REQUEST_FORMAT = xml_enabled.nil? ? 0 : 1
 
       if enabled != nil
         spinfo.STATUS = 1

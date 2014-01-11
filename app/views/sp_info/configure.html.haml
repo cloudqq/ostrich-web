@@ -33,6 +33,8 @@
     .controls
       %input{:type=>"text", :class => "input-xxlarge",:id=> "input_mo_suffix", :name => "mo_suffix", :value => "#{@sp_info.MOREQSUFFIX}" }
   .control-group
+    .controls
+      模板:spnumber$phone$content$linkid
     %label{:class => 'control-label'} MO 参数
     .controls
       %input{:type =>"text", :class => "input-xxlarge", :id => "input_mo_params", :name => "mo_params", :value => "#{@sp_info.MOREQPRAMLIST}"}
@@ -41,20 +43,44 @@
     .controls
       %input{:type=>"text", :class => "input-xxlarge", :id=> "input_mr_suffix", :name => "mr_suffix", :value => "#{@sp_info.MRREQSUFFIX}"} 
   .control-group
+    .controls
+      模板:spnumber$phone$status$linkid
     %label{:class => 'control-label'} MR 参数
     .controls
       %input{:type =>"text", :class => "input-xxlarge", :id => "input_mr_params", :name => "mr_params", :value => "#{@sp_info.MRREQPRAMLIST}"}
   .control-group
+    .controls
+      表示成功状态报告一般为（DELIVRD）
     %label{:class => 'control-label'} 成功标记
     .controls
-      %input{:type =>"text", :class => "input-xxlarge", :id => "input_success_tag", :name => "success_tag", :value => "#{@sp_info.SUCCESS_TAG}"}
+      %input{:type =>"text", :class => "input-large", :id => "input_success_tag", :name => "success_tag", :value => "#{@sp_info.SUCCESS_TAG}"}
   .control-group
+    .controls
+      对方要求的成功返回值默认（ok）
+    %label{:class => 'control-label'} 协议返回
+    .controls
+      %input{:type =>"text", :class => "input-large", :id => "input_protocol_status", :name => "input_protocol_status", :value => "#{@sp_info.PROTOCOL_STATUS}"}
+  .control-group
+    .controls
+      协议模板，有些特殊的比如XML可以在这里设定，$STATUS是替换内容
+    %label{:class => 'control-label'} 协议模板
+    .controls
+      %textarea.span6{:rows=>"3", :name=> "input_protocol_template"}
+        #{@sp_info.PROTOCOL_TEMPLATE}
+  .control-group
+    .controls
+      %label.checkbox.inline
+        - if @sp_info.REQUEST_FORMAT == 1
+          %input{:type =>'checkbox', :name => 'request_format', :id => 'option_request_format', :value=> "enabled", :checked => true} XML协议
+        - else
+          %input{:type =>'checkbox', :name => 'request_format', :id => 'option_request_format', :value=> "enabled"} XML协议          
     .controls
       %label{:class => 'checkbox inline'}
         - if @sp_info.STATUS == 1
           %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled", :checked => true} 启用
         - else
           %input{:type =>"checkbox", :name=>"enabled", :id=>"option_enabled", :value=>"enabled"} 启用
+
   .control-group
     .controls
       %button{:type => "submit", :class=>"btn"}
