@@ -1,7 +1,10 @@
 %legend
   省份策略配置 [#{@cpbusiness.SPNUMBER}/#{@cpbusiness.CMD}]
-%button{:class=>"btn", :id=>'btn_create_new_policy_item'}
-  新增策略
+%form.navbar-form.pull-left
+  %button{:class=>"btn", :id=>'btn_create_new_policy_item'}
+    新增策略
+  %button.btn{:id=>'btn_sync_policy_item'}
+    同步省份
 %br
 %br
 #policy_data_table

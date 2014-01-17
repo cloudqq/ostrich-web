@@ -29,6 +29,10 @@ jQuery ->
     $('#input_region').trigger('change')
     $('#update_policy_item_modal').modal('show');
     return
+    
+  $("#btn_sync_policy_item").click ->
+    alert('sync');
+    return
 
 @update_policy_item_for_cp = (policy_item_id) ->
   $("#update_policy_item_form").attr("action", "/cp_policy_item/update/#{policy_item_id}")

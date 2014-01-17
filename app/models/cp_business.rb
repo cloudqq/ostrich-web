@@ -11,6 +11,13 @@ class CpBusiness < ActiveRecord::Base
     where("SPID=?  and SPNUMBER=? and CMD=? and OFFLINE = 0",spid,spnumber,cmd).length > 0
   end
 
+
+  # sync policy from sp business
+  def self.sync_policy
+
+
+  end
+
   def self.list_for_datatable params
     per_page = params[:iDisplayLength].to_i > 0 ? params[:iDisplayLength].to_i : 10
     page = params[:iDisplayStart].to_i / per_page + 1

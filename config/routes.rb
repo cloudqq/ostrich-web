@@ -47,8 +47,10 @@ Rspp::Application.routes.draw do
   get "cp_policy/list"
   get "cp_policy/show"
   get "cp_policy/configure"
+  get "cp_policy/sync_policy"
   post "cp_policy/new"
 
+  match "/cp_policy/sync_policy/:id" => "cp_policy#sync_policy", :as => :cp_policy
   match "/cp_policy/configure/:id" => "cp_policy#configure", :as => :cp_policy
   match "/cp_policy/create/:id" => "cp_policy#create", :as => :cp_policy
   match "/cp_policy/new/:id" => "cp_policy#new", :as => :cp_policy

@@ -3,6 +3,8 @@ class SpBusiness < ActiveRecord::Base
 
   belongs_to :spinfo, :class_name => 'SpInfo', :foreign_key => 'SPID'
   has_many :cmd_usage, :class_name => 'CmdUsage', :foreign_key => 'ID'
+  belongs_to :policy, :class_name => 'SpPolicy', :foreign_key => 'POLICY_ID'
+
 
   def self.assignment_for_table params
 

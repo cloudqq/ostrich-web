@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class CpPolicyController < ApplicationController
 #  before_filter :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
@@ -21,6 +22,16 @@ class CpPolicyController < ApplicationController
   end
 
   def show
+  end
+
+  # 同步SP的省份默认使用SP的参数
+  def sync_policy
+    if params[:id].blank?
+      render :text => 'not found cp business id.'
+      return
+    end
+
+    
   end
 
   #@param
